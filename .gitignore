@@ -1,0 +1,30 @@
+# Node dependencies
+node_modules/
+
+# TypeScript build artifacts
+dist/
+out/
+*.js
+*.js.map
+*.d.ts
+
+# Logs
+logs/
+*.log
+
+# Unit testing coverage reports
+coverage/
+
+# IDE and editor files
+.vscode/
+.idea/
+.vscode-test/
+*.code-workspace
+.vs/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Foundry-specific
+foundrydata/
