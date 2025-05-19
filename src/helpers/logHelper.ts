@@ -54,11 +54,3 @@ export class LogHelper {
 // Apply config settings on startup
 LogHelper.setLogLevel(devConfig.logLevel);
 LogHelper.setShouldLogNonCriticalErrors(devConfig.shouldLogNonCriticalErrors);
-
-let logHelper: LogHelper | null = null;
-export const getLogHelper = (): LogHelper => {
-    if (!logHelper) {
-        logHelper = new LogHelper();
-    }
-    return logHelper;
-}

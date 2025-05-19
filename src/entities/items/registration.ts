@@ -1,6 +1,6 @@
 import { Dnd35eItem } from "./baseItem/Dnd35eItem";
 
-export const register = () => {
+export const registerItems = () => {
   Hooks.once("init", () => {
     Object.assign(CONFIG.Item.dataModels, {
       "dnd35e.item": Dnd35eItem

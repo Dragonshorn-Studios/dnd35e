@@ -3,7 +3,7 @@ type DataSchema = foundry.data.fields.DataSchema;
 import { AnyObject } from "fvtt-types/utils";
 import Document = foundry.abstract.Document
 
-class Dnd35eItemModel<
+export class Dnd35eItemModel<
   Schema extends DataSchema,
   parent extends Document.Any,
   baseData extends AnyObject,
@@ -19,8 +19,3 @@ class Dnd35eItemModel<
     return super.prepareDerivedData();
   }
 }
-
-// class TypeDataModel<Schema extends DataSchema, 
-// Parent extends Document.Any, 
-// BaseData extends AnyObject = EmptyObject,
-//  DerivedData extends AnyObject = EmptyObject>
