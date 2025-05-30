@@ -1,3 +1,3 @@
-import { Dnd35eItem } from "../baseItem/Dnd35eItem";
+import { Dnd35eItemModel } from "../baseItem/Dnd35eItemModel";
 
-export class Dnd35eBuff extends Dnd35eItem {};
+export class Dnd35eBuffModel extends Dnd35eItemModel {};

@@ -12,27 +12,22 @@
         "name": "Antoni 'Rughalt' Sobkowicz"
       },
       {
-        "name": "Jake 'Rev' Blackwell"
+        "name": "'Rev' Jake Blackwell"
       }
   ],
   "esmodules": [
-      "dnd35e.js"
+      "dist/main.js"
   ],
   "styles": [
-      "D35E.css"
+      "styles/core.css"
   ],
   "flags": {
     
   },
   "documentTypes": {
     "Item": {
-      "item": {
-
-      },
-      "weapon": {},
-      "equipment": {},
-      "spell": {},
-      "feat": {}
+      "item": {},
+      "weapon": {}
     }
   }
 }

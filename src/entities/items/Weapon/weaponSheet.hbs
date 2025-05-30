@@ -1,0 +1,34 @@
+<div class="{{cssClass}} flexcol">
+  {{!-- Item Sheet Header --}}
+  <div class="flexrow" style="flex: 0">
+    <div class="sheet-header-profile">
+      <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+    </div>
+  </div>
+
+  <header class="sheet-header flexrow">
+    <div class="header-details flexrow">
+      {{#if isGM}}
+        <h3 class="charname">
+          <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "D35E.ItemName"}}"/>
+        </h3>
+
+        <h3 class="charname">
+          <input name="system.unidentifiedName" type="text" value="{{system.unidentifiedName}}" placeholder="{{localize "D35E.UnidentifiedName"}}"/>
+        </h3>
+      {{else}}
+        {{#if showUnidentifiedData}}
+        <h1 class="charname">
+          <input name="system.unidentifiedName" type="text" value="{{displayName}}" placeholder="{{localize "D35E.ItemName"}}"/>
+        </h1>
+        {{else}}
+        <h1 class="charname">
+          <input name="name" type="text" value="{{displayName}}" placeholder="{{localize "D35E.ItemName"}}"/>
+        </h1>
+        {{/if}}
+      {{/if}}
+    </div>
+
+  </header>
+
+</div>

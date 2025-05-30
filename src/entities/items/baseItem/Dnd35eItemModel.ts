@@ -20,7 +20,7 @@ const schema = {
   goldValue: new fields.NumberField({
     required: true,
     default: 0,
-    validate: (value) => {
+    validate: (value: number) => {
       if (value < 0) throw new Error("Gold value cannot be negative");
       return true;
     },
@@ -28,7 +28,7 @@ const schema = {
   silverValue: new fields.NumberField({
     required: true,
     default: 0,
-    validate: (value) => {
+    validate: (value: number) => {
       if (value < 0) throw new Error("Silver value cannot be negative");
       return true;
     },
@@ -39,18 +39,17 @@ const schema = {
   }),
 };
 
-type Schema = typeof schema;
-
-class Dnd35eItemModel extends foundry.abstract.TypeDataModel<Schema, never> {
+export class Dnd35eItemModel extends foundry.abstract.TypeDataModel<typeof schema, never> {
     static defineSchema() {
         return schema;
     }
-}
 
-declare global {
-  interface DataModelConfig {
-    Item: {
-      item: Dnd35eItemModel
-    };
-  }
+    // get tag(): string {
+    //   if (this.name) return createTag(this.name);
+    //   return "tag";
+    // }
+    
+    // get hasAttack() {
+    //   return isAttackAction(foundry.utils.getProperty(this.system, "actionType"));
+    // }
 }

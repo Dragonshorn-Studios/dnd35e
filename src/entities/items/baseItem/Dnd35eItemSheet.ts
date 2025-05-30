@@ -20,28 +20,46 @@
 //   }
 // }
 
-export class Dnd35eItemSheet extends ItemSheet {
-  constructor(...args: ConstructorParameters<typeof ItemSheet>) {
+import { systemPath } from "../../../constants/paths";
+import ItemSheetV2 = foundry.applications.sheets.ItemSheetV2;
+import DocumentSheetV2 = foundry.applications.api.DocumentSheetV2;
+import { Dnd35eItem } from "./Dnd35eItem";
+import { AnyObject } from "fvtt-types/utils";
+
+type ItemSheetContext = {
+
+}
+
+export class Dnd35eItemSheet extends ItemSheetV2<ItemSheetContext> {
+  constructor(...args: ConstructorParameters<typeof ItemSheetV2>) {
     super(...args);
   }
 
-  static get defaultOptions(): DocumentSheet.Options<Item.Implementation> {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd35e", "sheet", "item"],
-      template: "systems/dnd35e/templates/item-sheet.html",
+  // this still needs:
+  // classes: ["dnd35e", "sheet", "item"],
+  static override DEFAULT_OPTIONS = {
+    id: "dnd35e-item-sheet", // this probably should be unique
+    form: {
+    },
+    position: {
       width: 600,
       height: 400,
-    });
+      resizable: false,
+    },
   }
+
+  static PARTS = {
+    main: {
+      template: `${systemPath}src/item-sheet.html`,
+    },
+  }
+
+  // get title() {
+  //   return this.item.system.displayName;
+  // }
 
   // get template() {
   //   const path = "systems/dnd35e/templates/items/";
   //   return `${path}/${this.item.type}.html`;
   // }
-
-  // TODO: make specific view type and drop any.
-  getData() {
-    const data = super.getData();
-    return data;
-  }
 }
