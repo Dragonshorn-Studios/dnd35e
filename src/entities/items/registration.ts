@@ -22,11 +22,20 @@ export const registerItems = () => {
   });
 };
 
-declare global {
+declare module "fvtt-types/configuration" {
+  interface DocumentClassConfig {
+    Item: typeof Dnd35eItem<Item.SubType>;
+    Weapon: typeof Dnd35eWeapon<Item.SubType>;
+  }
+
   interface DataModelConfig {
     Item: {
-      item: Dnd35eItemModel,
-      weapon: Dnd35eWeapon,
+      item: typeof Dnd35eItemModel;
+      weapon: typeof Dnd35eWeapon;
     };
+  }
+
+  interface ConfiguredItem<SubType extends Item.SubType> {
+    document: Dnd35eItem<SubType>;
   }
 }

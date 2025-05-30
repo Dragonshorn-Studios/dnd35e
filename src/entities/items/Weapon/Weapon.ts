@@ -1,6 +1,6 @@
 
-export class Dnd35eWeapon extends Item<"weapon"> {
-  constructor(...args: ConstructorParameters<typeof Item<"weapon">>) {
+export class Dnd35eWeapon<SubType extends Item.SubType = Item.SubType> extends Item.SubType {
+  constructor(...args: Item.ConstructorParameters) {
     super(...args);
   }
 }

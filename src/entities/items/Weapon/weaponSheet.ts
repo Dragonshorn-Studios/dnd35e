@@ -26,7 +26,7 @@ export class WeaponSheet extends ItemSheetV2<WeaponSheetContext> {
     },
   }
 
-  async _prepareContext(options: DocumentSheetV2.RenderOptions): WeaponSheetContext {
+  async _prepareContext(options: DocumentSheetV2.RenderOptions): Promise<WeaponSheetContext> {
     const context = await super._prepareContext(options);
     context.showUnidentifiedData = context.item.system.isIdentified;
     context.displayName = context.showUnidentifiedData ? context.item.system.unidentifiedName : context.item.name;
