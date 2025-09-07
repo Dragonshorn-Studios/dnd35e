@@ -1,0 +1,18 @@
+
+<div class="flexcol">
+  {{#if (or document.showUnidentifiedInfoMode.showBoth document.showUnidentifiedInfoMode.showOnlyIdentified)}}
+    <h3 class="charname">
+      <input name="name" type="text" value="{{displayName}}" placeholder="{{localize "D35E.ItemName"}}"/>
+    </h3>
+  {{/if}}
+  {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyUnidentified)}}
+    <h3 class="charname">
+      <input 
+        name="system.unidentifiedInfo.unidentifiedName"
+        type="text"
+        value="{{unidentifiedDisplayName}}"
+        placeholder="{{ternary showUnidentifiedInfoMode.showBoth (localize "D35E.UnidentifiedName") (localize "D35E.ItemName")}}"
+      />
+    </h3>
+  {{/if}}
+</div>

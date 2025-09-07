@@ -39,8 +39,8 @@ declare global {
 
         export import Roll = foundry.dice.Roll;
 
-        export import Collection = foundry.utils.Collection;
-        export import Color = foundry.utils.Color;
+        // export import Collection = foundry.utils.Collection;
+        // export import Color = foundry.utils.Color;
         export import fromUuidSync = foundry.utils.fromUuidSync;
         export import fromUuid = foundry.utils.fromUuid;
     }

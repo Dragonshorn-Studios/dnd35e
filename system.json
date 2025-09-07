@@ -16,7 +16,7 @@
       }
   ],
   "esmodules": [
-      "dist/main.js"
+      "dist/src/main.mjs"
   ],
   "styles": [
       "styles/core.css"
