@@ -5,7 +5,7 @@ import { identifiableHeaderPartialName, type IdentifiableItemRenderContext } fro
 import type { IdentifiableItemSource, IdentifiableItemSystemData } from './system.mjs';
 import { registerPartial } from '@helpers/display.mjs';
 
-const localPath = (file: string) => `${systemPath}entities/common/templates/${file}`;
+const localPath = (file: string) => `${systemPath}src/entities/items/components/IdentifiableItem/${file}`;
 
 const partials = [
   identifiableHeaderPartialName,

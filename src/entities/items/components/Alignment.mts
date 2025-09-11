@@ -1,4 +1,5 @@
-import { fields } from '@common/data/_module.mjs';
+import type { fields as fieldsType } from '@common/data/_module.mjs';
+const { fields } = foundry.data;
 
 const ORDER_ALIGNMENTS = ['lawful', 'neutral', 'chaotic'] as const;
 type OrderAlignments = (typeof ORDER_ALIGNMENTS)[number];
@@ -17,7 +18,7 @@ type Alignment = {
 };
 
 type AlignmentSchema = {
-    alignment: fields.StringField<Alignments, Alignments, false, true, true>;
+    alignment: fieldsType.StringField<Alignments, Alignments, false, true, true>;
 };
 
 const defineAlignmentSchema = (): AlignmentSchema => ({

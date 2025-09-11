@@ -1,19 +1,21 @@
-import { fields } from '@common/data/_module.mjs';
 import { ModelPropsFromSchema, SourceFromSchema } from '@common/data/fields.mjs';
 import { nullableOptionalStringField, optionalStringField, requiredBooleanField } from '@helpers/fieldBuilders.mjs';
+import type { fields as fieldsType } from '@common/data/_module.mjs';
+
+const { fields } = foundry.data;
 
 type IdentifiableItemInfoSchemaBase = {
-    unidentifiedName: fields.StringField<string, string, false, false, true>;
-    unidentifiedDescription: fields.StringField<string, string, false, false, true>;
-    unidentifiedPrice: fields.NumberField<number, number, true, true, false>;
-    isIdentified: fields.BooleanField;
-    unidentifiedNameFormula?: fields.StringField<string, string, false, true, true>;
-    usesUnidentifiedNameFormula: fields.BooleanField<boolean, boolean, true, false, true>;
+    unidentifiedName: fieldsType.StringField<string, string, false, false, true>;
+    unidentifiedDescription: fieldsType.StringField<string, string, false, false, true>;
+    unidentifiedPrice: fieldsType.NumberField<number, number, true, true, false>;
+    isIdentified: fieldsType.BooleanField;
+    unidentifiedNameFormula?: fieldsType.StringField<string, string, false, true, true>;
+    usesUnidentifiedNameFormula: fieldsType.BooleanField<boolean, boolean, true, false, true>;
 };
 
 type IdentifiableItemSchema = {
-    isIdentifiable: fields.BooleanField<boolean, boolean, true, false, true>;
-    unidentifiedInfo?: fields.SchemaField<
+    isIdentifiable: fieldsType.BooleanField<boolean, boolean, true, false, true>;
+    unidentifiedInfo?: fieldsType.SchemaField<
         IdentifiableItemInfoSchemaBase,
         SourceFromSchema<IdentifiableItemInfoSchemaBase>,
         ModelPropsFromSchema<IdentifiableItemInfoSchemaBase>,

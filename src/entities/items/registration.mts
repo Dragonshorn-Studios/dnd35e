@@ -2,11 +2,32 @@ import { registerCommon } from '@entities/common/index.mjs';
 import { ItemProxyDnd35e } from './baseItem/index.mjs';
 import { MaterialSystemModel, MaterialSheet } from './material/index.mjs';
 import { WeaponSystemModel, WeaponSheet } from './weapon/index.mjs';
-import ItemSheet from '@client/appv1/sheets/item-sheet.mjs';
 import Hooks from '@client/helpers/hooks.mjs';
+import ItemConfig from '@constants/config/item.mjs';
+import { runPartialRegistration } from '@helpers/display.mjs';
 
-export const registerItems = async () => {
-  await registerCommon();
+const registerSheets = () => {
+  foundry.documents.collections.Items.unregisterSheet('core', foundry.appv1.sheets.ItemSheet);
+  const itemSheets = [
+    ['material', MaterialSheet],
+    ['weapon', WeaponSheet],
+  ] as const;
+
+  for (const [type, Sheet] of itemSheets) {
+    foundry.documents.collections.Items.registerSheet('dnd35e', Sheet, {
+      types: [type],
+      makeDefault: true,
+    });
+  }
+};
+
+export const registerItems = () => {
+  CONFIG.Dnd35e = {
+    VERSION: '13.0.0-dev.1',
+    item: ItemConfig,
+  };
+
+
   Hooks.once('init', () => {
     CONFIG.Item.documentClass = ItemProxyDnd35e;
     Object.assign(CONFIG.Item.dataModels, {
@@ -14,19 +35,10 @@ export const registerItems = async () => {
       material: MaterialSystemModel,
     });
   });
-};
 
-export const registerSheets = async () => {
-  fd.collections.Items.unregisterSheet('core', ItemSheet);
-  const itemSheets = [
-    ['material', MaterialSheet],
-    ['weapon', WeaponSheet],
-  ] as const;
-
-  for (const [type, Sheet] of itemSheets) {
-    fd.collections.Items.registerSheet('dnd35e', Sheet, {
-      types: [type],
-      makeDefault: true,
-    });
-  }
+  Hooks.once('setup', () => {
+    registerCommon();
+    runPartialRegistration();
+    registerSheets();
+  });
 };

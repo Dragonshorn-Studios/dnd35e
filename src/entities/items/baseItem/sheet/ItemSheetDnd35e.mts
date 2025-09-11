@@ -1,9 +1,7 @@
 import { DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
-import ItemSheetV2 from '@client/applications/sheets/item-sheet.mjs';
 import { ItemDnd35e } from '../ItemDnd35e.mjs';
 import { IdentifiableItemRenderContext } from '@items/components/IdentifiableItem/index.mjs';
 import { nameAndArtPart } from '@entities/common/templates/item/index.mjs';
-import { itemHeaderPartialName } from './index.mjs';
 
 //   getData(options) {
 //     const data = super.getData(options);
@@ -31,19 +29,20 @@ interface ItemSheetDnd35eRenderContext extends fa.api.DocumentSheetRenderContext
   // };
 }
 
+export const itemHeaderPartialName = 'itemHeader';
+
 abstract class ItemSheetDnd35e<
   TDocument extends ItemDnd35e = ItemDnd35e,
   TConfig extends ItemSheetDnd35eConfig<TDocument> = ItemSheetDnd35eConfig<TDocument>
->
-  extends ItemSheetV2<TDocument, TConfig> {
+> extends foundry.applications.sheets.ItemSheetV2<TDocument, TConfig> {
   static testAction () {
     console.log('Test action triggered from ItemSheetDnd35e');
   };
 
   static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
-    actions: {
-      testAction: ItemSheetDnd35e.testAction,
-    },
+    // actions: {
+    //   testAction: ItemSheetDnd35e.testAction,
+    // },
     window: {
       controls: [
         {
@@ -64,7 +63,7 @@ abstract class ItemSheetDnd35e<
   };
 
   static PARTS = {
-    header: nameAndArtPart,
+    top: nameAndArtPart,
     // main: {
     //   template: `${systemPath}src/item-sheet.html`,
     // },

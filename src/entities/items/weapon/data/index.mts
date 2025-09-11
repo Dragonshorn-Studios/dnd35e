@@ -9,7 +9,7 @@ import {
   WEAPON_SUBTYPES,
   WEAPOON_BASE_TYPES,
 } from './constants.mjs';
-import { WeaponSystemModel, type WeaponSystemSchema } from './model';
+import { WeaponSystemModel, type WeaponSystemSchema } from './model.mjs';
 
 import type {
   WeaponDamage,
@@ -17,7 +17,7 @@ import type {
   WeaponSystemData,
 } from './system.mjs';
 
-type WeaponSource = BasePhysicalItemSource<'Weapon', WeaponSystemSource>;
+type WeaponSource = BasePhysicalItemSource<'weapon', WeaponSystemSource>;
 
 export type {
   WeaponSource,

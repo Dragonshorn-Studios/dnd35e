@@ -1,0 +1,309 @@
+PS D:\DND\FoundryVTT\Data\V13\Data\systems\dnd35e> npx madge src --extensions mts --json
+{
+  "canvas/CanvasDnd35e.mts": [],
+  "canvas/RegionDnd35e.mts": [],
+  "canvas/token/tokenDnd35e.mts": [],
+  "constants/attacks/actionTypes.mts": [],
+  "constants/attacks/damageTypes.mts": [],
+  "constants/config/index.mts": [],
+  "constants/config/item.mts": [],
+  "constants/devConfig.mts": [],
+  "constants/gameSettings/UnitOfMeasure.mts": [],
+  "constants/gameSettings/index.mts": [],
+  "constants/logging.mts": [],
+  "constants/numericTypes.mts": [],
+  "constants/paths.mts": [],
+  "constants/sizes.mts": [],
+  "entities/actors/baseActor/ActorDnd35e.mts": [],
+  "entities/common/index.mts": [],
+  "entities/common/templates/index.mts": [],
+  "entities/common/templates/item/index.mts": [],
+  "entities/items/Dnd35eBuff/Dnd35eBuff.mts": [],
+  "entities/items/baseItem/ItemDnd35e.mts": [],
+  "entities/items/baseItem/data/index.mts": [],
+  "entities/items/baseItem/data/model.mts": [],
+  "entities/items/baseItem/data/system.mts": [],
+  "entities/items/baseItem/index.mts": [],
+  "entities/items/baseItem/sheet/ItemSheetDnd35e.mts": [],
+  "entities/items/baseItem/sheet/index.mts": [],
+  "entities/items/components/Alignment.mts": [],
+  "entities/items/components/Changes.mts": [],
+  "entities/items/components/CursableItem.mts": [],
+  "entities/items/components/IdentifiableItem/index.mts": [],
+  "entities/items/components/IdentifiableItem/item.mts": [],
+  "entities/items/components/IdentifiableItem/model.mts": [],
+  "entities/items/components/IdentifiableItem/sheet.mts": [],
+  "entities/items/components/IdentifiableItem/system.mts": [],
+  "entities/items/index.mts": [],
+  "entities/items/material/data/index.mts": [],
+  "entities/items/material/data/model.mts": [],
+  "entities/items/material/data/system.mts": [],
+  "entities/items/material/index.mts": [],
+  "entities/items/material/material.mts": [],
+  "entities/items/material/sheet/MaterialSheet.mts": [],
+  "entities/items/material/sheet/index.mts": [],
+  "entities/items/physical/PhysicalItemDnd35e.mts": [],
+  "entities/items/physical/components/DamagableItem.mts": [],
+  "entities/items/physical/components/EquippableItem.mts": [],
+  "entities/items/physical/data/constants.mts": [],
+  "entities/items/physical/data/index.mts": [],
+  "entities/items/physical/data/model.mts": [],
+  "entities/items/physical/data/system.mts": [],
+  "entities/items/physical/index.mts": [],
+  "entities/items/physical/sheet/PhysicalItemSheet.mts": [],
+  "entities/items/physical/sheet/index.mts": [],
+  "entities/items/registration.mts": [],
+  "entities/items/registry.mts": [],
+  "entities/items/weapon/WeaponDnd35e.mts": [],
+  "entities/items/weapon/data/constants.mts": [],
+  "entities/items/weapon/data/index.mts": [],
+  "entities/items/weapon/data/model.mts": [],
+  "entities/items/weapon/data/system.mts": [],
+  "entities/items/weapon/index.mts": [],
+  "entities/items/weapon/sheet/index.mts": [],
+  "entities/items/weapon/sheet/weaponSheet.mts": [],
+  "global.mts": [],
+  "helpers/HasSystem.mts": [],
+  "helpers/display.mts": [],
+  "helpers/fieldBuilders.mts": [],
+  "helpers/formulae/index.mts": [],
+  "helpers/handlebars/helpers.mts": [],
+  "helpers/logHelper.mts": [],
+  "main.mts": [],
+  "scene/SceneDnd35e.mts": [],
+  "scene/region-behaviour/RegionBehaviorDnd35e.mts": [],
+  "scene/region-behaviour/constants.mts": [],
+  "scene/region-behaviour/environment-feature.mts": [],
+  "scene/region-behaviour/environment.mts": [],
+  "scene/region-behaviour/types.mts": [],
+  "scene/region-document/RegionDocumentDnd35e.mts": [],
+  "scene/token-document/TokenDocumentDnd35e.mts": [],
+  "scene/token-document/index.mts": []
+}
+PS D:\DND\FoundryVTT\Data\V13\Data\systems\dnd35e> npx madge dist --extensions mjs --json
+{
+  "src/canvas/CanvasDnd35e.mjs": [],
+  "src/canvas/RegionDnd35e.mjs": [],
+  "src/canvas/token/tokenDnd35e.mjs": [],
+  "src/constants/attacks/actionTypes.mjs": [],
+  "src/constants/attacks/damageTypes.mjs": [],
+  "src/constants/config/index.mjs": [
+    "src/constants/config/item.mjs"
+  ],
+  "src/constants/config/item.mjs": [
+    "src/entities/items/material/index.mjs",
+    "src/entities/items/weapon/index.mjs"
+  ],
+  "src/constants/devConfig.mjs": [
+    "src/constants/logging.mjs"
+  ],
+  "src/constants/gameSettings/UnitOfMeasure.mjs": [],
+  "src/constants/gameSettings/index.mjs": [
+    "src/constants/gameSettings/UnitOfMeasure.mjs"
+  ],
+  "src/constants/logging.mjs": [],
+  "src/constants/numericTypes.mjs": [],
+  "src/constants/paths.mjs": [],
+  "src/constants/sizes.mjs": [],
+  "src/entities/actors/baseActor/ActorDnd35e.mjs": [],
+  "src/entities/common/index.mjs": [
+    "src/entities/common/templates/index.mjs"
+  ],
+  "src/entities/common/templates/index.mjs": [
+    "src/constants/paths.mjs",
+    "src/entities/common/templates/item/index.mjs",
+    "src/helpers/display.mjs"
+  ],
+  "src/entities/common/templates/item/index.mjs": [
+    "src/constants/paths.mjs",
+    "src/helpers/display.mjs"
+  ],
+  "src/entities/items/Dnd35eBuff/Dnd35eBuff.mjs": [],
+  "src/entities/items/baseItem/ItemDnd35e.mjs": [
+    "src/constants/config/index.mjs",
+    "src/helpers/formulae/index.mjs",
+    "src/helpers/logHelper.mjs"
+  ],
+  "src/entities/items/baseItem/data/index.mjs": [
+    "src/entities/items/baseItem/data/model.mjs"
+  ],
+  "src/entities/items/baseItem/data/model.mjs": [
+    "src/helpers/fieldBuilders.mjs"
+  ],
+  "src/entities/items/baseItem/data/system.mjs": [],
+  "src/entities/items/baseItem/index.mjs": [
+    "src/entities/items/baseItem/ItemDnd35e.mjs",
+    "src/entities/items/baseItem/data/index.mjs",
+    "src/entities/items/baseItem/sheet/index.mjs"
+  ],
+  "src/entities/items/baseItem/sheet/ItemSheetDnd35e.mjs": [
+    "src/entities/common/templates/item/index.mjs",
+    "src/entities/items/baseItem/sheet/index.mjs"
+  ],
+  "src/entities/items/baseItem/sheet/index.mjs": [
+    "src/constants/paths.mjs",
+    "src/entities/items/baseItem/sheet/ItemSheetDnd35e.mjs",
+    "src/helpers/display.mjs"
+  ],
+  "src/entities/items/components/Alignment.mjs": [],
+  "src/entities/items/components/Changes.mjs": [],
+  "src/entities/items/components/CursableItem.mjs": [
+    "src/helpers/fieldBuilders.mjs"
+  ],
+  "src/entities/items/components/IdentifiableItem/index.mjs": [
+    "src/constants/paths.mjs",
+    "src/entities/items/components/IdentifiableItem/item.mjs",
+    "src/entities/items/components/IdentifiableItem/model.mjs",
+    "src/entities/items/components/IdentifiableItem/sheet.mjs",
+    "src/helpers/display.mjs"
+  ],
+  "src/entities/items/components/IdentifiableItem/item.mjs": [
+    "src/helpers/formulae/index.mjs"
+  ],
+  "src/entities/items/components/IdentifiableItem/model.mjs": [
+    "src/helpers/fieldBuilders.mjs"
+  ],
+  "src/entities/items/components/IdentifiableItem/sheet.mjs": [],
+  "src/entities/items/components/IdentifiableItem/system.mjs": [],
+  "src/entities/items/index.mjs": [
+    "src/entities/items/baseItem/index.mjs",
+    "src/entities/items/physical/index.mjs",
+    "src/entities/items/registration.mjs",
+    "src/entities/items/weapon/index.mjs"
+  ],
+  "src/entities/items/material/data/index.mjs": [
+    "src/entities/items/material/data/model.mjs"
+  ],
+  "src/entities/items/material/data/model.mjs": [
+    "src/entities/items/baseItem/index.mjs",
+    "src/entities/items/components/IdentifiableItem/index.mjs",
+    "src/helpers/fieldBuilders.mjs"
+  ],
+  "src/entities/items/material/data/system.mjs": [],
+  "src/entities/items/material/index.mjs": [
+    "src/entities/items/material/data/index.mjs",
+    "src/entities/items/material/material.mjs",
+    "src/entities/items/material/sheet/index.mjs"
+  ],
+  "src/entities/items/material/material.mjs": [
+    "src/entities/items/baseItem/index.mjs"
+  ],
+  "src/entities/items/material/sheet/MaterialSheet.mjs": [
+    "src/entities/items/baseItem/index.mjs",
+    "src/entities/items/components/IdentifiableItem/sheet.mjs",
+    "types/foundry/client/applications/api/handlebars-application.mjs"
+  ],
+  "src/entities/items/material/sheet/index.mjs": [
+    "src/entities/items/material/sheet/MaterialSheet.mjs"
+  ],
+  "src/entities/items/physical/PhysicalItemDnd35e.mjs": [
+    "src/entities/items/baseItem/index.mjs",
+    "src/entities/items/components/IdentifiableItem/index.mjs"
+  ],
+  "src/entities/items/physical/components/DamagableItem.mjs": [
+    "src/helpers/fieldBuilders.mjs"
+  ],
+  "src/entities/items/physical/components/EquippableItem.mjs": [
+    "src/constants/sizes.mjs",
+    "src/helpers/fieldBuilders.mjs"
+  ],
+  "src/entities/items/physical/data/constants.mjs": [],
+  "src/entities/items/physical/data/index.mjs": [
+    "src/entities/items/physical/data/constants.mjs",
+    "src/entities/items/physical/data/model.mjs"
+  ],
+  "src/entities/items/physical/data/model.mjs": [
+    "src/constants/sizes.mjs",
+    "src/entities/items/baseItem/index.mjs",
+    "src/entities/items/components/Alignment.mjs",
+    "src/entities/items/components/Changes.mjs",
+    "src/entities/items/components/CursableItem.mjs",
+    "src/entities/items/components/IdentifiableItem/index.mjs",
+    "src/entities/items/physical/components/DamagableItem.mjs",
+    "src/helpers/fieldBuilders.mjs"
+  ],
+  "src/entities/items/physical/data/system.mjs": [],
+  "src/entities/items/physical/index.mjs": [
+    "src/entities/items/physical/PhysicalItemDnd35e.mjs",
+    "src/entities/items/physical/components/EquippableItem.mjs",
+    "src/entities/items/physical/data/index.mjs",
+    "src/entities/items/physical/sheet/index.mjs"
+  ],
+  "src/entities/items/physical/sheet/PhysicalItemSheet.mjs": [
+    "src/entities/items/baseItem/index.mjs",
+    "src/entities/items/components/IdentifiableItem/index.mjs",
+    "src/entities/items/components/IdentifiableItem/sheet.mjs"
+  ],
+  "src/entities/items/physical/sheet/index.mjs": [
+    "src/entities/items/physical/sheet/PhysicalItemSheet.mjs"
+  ],
+  "src/entities/items/registration.mjs": [
+    "src/entities/common/index.mjs",
+    "src/entities/items/baseItem/index.mjs",
+    "src/entities/items/material/index.mjs",
+    "src/entities/items/weapon/index.mjs"
+  ],
+  "src/entities/items/weapon/WeaponDnd35e.mjs": [
+    "src/entities/items/physical/PhysicalItemDnd35e.mjs"
+  ],
+  "src/entities/items/weapon/data/constants.mjs": [],
+  "src/entities/items/weapon/data/index.mjs": [
+    "src/entities/items/weapon/data/constants.mjs",
+    "src/entities/items/weapon/data/model.mjs"
+  ],
+  "src/entities/items/weapon/data/model.mjs": [
+    "src/constants/attacks/damageTypes.mjs",
+    "src/entities/items/physical/index.mjs",
+    "src/entities/items/weapon/data/constants.mjs",
+    "src/helpers/fieldBuilders.mjs"
+  ],
+  "src/entities/items/weapon/data/system.mjs": [],
+  "src/entities/items/weapon/index.mjs": [
+    "src/entities/items/weapon/WeaponDnd35e.mjs",
+    "src/entities/items/weapon/data/index.mjs",
+    "src/entities/items/weapon/sheet/index.mjs"
+  ],
+  "src/entities/items/weapon/sheet/index.mjs": [
+    "src/constants/paths.mjs",
+    "src/entities/items/weapon/sheet/weaponSheet.mjs",
+    "src/helpers/display.mjs"
+  ],
+  "src/entities/items/weapon/sheet/weaponSheet.mjs": [
+    "src/entities/items/physical/index.mjs",
+    "src/entities/items/weapon/sheet/index.mjs",
+    "types/foundry/client/applications/api/handlebars-application.mjs"
+  ],
+  "src/global.mjs": [],
+  "src/helpers/HasSystem.mjs": [],
+  "src/helpers/display.mjs": [],
+  "src/helpers/fieldBuilders.mjs": [],
+  "src/helpers/formulae/index.mjs": [],
+  "src/helpers/handlebars/helpers.mjs": [],
+  "src/helpers/logHelper.mjs": [
+    "src/constants/devConfig.mjs",
+    "src/constants/logging.mjs"
+  ],
+  "src/helpers/stringHelpers.mjs": [],
+  "src/main.mjs": [
+    "src/entities/items/registration.mjs"
+  ],
+  "src/scene/SceneDnd35e.mjs": [],
+  "src/scene/region-behaviour/RegionBehaviorDnd35e.mjs": [],
+  "src/scene/region-behaviour/constants.mjs": [],
+  "src/scene/region-behaviour/environment-feature.mjs": [],
+  "src/scene/region-behaviour/environment.mjs": [],
+  "src/scene/region-behaviour/types.mjs": [],
+  "src/scene/region-document/RegionDocumentDnd35e.mjs": [],
+  "src/scene/token-document/TokenDocumentDnd35e.mjs": [],
+  "src/scene/token-document/index.mjs": [],
+  "types/foundry/client/applications/api/handlebars-application.mjs": [],
+  "types/foundry/client/applications/sheets/token/mixin.mjs": [
+    "types/foundry/client/applications/api/handlebars-application.mjs"
+  ],
+  "types/foundry/client/canvas/groups/canvas-group-mixin.mjs": [],
+  "types/foundry/client/canvas/primary/primary-canvas-object.mjs": [],
+  "types/foundry/client/canvas/primary/primary-occludable-object.mjs": [
+    "types/foundry/client/canvas/primary/primary-canvas-object.mjs"
+  ],
+  "types/foundry/client/packages/client-package.mjs": []
+}

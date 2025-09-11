@@ -18,7 +18,7 @@ type ItemSourceFlagsDnd35e = DocumentFlagsSource & {
     };
 };
 
-type ItemType = PhysicalItemType | 'Material';
+type ItemType = PhysicalItemType | 'material';
 
 type BaseItemSourceDnd35e<
     TType extends ItemType,

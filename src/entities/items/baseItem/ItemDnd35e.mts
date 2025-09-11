@@ -1,11 +1,11 @@
 import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
 import { DocumentConstructionContext } from '@common/_types.mjs';
 import { ItemFlagsDnd35e, ItemSystemData } from './data/system.mjs';
-import { Dnd35eConfig } from '@constants/config/index.mjs';
 import { replaceDataAttribute } from '@helpers/formulae/index.mjs';
 import { ItemSourceDnd35e } from './data/index.mjs';
 import { LogHelper } from '@helpers/logHelper.mjs';
 import Item from '@client/documents/item.mjs';
+// import { Dnd35eConfig } from '@constants/config/index.mjs';
 
 // export class Dnd35eItem<SubType extends Item.SubType = Item.SubType> extends Item<SubType> {
 //   extensionMap: Map<string, string>;
@@ -21,15 +21,12 @@ class ItemDnd35e<TParent extends ActorDnd35e | null = ActorDnd35e | null> extend
     super.prepareBaseData();
 
     this.system = this.system || this._createFreshSystemData();
-
-    // Set the display name
-    // this.system.displayName = this._getDisplayName();
   }
 
   _createFreshSystemData (): ItemSystemData {
     return {
       description: { value: '' },
-      version: Dnd35eConfig.VERSION,
+      version: CONFIG.Dnd35e.VERSION,
       isNameFromFormula: false,
       isPsionic: false,
       isEpic: false,

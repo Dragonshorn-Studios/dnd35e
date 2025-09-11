@@ -13,7 +13,7 @@ type PhysicalItemSheetPartialsList = ItemSheetPartialsList & {
 };
 
 interface PhysicalItemSheetRenderContext extends ItemSheetDnd35eRenderContext, IdentifiableItemRenderContext {
-  partials: PhysicalItemSheetPartialsList
+  partials: PhysicalItemSheetPartialsList;
 };
 
 abstract class PhysicalItemSheet<
@@ -27,6 +27,7 @@ abstract class PhysicalItemSheet<
   protected override async _prepareContext (options: fa.api.DocumentSheetRenderOptions): Promise<PhysicalItemSheetRenderContext> {
     const startingContext = await super._prepareContext(options);
     const identifiedContext = prepareIdentifiableContext(this.document.system);
+    
     return {
       ...startingContext,
       ...identifiedContext,

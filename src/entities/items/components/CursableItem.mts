@@ -1,6 +1,7 @@
-import { fields } from '@common/data/_module.mjs';
+import type { fields as fieldsType } from '@common/data/_module.mjs';
 import { ModelPropsFromSchema, SourceFromSchema } from '@common/data/fields.mjs';
 import { requiredBooleanField } from '@helpers/fieldBuilders.mjs';
+const { fields } = foundry.data;
 
 type CursableItem = {
     cursedInfo?: {
@@ -10,8 +11,8 @@ type CursableItem = {
 };
 
 type CursableItemSchemaBase = {
-    isCursed: fields.BooleanField;
-    isCurseActive: fields.BooleanField;
+    isCursed: fieldsType.BooleanField;
+    isCurseActive: fieldsType.BooleanField;
     // cursedInfo?: fields.SchemaField<{
     //     unidentifiedName: fields.StringField<string, string, false, false, true>;
     //     unidentifiedDescription: fields.StringField<string, string, false, false, true>;
@@ -20,7 +21,7 @@ type CursableItemSchemaBase = {
 };
 
 type CursableItemSchema = {
-    cursedInfo: fields.SchemaField<CursableItemSchemaBase, SourceFromSchema<CursableItemSchemaBase>, ModelPropsFromSchema<CursableItemSchemaBase>, false, true, false>;
+    cursedInfo: fieldsType.SchemaField<CursableItemSchemaBase, SourceFromSchema<CursableItemSchemaBase>, ModelPropsFromSchema<CursableItemSchemaBase>, false, true, false>;
 }
 
 const defineCursableSchema = (): CursableItemSchema => ({

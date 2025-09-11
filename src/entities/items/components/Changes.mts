@@ -1,4 +1,5 @@
-import { fields } from '@common/data/_module.mjs';
+import type { fields as fieldsType } from '@common/data/_module.mjs';
+const { fields } = foundry.data;
 
 const CHANGE_FLAG_KEYS = [
   'loseDexToAC',
@@ -29,11 +30,11 @@ type ChangesPropertySet = {
 };
 
 type ChangesPropertySetSchema = {
-    changes: fields.ArrayField<fields.SchemaField<{
-        [key: string]: fields.StringField | fields.NumberField
+    changes: fieldsType.ArrayField<fieldsType.SchemaField<{
+        [key: string]: fieldsType.StringField | fieldsType.NumberField
     }>>,
-    changeFlags: fields.ArrayField<fields.SchemaField<{
-        [key in ChangeFlagKey]?: fields.BooleanField<boolean, boolean, true, false, true>;
+    changeFlags: fieldsType.ArrayField<fieldsType.SchemaField<{
+        [key in ChangeFlagKey]?: fieldsType.BooleanField<boolean, boolean, true, false, true>;
     }>>;
     // resistances:
     // damage reduction:

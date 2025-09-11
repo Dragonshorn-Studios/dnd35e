@@ -1,7 +1,7 @@
 const DAMAGE_TYPES = [
-  'Piercing',
-  'Bludgeoning',
-  'Slashing',
+  'D35E.DRPiercing',
+  'D35E.DRBludgeoning',
+  'D35E.DRSlashing',
 ];
 type DamageType = (typeof DAMAGE_TYPES)[number];
 

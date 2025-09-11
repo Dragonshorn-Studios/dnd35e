@@ -1,9 +1,8 @@
 import { systemPath } from '@constants/paths.mjs';
 import { registerPartial } from '@helpers/display.mjs';
+import { weaponSummaryPartialName } from './weaponSheet.mjs';
 
-const localPath = (file: string) => `${systemPath}entities/common/templates/${file}`;
-
-export const weaponSummaryPartialName = 'weaponSummary';
+const localPath = (file: string) => `${systemPath}src/entities/items/weapon/sheet/${file}`;
 
 const partials = [
   weaponSummaryPartialName,

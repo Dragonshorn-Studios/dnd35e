@@ -26,7 +26,8 @@
   },
   "documentTypes": {
     "Item": {
-      "weapon": {}
+      "weapon": {},
+      "material": {}
     }
   }
 }

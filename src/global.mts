@@ -2,7 +2,6 @@ import { CanvasDnd35e } from './canvas/CanvasDnd35e.mjs';
 import { RegionDocumentDnd35e } from './scene/region-document/RegionDocumentDnd35e.mjs';
 import { SceneDnd35e } from './scene/SceneDnd35e.mjs';
 import { TokenDocumentDnd35e } from './scene/token-document/index.mjs';
-import { Dnd35eConfig } from './constants/config/index.mjs';
 import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
 import { ItemDnd35e } from '@items/baseItem/ItemDnd35e.mjs';
 import type { documents, Game } from '@client/_module.mjs';
@@ -51,7 +50,12 @@ type ThisConfig = Config<
 
 declare global {
   interface ConfigDnd35e extends ThisConfig {
-    Dnd35e: typeof Dnd35eConfig;
+    Dnd35e: {
+      VERSION: string;
+      item: {
+        documentClasses: Record<string, new (...args: any[]) => ItemDnd35e>;
+      },
+    };
   }
   const CONFIG: ConfigDnd35e;
   const canvas: CanvasDnd35e;

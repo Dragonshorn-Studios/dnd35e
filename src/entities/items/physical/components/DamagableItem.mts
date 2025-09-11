@@ -1,5 +1,7 @@
-import { fields } from '@common/data/_module.mjs';
 import { requiredNumberField } from '@helpers/fieldBuilders.mjs';
+import type { fields as fieldsType } from '@common/data/_module.mjs';
+
+const { fields } = foundry.data;
 
 type DamagableItem = {
     hp: {
@@ -10,11 +12,11 @@ type DamagableItem = {
 };
 
 type DamagableItemSchema = {
-    hp: fields.SchemaField<{
-        value: fields.NumberField<number, number, true, false, true>;
-        max: fields.NumberField<number, number, true, false, true>;
+    hp: fieldsType.SchemaField<{
+        value: fieldsType.NumberField<number, number, true, false, true>;
+        max: fieldsType.NumberField<number, number, true, false, true>;
     }>,
-    hardness: fields.NumberField<number, number, true, false, true>;
+    hardness: fieldsType.NumberField<number, number, true, false, true>;
 };
 
 const defineDamagableItemSchema = (): DamagableItemSchema => ({

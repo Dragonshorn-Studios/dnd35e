@@ -5,20 +5,28 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf dist && npx tsc && npx tsc-path-fix && node build/strip-alias-imports.js"
+    "post-build-tasks": "node build/strip-alias-imports.js && node build/copy-hbs.js",
+    "build": "rimraf dist && npx tsc && npx tsc-path-fix && npm run post-build-tasks",
+    "watch:ts": "tsc -p tsconfig.json --watch",
+    "watch:hbs": "node build/watch-hbs.mjs",
+    "dev": "npm-run-all --parallel watch:ts watch:hbs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "6.7.0",
     "@typescript-eslint/parser": "6.7.0",
+    "chokidar": "^4.0.3",
+    "dependency-cruiser": "^17.0.1",
     "eslint": "^8.57.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-config-standard-jsx": "^11.0.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.6.0",
+    "npm-run-all": "^4.1.5",
     "standardx": "^7.0.0",
     "tsc-path-fix": "^1.0.6",
     "typescript": "^5.8.3"

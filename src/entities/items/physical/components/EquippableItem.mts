@@ -1,6 +1,8 @@
-import { fields } from '@common/data/_module.mjs';
 import { Size, SIZES } from '@constants/sizes.mjs';
 import { requiredBooleanField, requiredStringField } from '@helpers/fieldBuilders.mjs';
+import type { fields as fieldsType } from '@common/data/_module.mjs';
+
+const { fields } = foundry.data;
 
 type EquippableItem = {
     isEquipped: boolean;
@@ -10,10 +12,10 @@ type EquippableItem = {
 };
 
 type EquippableItemSchema = {
-    isEquipped: fields.BooleanField<boolean, boolean, true, false, true>;
-    slot: fields.StringField<string, string, true, false, true>;
-    isMelded: fields.BooleanField<boolean, boolean, true, false, true>;
-    designedForSize: fields.StringField<Size, Size, true, false, true>;
+    isEquipped: fieldsType.BooleanField<boolean, boolean, true, false, true>;
+    slot: fieldsType.StringField<string, string, true, false, true>;
+    isMelded: fieldsType.BooleanField<boolean, boolean, true, false, true>;
+    designedForSize: fieldsType.StringField<Size, Size, true, false, true>;
 };
 
 const defineEquippableItemSchema = (): EquippableItemSchema => ({

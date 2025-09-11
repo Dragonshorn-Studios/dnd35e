@@ -5,7 +5,7 @@ import type {
   MaterialSystemSource,
 } from './system.mjs';
 
-type MaterialSource = BaseItemSourceDnd35e<'Material', MaterialSystemSource>;
+type MaterialSource = BaseItemSourceDnd35e<'material', MaterialSystemSource>;
 
 export {
   MaterialSystemModel,

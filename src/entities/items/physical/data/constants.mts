@@ -1,5 +1,5 @@
 const PHYSICAL_ITEM_TYPES = new Set([
-  'Weapon',
+  'weapon',
 ] as const);
 type PhysicalItemType = SetElement<typeof PHYSICAL_ITEM_TYPES>;
 

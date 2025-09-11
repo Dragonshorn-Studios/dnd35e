@@ -1,4 +1,3 @@
-import { fields } from '@common/data/_module.mjs';
 import { PhysicalItemDnd35e } from '../PhysicalItemDnd35e.mjs';
 import { ItemSystemModel, ItemSystemSchema } from '@items/baseItem/index.mjs';
 import { defineIdentifiableSchema, IdentifiableItemSchema } from '@items/components/IdentifiableItem/index.mjs';
@@ -8,6 +7,9 @@ import { ChangesPropertySetSchema, defineChangesSchema } from '@items/components
 import { AlignmentSchema, defineAlignmentSchema } from '@items/components/Alignment.mjs';
 import { optionalNumberField, optionalStringField, requiredBooleanField, requiredNumberField } from '@helpers/fieldBuilders.mjs';
 import { Size, SIZES } from '@constants/sizes.mjs';
+import type { fields as fieldsType } from '@common/data/_module.mjs';
+
+const { fields } = foundry.data;
 
 // Schema
 type PhysicalItemSystemSchema = ItemSystemSchema
@@ -17,21 +19,21 @@ type PhysicalItemSystemSchema = ItemSystemSchema
     & ChangesPropertySetSchema
     & AlignmentSchema
 & {
-    quantity: fields.NumberField<number, number, true, false, true>;
-    weight: fields.NumberField;
-    isWeightlessWhenCarried: fields.BooleanField;
-    isWeightlessInContainer: fields.BooleanField;
-    isCarried: fields.BooleanField;
-    size: fields.StringField<Size, Size, true, false, true>;
+    quantity: fieldsType.NumberField<number, number, true, false, true>;
+    weight: fieldsType.NumberField;
+    isWeightlessWhenCarried: fieldsType.BooleanField;
+    isWeightlessInContainer: fieldsType.BooleanField;
+    isCarried: fieldsType.BooleanField;
+    size: fieldsType.StringField<Size, Size, true, false, true>;
 
     // Price
-    price: fields.NumberField<number, number, true, false, true>;
-    resalePrice: fields.NumberField;
-    brokenResalePrice: fields.NumberField;
-    isFullResalePrice: fields.BooleanField;
+    price: fieldsType.NumberField<number, number, true, false, true>;
+    resalePrice: fieldsType.NumberField;
+    brokenResalePrice: fieldsType.NumberField;
+    isFullResalePrice: fieldsType.BooleanField;
 
     // Container
-    containerId: fields.StringField<string, string, false, false, true>;
+    containerId: fieldsType.StringField<string, string, false, false, true>;
 }
 
 abstract class PhysicalItemSystemModel<

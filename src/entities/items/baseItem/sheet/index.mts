@@ -1,9 +1,8 @@
 import { systemPath } from '@constants/paths.mjs';
 import { registerPartial } from '@helpers/display.mjs';
+import { itemHeaderPartialName } from './ItemSheetDnd35e.mjs';
 
-const localPath = (file: string) => `${systemPath}entities/items/baseItem/sheet/${file}`;
-
-export const itemHeaderPartialName = 'itemHeader';
+const localPath = (file: string) => `${systemPath}src/entities/items/baseItem/sheet/${file}`;
 
 const partials = [
   itemHeaderPartialName,
