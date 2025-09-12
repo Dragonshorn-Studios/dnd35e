@@ -6,6 +6,7 @@ const localPath = (file: string) => `${systemPath}src/entities/common/templates/
 
 const partials = [
   'wrapper',
+  'emptyDiv',
 ];
 
 export const register = () => {

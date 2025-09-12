@@ -1450,7 +1450,6 @@
   "D35E.NotificationSyncSuccessfull": "Manual sync to LotD Players Companion for {0} was successful!",
   "D35E.NotificationSyncError": "Manual sync to LotD Players Companion for {0} encountered an error! Check Companion setup for both World and Character!",
 
-  "D35E.Senses": "Senses",
   "D35E.SensesConfig": "Configure Senses",
   "D35E.SensesConfigHint": "Configure any special sensory perception abilities that this actor possesses.",
   "D35E.SenseDarkvision": "Darkvision",
@@ -1477,7 +1476,6 @@
   "D35E.CustomName":"Custom Name",
   "D35E.CustomReferenceName":"Custom Chat Card Name",
   "D35E.LeaveEmptyForItemName": "Leave empty to use Item name",
-  "D35E.Attacks": "Attacks",
   "D35E.ModifiedFieldPlaceholder": "Select from list or enter custom",
   "D35E.DrawCards":"Draw Cards",
   "D35E.SpellCards":"Spell Cards",

@@ -19,13 +19,14 @@ const partialsToRegister = [
   //     'wrapper',
   //   ],
   // },
-  // {
-  //   path: 'nameAndArt/',
-  //   partials: [
-  //     nameAndArtPartial,
-  //     defaultNameHeaderPartial,
-  //   ],
-  // },
+  {
+    path: 'nameAndArt/',
+    partials: [
+      // is registered in the sheet... but maybe we still use this instead later?
+      // nameAndArtPartial,
+      defaultNameHeaderPartial,
+    ],
+  },
 ];
 export const register = () => {
   // partialsToRegister.forEach(({path, partials}) => partials.forEach(partialName => registerPartial(localPath(path, `${partialName}.hbs`), partialName)))
