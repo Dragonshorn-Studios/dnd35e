@@ -1,5 +1,5 @@
 import type { fields as fieldsType } from '@common/data/_module.mjs';
-import { ModelPropsFromSchema, SourceFromSchema } from '@common/data/fields.mjs';
+import type { ModelPropsFromSchema, SourceFromSchema } from '@common/data/fields.mjs';
 import { requiredBooleanField } from '@helpers/fieldBuilders.mjs';
 const { fields } = foundry.data;
 

@@ -2,8 +2,9 @@ import { ItemSheetDnd35e, ItemSheetDnd35eConfig, ItemSheetDnd35eRenderContext, I
 import { MaterialDnd35e } from '../material.mjs';
 import { IdentifiableItemRenderContext } from '@items/components/IdentifiableItem/index.mjs';
 import { prepareIdentifiableContext } from '@items/components/IdentifiableItem/sheet.mjs';
-import HandlebarsApplicationMixin from '@client/applications/api/handlebars-application.mjs';
-import { DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
+import { type DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
+import { systemPath } from '@constants/paths.mjs';
+import type { HandlebarsTemplatePart } from '@client/applications/api/handlebars-application.mjs';
 
 type MaterialSheetConfig<TItem extends MaterialDnd35e = MaterialDnd35e> = ItemSheetDnd35eConfig<TItem>;
 
@@ -13,7 +14,7 @@ interface MaterialSheetRenderContext extends ItemSheetDnd35eRenderContext, Ident
   partials: MaterialSheetPartialsList;
 };
 
-class MaterialSheet extends HandlebarsApplicationMixin(ItemSheetDnd35e<MaterialDnd35e, MaterialSheetConfig>) {
+class MaterialSheet extends foundry.applications.api.HandlebarsApplicationMixin(ItemSheetDnd35e<MaterialDnd35e, MaterialSheetConfig>) {
   static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
     id: 'dnd35e-material-sheet', // this probably should be unique
     tag: 'form',
@@ -27,14 +28,18 @@ class MaterialSheet extends HandlebarsApplicationMixin(ItemSheetDnd35e<MaterialD
       width: 600,
       height: 400,
     },
-  };
+  }
 
-  static override PARTS = {
-    ...super.PARTS,
-    // main: {
-    //   template: `${systemPath}src/entities/items/weaponSheet.hbs`,
-    // },
-  };
+  static override get PARTS(): Record<string, HandlebarsTemplatePart> {
+    const old = ItemSheetDnd35e.PARTS;
+    return {
+      ...old,
+      main: {
+        template: `${systemPath}src/entities/items/material/sheet/MaterialSheet.hbs`,
+        // root: true,
+      },
+    }
+  }
 
   protected override async _prepareContext (options: fa.api.DocumentSheetRenderOptions): Promise<MaterialSheetRenderContext> {
     const startingContext = await super._prepareContext(options) as ItemSheetDnd35eRenderContext;

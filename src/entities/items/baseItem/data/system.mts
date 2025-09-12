@@ -1,4 +1,4 @@
-import { DocumentFlags, DocumentFlagsSource } from '@common/data/_module.mjs';
+import type { DocumentFlags } from '@common/data/_module.mjs';
 
 type ItemGrantDeleteAction = 'cascade' | 'detach' | 'restrict';
 

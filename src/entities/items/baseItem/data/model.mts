@@ -1,6 +1,6 @@
 
 import { ItemDnd35e } from '../ItemDnd35e.mjs';
-import { ModelPropsFromSchema, SourceFromSchema } from '@common/data/fields.mjs';
+import type { ModelPropsFromSchema, SourceFromSchema } from '@common/data/fields.mjs';
 import { nullableOptionalStringField, optionalStringField, requiredBooleanField, requiredStringField } from '@helpers/fieldBuilders.mjs';
 import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
 import type { fields as fieldsType } from '@common/data/_module.mjs';

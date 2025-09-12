@@ -1,5 +1,4 @@
-import HandlebarsApplicationMixin from '@client/applications/api/handlebars-application.mjs';
-import { DocumentSheetConfiguration, DocumentSheetRenderOptions } from '@client/applications/api/document-sheet.mjs';
+import { type DocumentSheetConfiguration, type DocumentSheetRenderOptions } from '@client/applications/api/document-sheet.mjs';
 import { WeaponDnd35e } from '../index.mjs';
 import { PhysicalItemSheet, PhysicalItemSheetConfig, PhysicalItemSheetPartialsList, PhysicalItemSheetRenderContext } from '@items/physical/index.mjs';
 
@@ -17,7 +16,7 @@ interface WeaponSheetRenderContext extends PhysicalItemSheetRenderContext {
 
 export const weaponSummaryPartialName = 'weaponSummary';
 
-class WeaponSheet extends HandlebarsApplicationMixin(PhysicalItemSheet<WeaponDnd35e, WeaponSheetConfig>) {
+class WeaponSheet extends foundry.applications.api.HandlebarsApplicationMixin(PhysicalItemSheet<WeaponDnd35e, WeaponSheetConfig>) {
   static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
     tag: 'form',
     id: 'dnd35e-weapon-sheet', // this probably should be unique

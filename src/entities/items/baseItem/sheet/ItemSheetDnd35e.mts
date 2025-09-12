@@ -1,7 +1,8 @@
-import { DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
+import { type DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
 import { ItemDnd35e } from '../ItemDnd35e.mjs';
 import { IdentifiableItemRenderContext } from '@items/components/IdentifiableItem/index.mjs';
 import { nameAndArtPart } from '@entities/common/templates/item/index.mjs';
+import { type HandlebarsTemplatePart } from '@client/applications/api/handlebars-application.mjs';
 
 //   getData(options) {
 //     const data = super.getData(options);
@@ -62,7 +63,7 @@ abstract class ItemSheetDnd35e<
     },
   };
 
-  static PARTS = {
+  static PARTS: Record<string, HandlebarsTemplatePart> = {
     top: nameAndArtPart,
     // main: {
     //   template: `${systemPath}src/item-sheet.html`,

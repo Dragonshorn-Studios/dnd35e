@@ -4,7 +4,7 @@ import { RegionBehaviorDnd35e } from './RegionBehaviorDnd35e.mjs';
 import { EnvironmentBehaviorType } from './environment.mjs';
 import { EnvironmentFeatureBehaviorType } from './environment-feature.mjs';
 import { DIFFICULT_TERRAIN_GRADES } from './constants.mjs';
-import { RegionEvent } from '@client/documents/region.mjs';
+import { type RegionEvent } from '@client/documents/region.mjs';
 
 interface AdjustDarknessLevelRegionBehavior<TParent extends RegionDocumentDnd35e | null = RegionDocumentDnd35e | null>
     extends RegionBehaviorDnd35e<TParent> {

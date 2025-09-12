@@ -9,7 +9,7 @@ import type {
   ItemSystemData,
   ItemSystemSource,
 } from './system.mjs';
-import { DocumentFlagsSource } from '@common/data/_module.mjs';
+import { type DocumentFlagsSource } from '@common/data/_module.mjs';
 import { MaterialSource } from '@items/material/index.mjs';
 
 type ItemSourceFlagsDnd35e = DocumentFlagsSource & {

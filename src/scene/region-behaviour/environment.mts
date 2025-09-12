@@ -1,4 +1,4 @@
-import { ModelPropsFromSchema, SetField, SourceFromSchema, StringField } from '@common/data/fields.mjs';
+import type { ModelPropsFromSchema, SetField, SourceFromSchema, StringField } from '@common/data/fields.mjs';
 import { RegionBehaviorDnd35e } from './RegionBehaviorDnd35e.mjs';
 
 type EnvironmentTypeSchema = {

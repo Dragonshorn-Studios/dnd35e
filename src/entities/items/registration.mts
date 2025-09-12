@@ -2,7 +2,6 @@ import { registerCommon } from '@entities/common/index.mjs';
 import { ItemProxyDnd35e } from './baseItem/index.mjs';
 import { MaterialSystemModel, MaterialSheet } from './material/index.mjs';
 import { WeaponSystemModel, WeaponSheet } from './weapon/index.mjs';
-import Hooks from '@client/helpers/hooks.mjs';
 import ItemConfig from '@constants/config/item.mjs';
 import { runPartialRegistration } from '@helpers/display.mjs';
 
@@ -28,7 +27,7 @@ export const registerItems = () => {
   };
 
 
-  Hooks.once('init', () => {
+  foundry.helpers.Hooks.once('init', () => {
     CONFIG.Item.documentClass = ItemProxyDnd35e;
     Object.assign(CONFIG.Item.dataModels, {
       weapon: WeaponSystemModel,
@@ -36,7 +35,7 @@ export const registerItems = () => {
     });
   });
 
-  Hooks.once('setup', () => {
+  foundry.helpers.Hooks.once('setup', () => {
     registerCommon();
     runPartialRegistration();
     registerSheets();

@@ -1,10 +1,9 @@
 import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
-import { DocumentConstructionContext } from '@common/_types.mjs';
+import { type DocumentConstructionContext } from '@common/_types.mjs';
 import { ItemFlagsDnd35e, ItemSystemData } from './data/system.mjs';
 import { replaceDataAttribute } from '@helpers/formulae/index.mjs';
 import { ItemSourceDnd35e } from './data/index.mjs';
 import { LogHelper } from '@helpers/logHelper.mjs';
-import Item from '@client/documents/item.mjs';
 // import { Dnd35eConfig } from '@constants/config/index.mjs';
 
 // export class Dnd35eItem<SubType extends Item.SubType = Item.SubType> extends Item<SubType> {
@@ -16,7 +15,7 @@ import Item from '@client/documents/item.mjs';
 //     this.extensionMap = new Map();
 //   }
 // };
-class ItemDnd35e<TParent extends ActorDnd35e | null = ActorDnd35e | null> extends Item<TParent> {
+class ItemDnd35e<TParent extends ActorDnd35e | null = ActorDnd35e | null> extends foundry.documents.Item<TParent> {
   override prepareBaseData (): void {
     super.prepareBaseData();
 

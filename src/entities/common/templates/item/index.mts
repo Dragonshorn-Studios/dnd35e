@@ -1,3 +1,4 @@
+import { type HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
 import { systemPath } from "@constants/paths.mjs";
 import { registerPartial } from "@helpers/display.mjs";
 
@@ -7,7 +8,7 @@ export const defaultNameHeaderPartial = "defaultNameHeader";
 export const nameAndArtPartial = 'nameAndArt';
 export const nameAndArtPartialPath = localPath('nameAndArt/', `nameAndArt.hbs`);
 
-export const nameAndArtPart = {
+export const nameAndArtPart: HandlebarsTemplatePart = {
   template: nameAndArtPartialPath,
 };
 
@@ -18,16 +19,16 @@ const partialsToRegister = [
   //     'wrapper',
   //   ],
   // },
-  {
-    path: 'nameAndArt/',
-    partials: [
-      nameAndArtPartial,
-      defaultNameHeaderPartial,
-    ],
-  },
+  // {
+  //   path: 'nameAndArt/',
+  //   partials: [
+  //     nameAndArtPartial,
+  //     defaultNameHeaderPartial,
+  //   ],
+  // },
 ];
 export const register = () => {
-  partialsToRegister.forEach(({path, partials}) => partials.forEach(partialName => registerPartial(localPath(path, `${partialName}.hbs`), partialName)))
+  // partialsToRegister.forEach(({path, partials}) => partials.forEach(partialName => registerPartial(localPath(path, `${partialName}.hbs`), partialName)))
 }
 // export const register = async () => await Promise.all(partials.flatMap(({path, partials}) =>
 //   partials.map(partialName => registerPartial(localPath(path, `${partialName}.hbs`), partialName))));
