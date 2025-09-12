@@ -1,10 +1,11 @@
-  <div class="name-and-art">
-    {{#with document}}
-      <div class="item-art-container">
-        <img class="item-art" src="{{img}}" title="{{displayName}}" />
-      </div>
+<div class="name-and-art">
+  {{#with document}}
+    <div class="item-art-container">
+      <img class="item-art" src="{{img}}" title="{{displayName}}" />
+    </div>
+  {{/with}}
 
-      <div class="sheet-header flexrow">
-      </div>
-    {{/with}}
+  <div class="sheet-header flexrow">
+    {{> (lookup partials 'header')}}
   </div>
+</div>

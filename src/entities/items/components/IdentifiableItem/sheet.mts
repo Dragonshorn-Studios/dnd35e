@@ -3,6 +3,10 @@ import { ItemSheetDnd35eRenderContext } from '@items/baseItem/index.mjs';
 
 // type UnidentifiedInfoMode = 'UnidentifiedOnly' | 'IdentifiedOnly' | 'Both';
 
+interface IdentifiableItemPartialsList {
+  headerMain: string;
+};
+
 interface IdentifiableItemRenderContext {
     // showUnidentifiedInfoMode: UnidentifiedInfoMode;
     showUnidentifiedInfoMode: {
@@ -10,12 +14,13 @@ interface IdentifiableItemRenderContext {
         showOnlyUnidentified: boolean;
         showOnlyIdentified: boolean;
     };
+    partials: IdentifiableItemPartialsList;
 };
 
-const prepareIdentifiableContext = <TData extends IdentifiableItemSystemData>(data: TData): Partial<ItemSheetDnd35eRenderContext> & IdentifiableItemRenderContext => {
+const prepareIdentifiableContext = <TData extends IdentifiableItemSystemData>(data: TData): DeepPartial<ItemSheetDnd35eRenderContext> & IdentifiableItemRenderContext => {
   return {
     partials: {
-      header: identifiableHeaderPartialName,
+      headerMain: identifiableHeaderPartialName,
     },
     showUnidentifiedInfoMode: {
       showBoth: game.user.isGM && data.isIdentifiable,
@@ -32,4 +37,5 @@ export {
   identifiableHeaderPartialName,
   // IdentifiableHeaderPart,
   type IdentifiableItemRenderContext,
+  type IdentifiableItemPartialsList,
 };

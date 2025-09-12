@@ -1,7 +1,6 @@
 import { type DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
 import { ItemDnd35e } from '../ItemDnd35e.mjs';
-import { IdentifiableItemRenderContext } from '@items/components/IdentifiableItem/index.mjs';
-import { nameAndArtPart } from '@entities/common/templates/item/index.mjs';
+import { defaultNameHeaderPartial, nameAndArtPart } from '@entities/common/templates/item/index.mjs';
 import { type HandlebarsTemplatePart } from '@client/applications/api/handlebars-application.mjs';
 
 //   getData(options) {
@@ -19,10 +18,13 @@ interface ItemSheetDnd35eConfig<TItem extends ItemDnd35e> extends DocumentSheetC
 
 type ItemSheetPartialsList = {
     header: string;
+    headerMain: string;
+    headerSummary: string;
+    // maybe I register partial names somewhere and restrict these values to those registered names?
     [key: string]: string;
 };
 
-interface ItemSheetDnd35eRenderContext extends fa.api.DocumentSheetRenderContext, IdentifiableItemRenderContext {
+interface ItemSheetDnd35eRenderContext extends fa.api.DocumentSheetRenderContext {
   itemType: 'D35E.Item' | 'D35E.Material';
   partials: ItemSheetPartialsList;
   // labels: {
@@ -75,6 +77,8 @@ abstract class ItemSheetDnd35e<
     context.itemType = 'D35E.Item';
     context.partials = {
       header: itemHeaderPartialName,
+      headerMain: defaultNameHeaderPartial,
+      headerSummary: "emptyDiv"
     };
     // context.labels = {};
 

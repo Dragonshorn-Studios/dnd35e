@@ -27,9 +27,9 @@ export const registerPartial = async (filePath: string, partialName: string) => 
 };
 
 export const runPartialRegistration = () => {
-  for (const [partialName, filePath] of Object.entries(partialsToRegister)) {
+  for (const [partialName, filePath] of partialsToRegister.entries()) {
     foundry.applications.handlebars.loadTemplates({ [partialName]: filePath });
     console.log(`Partial registered successfully: ${partialName}`);
     registeredPartials.add(partialName);
   }
-}
+};

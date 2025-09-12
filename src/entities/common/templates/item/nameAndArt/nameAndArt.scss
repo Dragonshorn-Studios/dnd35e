@@ -1,0 +1,17 @@
+.dnd35e-material-sheet {
+    .name-and-art {
+        display: flex;
+    }
+
+    .item-art-container {
+        flex: 0 128px;
+        width: 128px;
+        margin-right: 2px;
+        position: relative;
+
+        img.item-art {
+            object-fit: contain;
+            border: 2px solid #000;
+        }
+    }
+}

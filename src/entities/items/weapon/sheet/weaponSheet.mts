@@ -33,7 +33,7 @@ class WeaponSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ph
   };
 
   static override PARTS = {
-    ...super.PARTS,
+    ...PhysicalItemSheet.PARTS,
     // main: {
     //   template: `${systemPath}src/entities/items/weaponSheet.hbs`,
     // },
@@ -41,14 +41,9 @@ class WeaponSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ph
 
   override async _prepareContext (options: DocumentSheetRenderOptions): Promise<WeaponSheetRenderContext> {
     const baseContext = await super._prepareContext(options) as PhysicalItemSheetRenderContext;
+    baseContext.partials.headerSummary = weaponSummaryPartialName;
 
-    return {
-      ...baseContext,
-      partials: {
-        ...baseContext.partials,
-        headerSummary: weaponSummaryPartialName,
-      },
-    };
+    return baseContext;
   }
 }
 

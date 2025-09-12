@@ -1,8 +1,8 @@
 
 <div class="flexcol">
-  {{#if (or document.showUnidentifiedInfoMode.showBoth document.showUnidentifiedInfoMode.showOnlyIdentified)}}
+  {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyIdentified)}}
     <h3 class="charname">
-      <input name="name" type="text" value="{{displayName}}" placeholder="{{localize "D35E.ItemName"}}"/>
+      <input name="name" type="text" value="{{document.displayName}}" placeholder="{{localize "D35E.ItemName"}}"/>
     </h3>
   {{/if}}
   {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyUnidentified)}}

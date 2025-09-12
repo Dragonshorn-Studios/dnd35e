@@ -8,7 +8,7 @@ const partials = [
   itemHeaderPartialName,
 ];
 
-await Promise.all(partials.map(partialName => registerPartial(localPath(`${partialName}.hbs`), partialName)));
+partials.map(partialName => registerPartial(localPath(`${partialName}.hbs`), partialName));
 
 export { ItemSheetDnd35e } from './ItemSheetDnd35e.mjs';
 
