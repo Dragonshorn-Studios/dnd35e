@@ -16,10 +16,10 @@
       }
   ],
   "esmodules": [
-      "dist/src/main.mjs"
+      "dist/main.mjs"
   ],
   "styles": [
-      "styles/core.css"
+      "dist/main.css"
   ],
   "languages": [
       {

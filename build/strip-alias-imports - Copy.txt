@@ -1,0 +1,38 @@
+// scripts/strip-alias-imports.js
+import fs from 'fs';
+import path from 'path';
+
+const outDir = path.resolve('./dist'); // adjust to your outDir
+const aliasPatterns = [
+  /^import\s.+['"]@common\//,
+  /^import\s.+['"]@client\//,
+  /^export\s.+['"]@common\//,
+  /^export\s.+['"]@client\//
+];
+
+function walk(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      walk(fullPath);
+    } else if (entry.isFile() && fullPath.endsWith('.mjs')) {
+      let content = fs.readFileSync(fullPath, 'utf8');
+      const newContent = content
+        .split('\n')
+        .filter(line => !aliasPatterns.some(rx => rx.test(line.trim())))
+        .join('\n');
+      if (newContent !== content) {
+        fs.writeFileSync(fullPath, newContent, 'utf8');
+        console.log(`Stripped alias imports from ${fullPath}`);
+      }
+    }
+  }
+}
+
+walk(outDir);
+console.log(`Finished at ${new Date().toLocaleTimeString('en-US', {
+  hour: 'numeric',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: true,
+})}`);

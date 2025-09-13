@@ -1,0 +1,11 @@
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "post-build-tasks": "node build/strip-alias-imports.js && node build/copy-hbs.js",
+    "build": "rimraf dist && npx tsc && npx tsc-path-fix && npm run build:scss && npm run post-build-tasks",
+    "build:scss": "sass-glob && sass src/styles/core.scss dist/core.css --source-map --style=compressed",
+    "watch:scss": "sass-glob && sass --watch src/styles/core.scss dist/core.css --source-map --style=expanded",
+    "watch:ts": "tsc -p tsconfig.json --watch",
+    "watch:hbs": "node build/watch-hbs.mjs",
+    "dev": "npm-run-all --parallel watch:ts watch:hbs"
+  },

@@ -1,16 +1,15 @@
-import { systemPath } from '@constants/paths.mjs';
+import { hbsTemplatePath } from '@constants/paths.mjs';
 import { registerPartial } from '@helpers/display.mjs';
 import { weaponSummaryPartialName } from './weaponSheet.mjs';
+import './weaponSheet.scss';
 
-const localPath = (file: string) => `${systemPath}src/entities/items/weapon/sheet/${file}`;
+const hbsPath = (file: string) => `${hbsTemplatePath}/entities/items/weapon/sheet/${file}`;
 
 const partials = [
   weaponSummaryPartialName,
 ];
 
-await Promise.all(
-  partials.map(partialName => registerPartial(localPath(`${partialName}.hbs`), partialName)),
-);
+partials.forEach(partialName => registerPartial(hbsPath(`${partialName}.hbs`), partialName));
 
 export { WeaponSheet } from './weaponSheet.mjs';
 export type {

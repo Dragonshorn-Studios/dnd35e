@@ -1,0 +1,23 @@
+import { glob } from "glob";
+import fs from "fs-extra";
+import path from "node:path";
+
+async function copyTemplates() {
+  // Find all .hbs files under src/
+  const files = await glob("src/**/*.hbs");
+
+  await Promise.all(
+    files.map(src => {
+      // Keep the src/ prefix in the destination
+      const dest = path.join("dist", src);
+      return fs.copy(src, dest);
+    })
+  );
+
+  console.log(`Copied ${files.length} .hbs file(s) to dist/src/`);
+}
+
+await copyTemplates().catch(err => {
+  console.error("Failed to copy .hbs files:", err);
+  process.exit(1);
+});

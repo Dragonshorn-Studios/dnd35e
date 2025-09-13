@@ -35,7 +35,7 @@ class WeaponSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ph
   static override PARTS = {
     ...PhysicalItemSheet.PARTS,
     // main: {
-    //   template: `${systemPath}src/entities/items/weaponSheet.hbs`,
+    //   template: `${hbsTemplatePath}src/entities/items/weaponSheet.hbs`,
     // },
   };
 

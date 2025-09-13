@@ -1,14 +1,16 @@
-import { systemPath } from '@constants/paths.mjs';
+import { hbsTemplatePath } from '@constants/paths.mjs';
 import { registerPartial } from '@helpers/display.mjs';
 import { itemHeaderPartialName } from './ItemSheetDnd35e.mjs';
+import './itemSheet.scss';
 
-const localPath = (file: string) => `${systemPath}src/entities/items/baseItem/sheet/${file}`;
+
+const hbsPath = (file: string) => `${hbsTemplatePath}/entities/items/baseItem/sheet/${file}`;
 
 const partials = [
   itemHeaderPartialName,
 ];
 
-partials.map(partialName => registerPartial(localPath(`${partialName}.hbs`), partialName));
+partials.forEach(partialName => registerPartial(hbsPath(`${partialName}.hbs`), partialName));
 
 export { ItemSheetDnd35e } from './ItemSheetDnd35e.mjs';
 

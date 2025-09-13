@@ -1,0 +1,18 @@
+import sass from 'sass';
+import fg from 'fast-glob';
+import fs from 'fs';
+
+const files = fg.sync('src/**/*.scss');
+const imports = files.map(f => `@import "${f.replace(/\\/g, '/')}";`).join('\n');
+fs.writeFileSync('src/styles/_all.scss', imports);
+
+const result = sass.compile('src/styles/_all.scss', {
+  style: 'compressed',
+  sourceMap: true
+});
+
+fs.mkdirSync('dist/styles', { recursive: true });
+fs.writeFileSync('dist/styles/dnd35e.css', result.css);
+if (result.sourceMap) {
+  fs.writeFileSync('dist/styles/dnd35e.css.map', JSON.stringify(result.sourceMap));
+}

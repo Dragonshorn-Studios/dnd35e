@@ -3,7 +3,6 @@ import { MaterialDnd35e } from '../material.mjs';
 import { IdentifiableItemRenderContext } from '@items/components/IdentifiableItem/index.mjs';
 import { IdentifiableItemPartialsList, prepareIdentifiableContext } from '@items/components/IdentifiableItem/sheet.mjs';
 import { type DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
-import { systemPath } from '@constants/paths.mjs';
 import type { HandlebarsTemplatePart } from '@client/applications/api/handlebars-application.mjs';
 
 type MaterialSheetConfig<TItem extends MaterialDnd35e = MaterialDnd35e> = ItemSheetDnd35eConfig<TItem>;
@@ -34,10 +33,10 @@ class MaterialSheet extends foundry.applications.api.HandlebarsApplicationMixin(
     const old = ItemSheetDnd35e.PARTS;
     return {
       ...old,
-      main: {
-        template: `${systemPath}src/entities/items/material/sheet/MaterialSheet.hbs`,
-        // root: true,
-      },
+      // main: {
+      //   template: `${hbsTemplatePath}src/entities/items/material/sheet/MaterialSheet.hbs`,
+      //   // root: true,
+      // },
     }
   }
 

@@ -1,4 +1,6 @@
 import { registerItems } from './entities/items/index.mjs';
+import './styles/core.scss';
+
 
 globalThis.fa = foundry.applications;
 globalThis.fc = foundry.canvas;

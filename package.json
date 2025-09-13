@@ -4,20 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "post-build-tasks": "node build/strip-alias-imports.js && node build/copy-hbs.js",
-    "build": "rimraf dist && npx tsc && npx tsc-path-fix && npm run build:scss && npm run post-build-tasks",
-    "build:scss": "sass-glob && sass src/styles/core.scss dist/core.css --source-map --style=compressed",
-    "watch:scss": "sass-glob && sass --watch src/styles/core.scss dist/core.css --source-map --style=expanded",
-    "watch:ts": "tsc -p tsconfig.json --watch",
-    "watch:hbs": "node build/watch-hbs.mjs",
-    "dev": "npm-run-all --parallel watch:ts watch:hbs"
+    "build": "vite build",
+    "dev": "vite"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@typescript-eslint/eslint-plugin": "6.7.0",
     "@typescript-eslint/parser": "6.7.0",
     "chokidar": "^4.0.3",
@@ -28,12 +23,16 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.6.0",
-    "node-sass-glob-importer": "^5.3.3",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.1",
+    "node-sass-glob-importer": "^3.0.2",
     "npm-run-all": "^4.1.5",
     "sass": "^1.92.1",
     "standardx": "^7.0.0",
     "tsc-path-fix": "^1.0.6",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vite": "^7.1.5",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
     "handlebars": "^4.7.7",

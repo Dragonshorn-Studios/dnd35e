@@ -1,4 +1,0 @@
-{
-  "fileExtensions": ["mts"],
-  "resolveExtensions": [".mts"]
-}

@@ -55,21 +55,16 @@ abstract class ItemSheetDnd35e<
         },
       ],
     },
-    classes: ['dnd35e', 'sheet', 'item'],
+    classes: ['dnd35e', 'item-sheet'],
     id: 'dnd35e-item-sheet', // this probably should be unique
     position: {
       width: 600,
       height: 400,
-      // Where does this go?
-      // resizable: false,
     },
   };
 
   static PARTS: Record<string, HandlebarsTemplatePart> = {
     top: nameAndArtPart,
-    // main: {
-    //   template: `${systemPath}src/item-sheet.html`,
-    // },
   };
 
   protected async _prepareContext (options: fa.api.DocumentSheetRenderOptions): Promise<ItemSheetDnd35eRenderContext> {
@@ -78,7 +73,7 @@ abstract class ItemSheetDnd35e<
     context.partials = {
       header: itemHeaderPartialName,
       headerMain: defaultNameHeaderPartial,
-      headerSummary: "emptyDiv"
+      headerSummary: "emptyDiv",
     };
     // context.labels = {};
 

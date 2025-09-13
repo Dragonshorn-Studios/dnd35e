@@ -1,11 +1,13 @@
-<ul class="summary">
-    <li>
-        {{itemType}}
-    </li>
-    <li>
-        {{system.weaponType}}
-    </li>
-    <li>
-        {{system.weaponSubtype}}
-    </li>
+<ul class="weapon-summary">
+    {{#with document}}
+        <li>
+            {{itemType}}
+        </li>
+        <li>
+            {{system.weaponType}}
+        </li>
+        <li>
+            {{system.weaponSubtype}}
+        </li>
+    {{/with}}
 </ul>
