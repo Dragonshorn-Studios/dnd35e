@@ -3,6 +3,7 @@
 
     <div class="item-subtitle">
         <h4 class="item-type">{{localize itemType}}</h4>
+        {{> (lookup partials 'headerStatus')}}
     </div>
 
     {{> (lookup partials 'headerSummary')}}

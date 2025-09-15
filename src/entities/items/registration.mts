@@ -30,8 +30,8 @@ export const registerItems = () => {
   foundry.helpers.Hooks.once('init', () => {
     CONFIG.Item.documentClass = ItemProxyDnd35e;
     Object.assign(CONFIG.Item.dataModels, {
-      weapon: WeaponSystemModel,
-      material: MaterialSystemModel,
+      "weapon": WeaponSystemModel,
+      "material": MaterialSystemModel,
     });
   });
 

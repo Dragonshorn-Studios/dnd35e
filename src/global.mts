@@ -54,6 +54,7 @@ declare global {
       VERSION: string;
       item: {
         documentClasses: Record<string, new (...args: any[]) => ItemDnd35e>;
+        typeLabels: Record<string, string>;
       },
     };
   }

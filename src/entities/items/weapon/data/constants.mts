@@ -1,17 +1,17 @@
-const weaponTypes = {
-  Simple: 'D35E.WeaponTypeSimple',
-  Martial: 'D35E.WeaponTypeMartial',
-  Exotic: 'D35E.WeaponTypeExotic',
-  Misc: 'D35E.Misc',
-} as const;
-type WeaponType = keyof typeof weaponTypes;
+const WEAPON_TYPES = [
+ 'D35E.WeaponTypeSimple',
+  'D35E.WeaponTypeMartial',
+  'D35E.WeaponTypeExotic',
+  'D35E.Misc', 
+] as const;
+type WeaponType = (typeof WEAPON_TYPES)[number];
 
 const WEAPON_SUBTYPES = [
-  'Light',
-  'One-Handed',
-  'Two-Handed',
-  'Ranged',
-  'Thrown',
+  'D35E.WeaponPropLight',
+  'D35E.WeaponPropOneHanded',
+  'D35E.WeaponPropTwoHanded',
+  'D35E.WeaponSubtypeRanged',
+  // 'Thrown',
 ] as const;
 type WeaponSubtype = (typeof WEAPON_SUBTYPES)[number];
 
@@ -96,7 +96,7 @@ export type {
 };
 
 export {
-  weaponTypes,
+  WEAPON_TYPES,
   WEAPON_SUBTYPES,
   WEAPOON_BASE_TYPES,
 };

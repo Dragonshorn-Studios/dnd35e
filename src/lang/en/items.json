@@ -1,0 +1,17 @@
+{
+    "TYPES.Item.weapon": "Weapon",
+    "TYPES.Item.equipment": "Equipment",
+    "TYPES.Item.loot": "Loot",
+    "TYPES.Item.consumable": "Consumable",
+    "TYPES.Item.class": "Class",
+    "TYPES.Item.buff": "Buff",
+    "TYPES.Item.spell": "Spell",
+    "TYPES.Item.feat": "Feat",
+    "TYPES.Item.attack": "Attack",
+    "TYPES.Item.material": "Material",
+    
+    "D35E.Identified": "Identified",
+    "D35E.Unidentified": "Unidentified",
+    "D35E.UnidentifiedName": "Unidentified Name",
+    "D35E.ItemName": "Item Name"
+}

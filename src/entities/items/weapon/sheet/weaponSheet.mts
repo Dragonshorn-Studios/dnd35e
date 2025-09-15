@@ -1,6 +1,7 @@
 import { type DocumentSheetConfiguration, type DocumentSheetRenderOptions } from '@client/applications/api/document-sheet.mjs';
 import { WeaponDnd35e } from '../index.mjs';
 import { PhysicalItemSheet, PhysicalItemSheetConfig, PhysicalItemSheetPartialsList, PhysicalItemSheetRenderContext } from '@items/physical/index.mjs';
+import { defaultHeaderStatusPartialName } from '@items/baseItem/sheet/ItemSheetDnd35e.mjs';
 
 type WeaponSheetConfig<TItem extends WeaponDnd35e = WeaponDnd35e> = PhysicalItemSheetConfig<TItem> & {
   // Add any additional properties needed for the physical item sheet context here
@@ -8,6 +9,7 @@ type WeaponSheetConfig<TItem extends WeaponDnd35e = WeaponDnd35e> = PhysicalItem
 
 type WeaponSheetPartialsList = PhysicalItemSheetPartialsList & {
   headerSummary: string;
+  headerStatus: string;
 };
 
 interface WeaponSheetRenderContext extends PhysicalItemSheetRenderContext {
@@ -42,6 +44,7 @@ class WeaponSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ph
   override async _prepareContext (options: DocumentSheetRenderOptions): Promise<WeaponSheetRenderContext> {
     const baseContext = await super._prepareContext(options) as PhysicalItemSheetRenderContext;
     baseContext.partials.headerSummary = weaponSummaryPartialName;
+    baseContext.partials.headerStatus = defaultHeaderStatusPartialName;
 
     return baseContext;
   }

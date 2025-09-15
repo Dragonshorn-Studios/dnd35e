@@ -53,11 +53,51 @@ function logBuildTimestamp(opts?: PluginOptions | undefined): Plugin {
   };
 }
 
+// Glob lang files
+function bundleLangFiles() {
+  return {
+    name: 'bundle-lang-files',
+    async closeBundle() {
+      const srcRoot = path.resolve(__dirname, 'src/lang');
+      const distRoot = path.resolve(__dirname, 'dist/lang');
+
+      // Find all language directories
+      const langDirs = await fs.readdir(srcRoot);
+
+      for (const langCode of langDirs) {
+        const langPath = path.join(srcRoot, langCode);
+        const stat = await fs.stat(langPath);
+        if (!stat.isDirectory()) continue;
+
+        // Find all JSON files in this language folder (recursive)
+        const files = await fg('**/*.json', { cwd: langPath, absolute: true });
+
+        let merged: Record<string, string> = {};
+
+        for (const file of files) {
+          const json = await fs.readJSON(file);
+          merged = { ...merged, ...json };
+        }
+
+        // Ensure dist/lang exists
+        await fs.ensureDir(distRoot);
+
+        // Write merged file
+        const outFile = path.join(distRoot, `${langCode}.json`);
+        await fs.writeJSON(outFile, merged, { spaces: 2 });
+
+        console.log(`✅ Bundled ${files.length} files into ${outFile}`);
+      }
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     tsconfigPaths(),
     copyStaticFiles(),
     copyHbsFiles(),
+    bundleLangFiles(),
     logBuildTimestamp(),
   ],
   build: {

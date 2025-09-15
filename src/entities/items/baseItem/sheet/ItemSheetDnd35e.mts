@@ -20,12 +20,13 @@ type ItemSheetPartialsList = {
     header: string;
     headerMain: string;
     headerSummary: string;
+    headerStatus: string;
     // maybe I register partial names somewhere and restrict these values to those registered names?
     [key: string]: string;
 };
 
 interface ItemSheetDnd35eRenderContext extends fa.api.DocumentSheetRenderContext {
-  itemType: 'D35E.Item' | 'D35E.Material';
+  itemType: 'D35E.Item' | 'material';
   partials: ItemSheetPartialsList;
   // labels: {
   //   [key: string]: string;
@@ -33,6 +34,7 @@ interface ItemSheetDnd35eRenderContext extends fa.api.DocumentSheetRenderContext
 }
 
 export const itemHeaderPartialName = 'itemHeader';
+export const defaultHeaderStatusPartialName = 'defaultHeaderStatus';
 
 abstract class ItemSheetDnd35e<
   TDocument extends ItemDnd35e = ItemDnd35e,
@@ -58,8 +60,8 @@ abstract class ItemSheetDnd35e<
     classes: ['dnd35e', 'item-sheet'],
     id: 'dnd35e-item-sheet', // this probably should be unique
     position: {
-      width: 600,
-      height: 400,
+      width: 560,
+      height: 650,
     },
   };
 
@@ -74,20 +76,16 @@ abstract class ItemSheetDnd35e<
       header: itemHeaderPartialName,
       headerMain: defaultNameHeaderPartial,
       headerSummary: "emptyDiv",
+      headerStatus: "emptyDiv",
     };
     // context.labels = {};
 
     return context;
   }
 
-  // get title() {
-  //   return this.conte
-  // }
-
-  // get template() {
-  //   const path = "systems/dnd35e/templates/items/";
-  //   return `${path}/${this.item.type}.html`;
-  // }
+  get title() {
+    return this.document.displayName;
+  }
 }
 
 export { ItemSheetDnd35e, type ItemSheetDnd35eConfig, type ItemSheetDnd35eRenderContext, type ItemSheetPartialsList };

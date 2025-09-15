@@ -5,7 +5,7 @@ import type {
   WeaponBaseType,
 } from './constants.mjs';
 import {
-  weaponTypes,
+  WEAPON_TYPES,
   WEAPON_SUBTYPES,
   WEAPOON_BASE_TYPES,
 } from './constants.mjs';
@@ -34,7 +34,7 @@ export type {
 };
 
 export {
-  weaponTypes as WEAPON_TYPES,
+  WEAPON_TYPES,
   WEAPON_SUBTYPES,
   WEAPOON_BASE_TYPES,
   WeaponSystemModel,

@@ -1,7 +1,7 @@
 import { WeaponDnd35e } from '../index.mjs';
 import { defineEquippableItemSchema, EquippableItemSchema, PhysicalItemSystemModel, PhysicalItemSystemSchema } from '@items/physical/index.mjs';
 import { requiredBooleanField } from '@helpers/fieldBuilders.mjs';
-import { WEAPON_SUBTYPES, weaponTypes, WeaponBaseType, WeaponSubtype, WeaponType, WEAPOON_BASE_TYPES } from './constants.mjs';
+import { WEAPON_SUBTYPES, WEAPON_TYPES, WeaponBaseType, WeaponSubtype, WeaponType, WEAPOON_BASE_TYPES } from './constants.mjs';
 import { DAMAGE_TYPES, DamageType } from '@constants/attacks/damageTypes.mjs';
 import type { fields as fieldsType } from '@common/data/_module.mjs';
 
@@ -37,8 +37,8 @@ class WeaponSystemModel<
       ...defineEquippableItemSchema(),
       // Weapon specific fields go here
       isMasterwork: requiredBooleanField(false),
-      weaponType: new fields.StringField<WeaponType, WeaponType, true, false, true>({ choices: weaponTypes, initial: 'Simple', required: true }),
-      weaponSubtype: new fields.StringField<WeaponSubtype, WeaponSubtype, true, false, true>({ choices: WEAPON_SUBTYPES, initial: 'Light', required: true }),
+      weaponType: new fields.StringField<WeaponType, WeaponType, true, false, true>({ choices: WEAPON_TYPES, initial: 'D35E.WeaponTypeSimple', required: true }),
+      weaponSubtype: new fields.StringField<WeaponSubtype, WeaponSubtype, true, false, true>({ choices: WEAPON_SUBTYPES, initial: 'D35E.WeaponPropLight', required: true }),
       weaponBaseType: new fields.StringField<WeaponBaseType, WeaponBaseType, true, false, true>({ choices: WEAPOON_BASE_TYPES, initial: '', required: true, blank: true }),
       weaponDamage: new fields.SchemaField<WeaponDamageSchema>({
         damageRoll: new fields.StringField<string, string, true, false, true>({ initial: '', required: true, blank: true  }),

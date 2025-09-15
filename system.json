@@ -24,28 +24,8 @@
   "languages": [
       {
           "lang": "en",
-          "path": "lang/en.json",
+          "path": "dist/lang/en.json",
           "name": "English"
-      },
-      {
-          "lang": "de",
-          "path": "lang/de.json",
-          "name": "German"
-      },
-      {
-          "lang": "es",
-          "path": "lang/es.json",
-          "name": "Spanish"
-      },
-      {
-          "lang": "fr",
-          "path": "lang/fr.json",
-          "name": "French"
-      },
-      {
-          "lang": "pt-BR",
-          "path": "lang/br.json",
-          "name": "Portugu\u00eas (Brasil)"
       }
   ],
   "flags": {

@@ -4,8 +4,8 @@ import { WeaponDnd35e } from "@items/weapon/index.mjs";
 
 const ItemConfig = {
   documentClasses: {
-    weapon: WeaponDnd35e,
-    material: MaterialDnd35e,
+    "weapon": WeaponDnd35e,
+    "material": MaterialDnd35e,
   },
 };
 

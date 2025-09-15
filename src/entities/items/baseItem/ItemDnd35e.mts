@@ -38,6 +38,11 @@ class ItemDnd35e<TParent extends ActorDnd35e | null = ActorDnd35e | null> extend
       : this.name;
   }
 
+  get itemType (): string {
+    return CONFIG.Dnd35e.item.typeLabels[this.type]
+      ?? 'D35E.Item';
+  }
+
   declare flags: ItemFlagsDnd35e;
   declare system: ItemSystemData;
   declare readonly _source: ItemSourceDnd35e;

@@ -1,6 +1,6 @@
 import { hbsTemplatePath } from '@constants/paths.mjs';
 import { registerPartial } from '@helpers/display.mjs';
-import { itemHeaderPartialName } from './ItemSheetDnd35e.mjs';
+import { defaultHeaderStatusPartialName, itemHeaderPartialName } from './ItemSheetDnd35e.mjs';
 import './itemSheet.scss';
 
 
@@ -8,6 +8,7 @@ const hbsPath = (file: string) => `${hbsTemplatePath}/entities/items/baseItem/sh
 
 const partials = [
   itemHeaderPartialName,
+  defaultHeaderStatusPartialName,
 ];
 
 partials.forEach(partialName => registerPartial(hbsPath(`${partialName}.hbs`), partialName));

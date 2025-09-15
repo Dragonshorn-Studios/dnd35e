@@ -23,10 +23,6 @@ class MaterialSheet extends foundry.applications.api.HandlebarsApplicationMixin(
     window: {
       resizable: true,
     },
-    position: {
-      width: 600,
-      height: 400,
-    },
   }
 
   static override get PARTS(): Record<string, HandlebarsTemplatePart> {
@@ -45,7 +41,7 @@ class MaterialSheet extends foundry.applications.api.HandlebarsApplicationMixin(
     const identifiedContext: IdentifiableItemRenderContext = prepareIdentifiableContext(this.document.system);
     const contextExport: MaterialSheetRenderContext = foundry.utils.mergeObject(startingContext, identifiedContext);
     
-    contextExport.itemType = 'D35E.Material';
+    contextExport.itemType = 'material';
     return contextExport;
   }
 }
