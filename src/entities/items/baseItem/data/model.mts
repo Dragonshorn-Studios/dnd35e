@@ -17,7 +17,7 @@ type ItemOriginSchema = fieldsType.SchemaField<ItemOriginShemaBase, SourceFromSc
 
 // Description
 type ItemDescriptionSchemaBase = {
-    value: fieldsType.StringField<string, string, true, false, true>;
+    value: fieldsType.HTMLField<string, string, true, false, true>;
     // chat: fields.StringField<string, string, false, false, true>;
 };
 
@@ -64,7 +64,7 @@ abstract class ItemSystemModel<
       nameFormula: nullableOptionalStringField(),
       isNameFromFormula: requiredBooleanField(false),
       description: new fields.SchemaField({
-        value: requiredStringField(),
+        value: new fields.HTMLField(),
       }),
 
       isPsionic: requiredBooleanField(),

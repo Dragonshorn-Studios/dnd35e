@@ -1,7 +1,9 @@
 import { type DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
 import { ItemDnd35e } from '../ItemDnd35e.mjs';
-import { defaultNameHeaderPartial, nameAndArtPart } from '@entities/common/templates/item/index.mjs';
+import { defaultNameHeaderPartial, artHeaderPart } from '@entities/common/templates/item/index.mjs';
 import { type HandlebarsTemplatePart } from '@client/applications/api/handlebars-application.mjs';
+import { ItemTypeLocalizationValues } from '@items/constants.mjs';
+import { createUniqueId } from '@items/components/uniqueId/index.mjs';
 
 //   getData(options) {
 //     const data = super.getData(options);
@@ -25,12 +27,21 @@ type ItemSheetPartialsList = {
     [key: string]: string;
 };
 
-interface ItemSheetDnd35eRenderContext extends fa.api.DocumentSheetRenderContext {
-  itemType: 'D35E.Item' | 'material';
+type ItemSheetContextEnrichedTexts = {
+    identifiedDescription: string;
+}
+
+type BaseRenderContextItemType = 'D35E.Item' | ItemTypeLocalizationValues;
+
+interface ItemSheetDnd35eRenderContext<TDocument extends ItemDnd35e = ItemDnd35e> extends fa.api.DocumentSheetRenderContext<TDocument> {
+  itemType: BaseRenderContextItemType;
   partials: ItemSheetPartialsList;
+  // openTab: string;
   // labels: {
   //   [key: string]: string;
   // };
+  isNameTabOpen: boolean;
+  enrichedTexts: ItemSheetContextEnrichedTexts;
 }
 
 export const itemHeaderPartialName = 'itemHeader';
@@ -40,14 +51,17 @@ abstract class ItemSheetDnd35e<
   TDocument extends ItemDnd35e = ItemDnd35e,
   TConfig extends ItemSheetDnd35eConfig<TDocument> = ItemSheetDnd35eConfig<TDocument>
 > extends foundry.applications.sheets.ItemSheetV2<TDocument, TConfig> {
-  static testAction () {
-    console.log('Test action triggered from ItemSheetDnd35e');
-  };
+
+  static async createUniqueId(this: ItemSheetDnd35e): Promise<void> {
+    const uid = createUniqueId();
+    await this.document .update({ "system.uniqueId": uid });
+    this.render(true);
+  }
 
   static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
-    // actions: {
-    //   testAction: ItemSheetDnd35e.testAction,
-    // },
+    actions: {
+      createUniqueId: ItemSheetDnd35e.createUniqueId,
+    },
     window: {
       controls: [
         {
@@ -65,22 +79,52 @@ abstract class ItemSheetDnd35e<
     },
   };
 
+  static override TABS: Record<string, fa.ApplicationTabsConfiguration> = {
+    primary: {
+      tabs: [
+        {
+          id: 'description',
+          label: 'D35E.Description',
+        },
+        {
+          id: 'namesetup',
+          label: 'D35E.Name',
+        }
+      ],
+      initial: 'description',
+    },
+  }
+
   static PARTS: Record<string, HandlebarsTemplatePart> = {
-    top: nameAndArtPart,
+    top: artHeaderPart,
+    tabs: {
+        // Foundry-provided generic template
+        template: 'templates/generic/tab-navigation.hbs',
+    },
   };
 
   protected async _prepareContext (options: fa.api.DocumentSheetRenderOptions): Promise<ItemSheetDnd35eRenderContext> {
     const context = await super._prepareContext(options) as ItemSheetDnd35eRenderContext;
     context.itemType = 'D35E.Item';
+    context.isNameTabOpen = this.tabGroups['primary'] === 'namesetup';
     context.partials = {
       header: itemHeaderPartialName,
       headerMain: defaultNameHeaderPartial,
       headerSummary: "emptyDiv",
       headerStatus: "emptyDiv",
     };
+    context.tabs = this._prepareTabs("primary");
+    context.enrichedTexts = {
+      identifiedDescription: context.document.system.description.value || game.i18n.localize('D35E.DescriptionPlaceholder'),
+    }
+    // context.isNameTabOpen = this.tabGroups activeTab === 'nameSetup';
     // context.labels = {};
 
     return context;
+  }
+
+  override changeTab(tab:string, group:string, options?: { event?: Event; navElement?: HTMLElement; force?: boolean; updatePosition?: boolean }) {
+    super.changeTab(tab, group, options);
   }
 
   get title() {
@@ -88,4 +132,14 @@ abstract class ItemSheetDnd35e<
   }
 }
 
-export { ItemSheetDnd35e, type ItemSheetDnd35eConfig, type ItemSheetDnd35eRenderContext, type ItemSheetPartialsList };
+export {
+  ItemSheetDnd35e,
+};
+
+export type {
+  BaseRenderContextItemType,
+  ItemSheetDnd35eConfig,
+  ItemSheetDnd35eRenderContext,
+  ItemSheetPartialsList,
+  ItemSheetContextEnrichedTexts,
+};

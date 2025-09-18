@@ -1,5 +1,6 @@
 import { hbsTemplatePath } from "@constants/paths.mjs";
 import { registerPartial } from "@helpers/display.mjs";
+import './toggleSwitch/toggleSwitch.scss';
 
 const hbsPath = (path:string, file: string) => `${hbsTemplatePath}/entities/common/components/${path}/${file}`;
 

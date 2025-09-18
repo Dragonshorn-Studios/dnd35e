@@ -1,3 +1,27 @@
-<div>
-    test identifiable identifiable
-</div>
+<section class="tab {{tab.cssClass}} flexcol description" data-group="primary" data-tab="description"> 
+  {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyIdentified)}}
+    {{#with document}}
+        {{formGroup
+            system.schema.fields.description.fields.value
+            value=@root.enrichedTexts.identifiedDescription
+            enriched=system.description.value
+            label=(localize (ternary showUnidentifiedInfoMode.showBoth "D35E.IdentifiedDescription" "D35E.Description"))
+            toggled=true
+        }}
+    {{/with}}
+  {{/if}}
+  {{#if showUnidentifiedInfoMode.showBoth}}
+    <hr />
+  {{/if}}
+  {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyUnidentified)}}
+    {{#with document}}
+      {{formGroup
+        system.schema.fields.unidentifiedInfo.fields.unidentifiedDescription
+        value=@root.enrichedTexts.unIdentifiedDescription
+        enriched=system.unidentifiedInfo.unidentifiedDescription
+        label=(localize "D35E.UnidentifiedDescription")
+        toggled=true
+      }}
+    {{/with}}
+  {{/if}}
+</section>

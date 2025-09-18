@@ -1,0 +1,55 @@
+<section
+  class="tab {{tab.cssClass}} flexcol"
+  data-group="primary"
+  data-tab="details"
+> 
+  {{#with document}}
+    <div class="form-container">
+      {{formGroup
+        system.schema.fields.bonusHardness
+        value=system.bonusHardness
+        label=(localize "D35E.Hardness")
+      }}
+      {{formGroup
+        system.schema.fields.bonusHpPerInch
+        value=system.bonusHpPerInch
+        label=(localize "D35E.HpPerInch")
+      }}
+
+      <h3 class="form-header">{{localize "D35E.MagicEquivalent"}}</h3>
+      {{formGroup
+        system.schema.fields.magicEquivalent
+        value=system.magicEquivalent
+        label=(localize "D35E.MagicEquivalent")
+      }}
+      <span class="notes"><em>{{localize "D35E.MagicEquivalentDescription"}}</em></span>
+      {{formGroup
+        system.schema.fields.isAlchemicalSilverEquivalent
+        value=system.isAlchemicalSilverEquivalent
+        label=(localize "D35E.MaterialAlchemicalSilverEquivalent")
+      }}
+      {{formGroup
+        system.schema.fields.isAdamantineEquivalent
+        value=system.isAdamantineEquivalent
+        label=(localize "D35E.MaterialAdamantineEquivalent")
+      }}
+      {{formGroup
+        system.schema.fields.isColdIronEquivalent
+        value=system.isColdIronEquivalent
+        label=(localize "D35E.MaterialColdIronEquivalent")
+      }}
+      
+      {{#if @root.user.isGM}}
+        <h3 class="form-header">{{localize "D35E.SystemProperties"}}</h3>
+        {{> toggleSwitch
+          name="system.isIdentifiable"
+          label="D35E.IsIdentifiable"
+          trueLabel="D35E.Yes"
+          falseLabel="D35E.No"
+          checked=system.isIdentifiable
+        }}
+        {{> "_uniqueId"}}
+      {{/if}}
+    </div>
+  {{/with}}
+</section>

@@ -19,4 +19,6 @@ export type {
   ItemSheetPartialsList,
   ItemSheetDnd35eConfig,
   ItemSheetDnd35eRenderContext,
+  BaseRenderContextItemType,
+  ItemSheetContextEnrichedTexts,
 } from './ItemSheetDnd35e.mjs';

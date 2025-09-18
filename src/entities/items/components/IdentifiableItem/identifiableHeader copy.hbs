@@ -1,0 +1,22 @@
+
+<div class="identifiable-header-main">
+  {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyIdentified)}}
+    <h4>
+      {{localize (ternary isIdentifiable "D35E.IdentifiedName" "D35E.ItemName")}}:<br />
+    </h4>
+    <h3 class="charname">
+      {{ternary showUnidentifiedInfoMode.showBoth document.identifiedName document.displayName}}
+    </h3>
+  {{/if}}
+  {{#if showUnidentifiedInfoMode.showBoth}}
+    <hr />
+  {{/if}}
+  {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyUnidentified)}}
+    <h4>
+      {{localize "D35E.UnidentifiedName"}}:<br />
+    </h4>
+    <h3 class="charname">
+      {{document.unidentifiedDisplayName}}
+    </h3>
+  {{/if}}
+</div>

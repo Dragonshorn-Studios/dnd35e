@@ -6,7 +6,7 @@ type IdentifiableItemSource = {
         unidentifiedPrice: number | null;
         isIdentified: boolean;
         unidentifiedNameFormula?: string | null;
-        usesUnidentifiedNameFormula: boolean;
+        isUnidentifiedNameFromFormula: boolean;
     };
 };
 

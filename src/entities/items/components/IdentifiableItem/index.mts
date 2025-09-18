@@ -1,7 +1,17 @@
 import { hbsTemplatePath } from '@constants/paths.mjs';
 import { createIdentifiableSystemData, getIdentifiableDisplayName, getUnidentifiedDisplayName } from './item.mjs';
 import { defineIdentifiableSchema, type IdentifiableItemSchema } from './model.mjs';
-import { identifiableHeaderPartialName, type IdentifiableItemRenderContext, type IdentifiableItemPartialsList } from './sheet.mjs';
+import {
+  identifiableHeaderPartialName,
+  identifiableBannerPartialName,
+  identifiableDescriptionPartialName,
+  identifiableNameConfigPartialName,
+} from './sheet.mjs';
+import type {
+  IdentifiableItemContextEnrichedTexts,
+  IdentifiableItemRenderContext,
+  IdentifiableItemPartialsList,
+} from './sheet.mts';
 import type { IdentifiableItemSource, IdentifiableItemSystemData } from './system.mjs';
 import { registerPartial } from '@helpers/display.mjs';
 import './identifiableHeader.scss';
@@ -11,6 +21,9 @@ const hbsPath = (file: string) => `${hbsTemplatePath}/entities/items/components/
 
 const partials = [
   identifiableHeaderPartialName,
+  identifiableBannerPartialName,
+  identifiableDescriptionPartialName,
+  identifiableNameConfigPartialName,
 ];
 
 partials.forEach(partialName => registerPartial(hbsPath(`${partialName}.hbs`), partialName));
@@ -20,7 +33,8 @@ export type {
   IdentifiableItemSystemData,
   IdentifiableItemRenderContext,
   IdentifiableItemSchema,
-  IdentifiableItemPartialsList
+  IdentifiableItemPartialsList,
+  IdentifiableItemContextEnrichedTexts,
 };
 export {
   getUnidentifiedDisplayName,
@@ -28,4 +42,7 @@ export {
   getIdentifiableDisplayName,
   defineIdentifiableSchema,
   identifiableHeaderPartialName,
+  identifiableDescriptionPartialName,
+  identifiableBannerPartialName,
+  identifiableNameConfigPartialName,
 };

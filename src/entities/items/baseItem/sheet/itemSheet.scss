@@ -2,7 +2,6 @@
     .item-header {    
         display: grid;
         grid-template: auto / 3fr minmax(80px, 1fr);
-        padding: 0 0.5rem;
     }
 
     .item-subtitle {
@@ -18,5 +17,10 @@
         font-size: 24px;
         line-height: 26px;
         margin: 0;
+    }
+    
+    .tab {
+        padding: 0.5rem 0.5rem 0 0;
+        overflow: auto;
     }
 }

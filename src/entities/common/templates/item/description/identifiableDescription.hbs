@@ -1,0 +1,64 @@
+<section class="tab primary-description" data-group="description" data-tab="primary">
+        {{#if document.system.isIdentifiable}}
+            {{> toggleSwitch
+                name="isIdentified"
+                label="D35E.Identified"
+                trueLabel="D35E.Yes"
+                falseLabel="D35E.No"
+                checked=showUnidentifiedInfoMode.showUnIdentifiedDescriptionEditor
+            }}
+        {{/if}}
+    
+    
+    
+    
+    
+    {{#if showIdentifyDescription}}
+        <nav class="sheet-navigation tabs subtabs description" data-group="description">
+            <a class="item active" data-tab="identified">{{localize "D35E.Identified"}}</a>
+            <a class="item" data-tab="unidentified">{{localize "D35E.Unidentified"}}</a>
+        </nav>
+    {{/if}}
+    {{#if showIdentifyDescription}}
+        <section class="description-body">
+        <div class="tab description-group flexcol" data-group="description" data-tab="identified">
+            {{editor enriched.description.value target="system.description.value" button=true editable=editable}}
+        </div>
+
+        <div class="tab description-group flexcol" data-group="description" data-tab="unidentified">
+            {{editor enriched.description.unidentified target="system.description.unidentified" button=true editable=editable}}
+        </div>
+        </section>
+    {{else}}
+        {{#if showUnidentifiedData}}
+            {{editor enriched.description.unidentified target="system.description.unidentified" button=true editable=editable}}
+        {{else}}
+            {{editor enriched.description.value target="system.description.value" button=true editable=editable}}
+        {{/if}}
+    {{/if}}
+    {{#if data.system.changeFlags.firstChangeTargetSelectableOnDescription}}
+        <div class="detailsbox" style="flex: 0">
+            {{#if data.system.changes}}
+                <div class="item-properties flexrow" style="display: flex; flex-wrap: wrap;">
+                    <div class="form-group" style="flex: 1">
+                        <label>{{firstChangeName}}</label>
+                        <select name="firstChangeTarget">
+                            {{#select selectedFirstChange }}
+                                <option value=":Not Set">Not Set</option>
+                                {{#each firstItemSubtargets as |target type|}}
+                                <option value="{{type}}:{{target}}">{{target}}</option>
+                                {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                </div>
+            {{/if}}
+            {{#unless data.system.changes}}
+                <li class="change flexrow">
+                <div style="width: 100%; opacity: 0.7; text-align: center">{{localize "D35E.ThereAreNo"}} {{localize "D35E.Changes"}}.</div>
+                </li>
+            {{/unless}}
+        </div>
+    {{/if}}
+
+</div>

@@ -6,8 +6,9 @@
     .item-art-container {
         flex: 0 128px;
         width: 128px;
-        margin-right: 2px;
         position: relative;
+        margin-right: 0.5rem;
+        margin-bottom: 0.25rem;
 
         img.item-art {
             object-fit: contain;

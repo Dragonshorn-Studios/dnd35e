@@ -1,18 +1,18 @@
 
 <div class="identifiable-header-main">
   {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyIdentified)}}
-    <h3 class="charname">
-      <input name="name" type="text" value="{{document.displayName}}" placeholder="{{localize "D35E.ItemName"}}"/>
-    </h3>
+    {{> "_itemName"
+        labelKey=(ternary isIdentifiable "D35E.IdentifiedName" "D35E.ItemName")
+        value=(ternary showUnidentifiedInfoMode.showBoth document.identifiedDisplayName document.displayName)
+    }}
+  {{/if}}
+  {{#if showUnidentifiedInfoMode.showBoth}}
+    <hr />
   {{/if}}
   {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyUnidentified)}}
-    <h3 class="charname">
-      <input 
-        name="system.unidentifiedInfo.unidentifiedName"
-        type="text"
-        value="{{unidentifiedDisplayName}}"
-        placeholder="{{ternary showUnidentifiedInfoMode.showBoth (localize "D35E.UnidentifiedName") (localize "D35E.ItemName")}}"
-      />
-    </h3>
+    {{> "_itemName"
+        labelKey="D35E.UnidentifiedName"
+        value=document.unidentifiedDisplayName
+    }}
   {{/if}}
 </div>

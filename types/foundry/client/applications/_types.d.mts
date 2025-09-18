@@ -144,7 +144,10 @@ export interface ApplicationWindowRenderOptions {
     controls: boolean;
 }
 
-type ApplicationRenderContext = object;
+type ApplicationRenderContext = {
+    tabs?: Record<string, ApplicationTab>;
+    tab?: ApplicationTab;
+};
 
 export interface ApplicationClosingOptions {
     /** Whether to animate the close, or perform it instantaneously */

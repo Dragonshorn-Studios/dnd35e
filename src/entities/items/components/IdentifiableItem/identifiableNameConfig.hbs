@@ -1,0 +1,61 @@
+<section
+    class="tab {{tab.cssClass}}"
+    data-group="primary"
+    data-tab="namesetup"
+>
+  {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyIdentified)}}
+    {{#with document}}
+      <div class="form-container">
+        {{formGroup
+          @root.fields.name
+          value=name
+          disabled=system.isNameFromFormula
+          label=(localize "D35E.ItemName")
+        }}
+        {{formGroup
+          system.schema.fields.isNameFromFormula
+          value=system.isNameFromFormula
+          label=(localize "D35E.UseNameFromFormula")
+        }}
+        {{formGroup
+          system.schema.fields.nameFormula
+          value=system.nameFormula
+          label=(localize "D35E.CustomNameFormula")
+          disabled=(not system.isNameFromFormula)
+        }}
+        {{#if system.isNameFromFormula}}
+          <p class="notes">{{localize "D35E.UsesNameFromFormula"}}</p>
+        {{/if}}
+      </div>
+    {{/with}}
+  {{/if}}
+  {{#if showUnidentifiedInfoMode.showBoth}}
+    <hr />
+  {{/if}}
+  {{#if (or showUnidentifiedInfoMode.showBoth showUnidentifiedInfoMode.showOnlyUnidentified)}}
+    {{#with document}}
+      <div>
+        {{formGroup
+          system.schema.fields.unidentifiedInfo.fields.unidentifiedName
+          value=system.unidentifiedInfo.unidentifiedName
+          disabled=system.unidentifiedInfo.isUnidentifiedNameFromFormula
+          label=(localize "D35E.UnidentifiedName")
+        }}
+        {{formGroup
+          system.schema.fields.unidentifiedInfo.fields.isUnidentifiedNameFromFormula
+          value=system.unidentifiedInfo.isUnidentifiedNameFromFormula
+          label=(localize "D35E.UseUnidentifiedNameFromFormula")
+        }}
+        {{formGroup
+          system.schema.fields.unidentifiedInfo.fields.unidentifiedNameFormula
+          value=system.unidentifiedInfo.unidentifiedNameFormula
+          label=(localize "D35E.CustomNameFormula")
+          disabled=(not system.unidentifiedInfo.isUnidentifiedNameFromFormula)
+        }}
+        {{#if system.isUnidentifiedNameFromFormula}}
+          <p class="notes">{{localize "D35E.UsesNameFromFormula"}}</p>
+        {{/if}}
+      </div>
+    {{/with}}
+  {{/if}}
+</section>

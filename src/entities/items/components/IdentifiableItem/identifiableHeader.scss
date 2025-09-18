@@ -1,6 +1,19 @@
-.dnd35e.item-sheet{
+.dnd35e.item-sheet {
     .identifiable-header-main {
         display: flex;
         flex-direction: column;
+        margin-top: 0.5rem;
+        
+        h4 {
+            text-decoration: underline;
+        }
+
+        h3, h4 {
+            margin: 0;
+        }
+
+        hr {
+            margin: 0.5rem 0;
+        }
     }
 }

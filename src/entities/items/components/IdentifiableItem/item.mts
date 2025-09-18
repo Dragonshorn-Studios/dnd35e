@@ -18,10 +18,6 @@ const getIdentifiableDisplayName = <
     } = {},
   } = item.system;
 
-  if (!isIdentifiable || isIdentified) {
-    return item.identifiedName;
-  }
-
   return !isIdentifiable || isIdentified
     ? item.identifiedName
     : getUnidentifiedDisplayName(item);
@@ -34,12 +30,12 @@ const getUnidentifiedDisplayName = <
   const {
     unidentifiedInfo: {
       unidentifiedNameFormula,
-      usesUnidentifiedNameFormula,
+      isUnidentifiedNameFromFormula,
       unidentifiedName,
     } = {},
   } = item.system;
 
-  return unidentifiedNameFormula && usesUnidentifiedNameFormula
+  return unidentifiedNameFormula && isUnidentifiedNameFromFormula
     ? replaceDataAttribute(item.system.unidentifiedInfo?.unidentifiedNameFormula, item)
     : unidentifiedName ?? '';
 };
@@ -52,7 +48,7 @@ const createIdentifiableSystemData = () => ({
     unidentifiedPrice: null,
     isIdentified: false,
     unidentifiedNameFormula: null,
-    usesUnidentifiedNameFormula: false,
+    isUnidentifiedNameFromFormula: false,
   },
 });
 

@@ -5,4 +5,5 @@ export const registerHandlebarsHelpers = () => {
     return args.find(Boolean);
   });
   Handlebars.registerHelper('ternary', (cond, a, b) => cond ? a : b);
+  Handlebars.registerHelper('not', (bool) => !bool);
 };

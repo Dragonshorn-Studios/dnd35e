@@ -2,8 +2,9 @@ import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
 import { type DocumentConstructionContext } from '@common/_types.mjs';
 import { ItemFlagsDnd35e, ItemSystemData } from './data/system.mjs';
 import { replaceDataAttribute } from '@helpers/formulae/index.mjs';
-import { ItemSourceDnd35e } from './data/index.mjs';
+import { ItemSourceDnd35e, ItemType } from './data/index.mjs';
 import { LogHelper } from '@helpers/logHelper.mjs';
+import { ITEM_TYPES } from '@items/constants.mjs';
 // import { Dnd35eConfig } from '@constants/config/index.mjs';
 
 // export class Dnd35eItem<SubType extends Item.SubType = Item.SubType> extends Item<SubType> {
@@ -38,8 +39,8 @@ class ItemDnd35e<TParent extends ActorDnd35e | null = ActorDnd35e | null> extend
       : this.name;
   }
 
-  get itemType (): string {
-    return CONFIG.Dnd35e.item.typeLabels[this.type]
+  get localizedType (): string {
+    return ITEM_TYPES[this.type as ItemType]
       ?? 'D35E.Item';
   }
 

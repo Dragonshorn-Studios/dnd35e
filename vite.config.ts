@@ -42,6 +42,7 @@ function logBuildTimestamp(opts?: PluginOptions | undefined): Plugin {
   return {
     name: 'log-build-timestamp',
     apply: 'build',
+    enforce: 'post',
     closeBundle() {
       console.log(`Finished at ${new Date().toLocaleTimeString('en-US', {
         hour: 'numeric',

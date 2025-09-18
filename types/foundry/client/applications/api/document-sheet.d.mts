@@ -12,8 +12,8 @@ import {
 import FormDataExtended from "../ux/form-data-extended.mjs";
 import ApplicationV2 from "./application.mjs";
 
-export interface DocumentSheetRenderContext extends ApplicationRenderContext {
-    document: Document;
+export interface DocumentSheetRenderContext<TDocument extends Document = Document> extends ApplicationRenderContext {
+    document: TDocument;
     source: Record<string, JSONValue | undefined>;
     fields: DataSchema;
     editable: boolean;

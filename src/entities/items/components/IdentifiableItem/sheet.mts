@@ -7,6 +7,10 @@ interface IdentifiableItemPartialsList {
   headerMain: string;
 };
 
+type IdentifiableItemContextEnrichedTexts = {
+  unIdentifiedDescription: string;
+};
+
 interface IdentifiableItemRenderContext {
     // showUnidentifiedInfoMode: UnidentifiedInfoMode;
     showUnidentifiedInfoMode: {
@@ -15,27 +19,43 @@ interface IdentifiableItemRenderContext {
         showOnlyIdentified: boolean;
     };
     partials: IdentifiableItemPartialsList;
+    enrichedTexts: IdentifiableItemContextEnrichedTexts;
 };
 
-const prepareIdentifiableContext = <TData extends IdentifiableItemSystemData>(data: TData): DeepPartial<ItemSheetDnd35eRenderContext> & IdentifiableItemRenderContext => {
+const prepareIdentifiableContext = <TData extends IdentifiableItemSystemData>(data: TData, windowConfig: {
+  editable: boolean;
+}): DeepPartial<ItemSheetDnd35eRenderContext> & IdentifiableItemRenderContext => {
+  const { editable } = windowConfig ?? {};
   return {
     partials: {
       headerMain: identifiableHeaderPartialName,
     },
     showUnidentifiedInfoMode: {
-      showBoth: game.user.isGM && data.isIdentifiable,
+      showBoth: (game.user.isGM || editable) && data.isIdentifiable,
       showOnlyIdentified: !data.isIdentifiable || (data.unidentifiedInfo?.isIdentified || false),
       showOnlyUnidentified: data.isIdentifiable && !data.unidentifiedInfo?.isIdentified,
     },
+    enrichedTexts: {
+      unIdentifiedDescription: data.unidentifiedInfo?.unidentifiedDescription || game.i18n.localize('D35E.DescriptionPlaceholder'),
+    }
   };
 };
 
 const identifiableHeaderPartialName = 'identifiableHeader';
+const identifiableBannerPartialName = 'identifiableBanner';
+const identifiableDescriptionPartialName = 'identifiableDescription';
+const identifiableNameConfigPartialName = 'identifiableNameConfig';
 
 export {
   prepareIdentifiableContext,
   identifiableHeaderPartialName,
-  // IdentifiableHeaderPart,
-  type IdentifiableItemRenderContext,
-  type IdentifiableItemPartialsList,
+  identifiableBannerPartialName,
+  identifiableDescriptionPartialName,
+  identifiableNameConfigPartialName,
 };
+
+export type {
+  IdentifiableItemContextEnrichedTexts,
+  IdentifiableItemRenderContext,
+  IdentifiableItemPartialsList,
+}
