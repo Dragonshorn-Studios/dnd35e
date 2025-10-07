@@ -3,12 +3,11 @@ import { IdentifiableItemSchema, IdentifiableItemSystemModelMixin } from '@items
 import { MaterialDnd35e } from '../material.mjs';
 import { requiredBooleanField, requiredNumberField } from '@helpers/fieldBuilders.mjs';
 import type { fields as fieldsType } from '@common/data/_module.mjs';
-import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
 
 type MaterialSystemSchema = IdentifiableItemSchema<
-  ActorDnd35e | null,
+  ItemSystemSchema,
   MaterialDnd35e,
-  ItemSystemSchema
+  typeof ItemSystemModel<MaterialDnd35e, ItemSystemSchema>
 > & {
   priceDifference: fieldsType.NumberField<number, number, true, false, true>;
   magicEquivalent: fieldsType.NumberField<number, number, true, false, true>;
@@ -19,7 +18,12 @@ type MaterialSystemSchema = IdentifiableItemSchema<
   isColdIronEquivalent: fieldsType.BooleanField,
 };
 
-class MaterialSystemModel extends IdentifiableItemSystemModelMixin(ItemSystemModel) {
+class MaterialSystemModel extends IdentifiableItemSystemModelMixin<
+  ItemSystemSchema,
+  MaterialDnd35e,
+  AbstractConstructorOf<ItemSystemModel<MaterialDnd35e, ItemSystemSchema>>
+    & typeof ItemSystemModel<MaterialDnd35e, ItemSystemSchema>
+>(ItemSystemModel<MaterialDnd35e, ItemSystemSchema>) {
   static override defineSchema ()  {
     const superSchema = super.defineSchema();
     return {

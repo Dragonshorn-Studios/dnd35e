@@ -143,7 +143,7 @@ function HandleBarsItemSheetMixin<
       return context;
     }
 
-    override changeTab(tab:string, group:string, options?: { event?: Event; navElement?: HTMLElement; force?: boolean; updatePosition?: boolean }) {
+    public override changeTab(tab:string, group:string, options?: { event?: Event; navElement?: HTMLElement; force?: boolean; updatePosition?: boolean }) {
       super.changeTab(tab, group, options);
     }
 
@@ -159,8 +159,7 @@ type HandleBarsItemSheetBase<
   TActor extends ActorDnd35e | null = ActorDnd35e | null,
   TDoc extends ItemDnd35e<TActor> = ItemDnd35e<TActor>,
   TConfig extends ItemSheetDnd35eConfig<TDoc> = ItemSheetDnd35eConfig<TDoc>
-> = 
-ReturnType<typeof HandleBarsItemSheetMixin<TActor, TDoc, TConfig>>;
+> = ReturnType<typeof HandleBarsItemSheetMixin<TActor, TDoc, TConfig>>;
 // abstract new (...args: any[]) => ReturnType<typeof HandleBarsItemSheetMixin<TActor, TDoc, TConfig>>;
 
 export {

@@ -18,3 +18,19 @@ export function mergeSchemas<Base, Ext>(base: Base, ext: Ext): Base & Ext {
 
 export type ConstructorWithStatics<TCtor extends abstract new (...args: any[]) => any> =
   TCtor & { new (...args: any[]): InstanceType<TCtor> };
+
+export type DeepMerge<A, B> =
+  A extends object
+    ? B extends object
+      ? {
+          [K in keyof (A & B)]:
+            K extends keyof B
+              ? K extends keyof A
+                ? DeepMerge<A[K], B[K]> // recurse if key exists in both
+                : B[K]                  // only in B
+              : K extends keyof A
+                ? A[K]                  // only in A
+                : never;
+        }
+      : B
+    : B;

@@ -8,11 +8,13 @@ type IdentifiableItemSystemData<
   // TItem extends ItemDnd35e<TActor> = ItemDnd35e<TActor>
 > = IdentifiableItemSystemDataCore & TItem['system'];
 
+class RequiredBaseIdentifiableItem extends IdentifiableItemMixin<ActorTypes, ItemDnd35e<ActorTypes>>(ItemDnd35e){}
+
 function IdentifiableItemMixin<
   TParent extends ActorTypes = ActorTypes,
   TItem extends ItemDnd35e<TParent> = ItemDnd35e<TParent>,
-  TBase extends SubclassOf<typeof ItemDnd35e<TParent>>
-    = SubclassOf<typeof ItemDnd35e<TParent>>
+  TBase extends ConstructorOf<ItemDnd35e<TParent>>
+    = ConstructorOf<ItemDnd35e<TParent>>
 >(Base: TBase) {
   type MergedSystemData = IdentifiableItemSystemData<TItem>;
 
@@ -90,5 +92,5 @@ function IdentifiableItemMixin<
 // > = ReturnType<typeof IdentifiableItemMixin<TActor, TBase>>
 //   & StaticSide<TBase>;
 
-export { IdentifiableItemMixin };
+export { IdentifiableItemMixin, RequiredBaseIdentifiableItem };
 export type { IdentifiableItemSystemData };

@@ -1,4 +1,6 @@
-type MaterialSystemSource = {
+import { ItemSystemSource } from "@items/baseItem/index.mjs";
+
+type MaterialSystemSource = ItemSystemSource & {
   priceDifference: number;
   magicEquivalent: number;
   bonusHardness: number;

@@ -80,21 +80,6 @@ abstract class ItemSystemModel<
   // }
 }
 
-// type ItemSystemModelConstructor<
-//   TActor extends ActorDnd35e | null = ActorDnd35e | null,
-//   TItem extends ItemDnd35e<TActor> = ItemDnd35e<TActor>,
-//   TSchema extends ItemSystemSchema = ItemSystemSchema,
-//   TModel extends ItemSystemModel<TActor, TItem, TSchema>
-//     = ItemSystemModel<TActor, TItem, TSchema>
-// > = (abstract new (...args: any[]) => TModel)
-//   & StaticSide<TModel>;
-
-// type BaseDefineSchemaType<
-//   TActor extends ActorDnd35e | null = ActorDnd35e | null,
-//   TItem extends ItemDnd35e<TActor> = ItemDnd35e<TActor>,
-//   TSchema extends ItemSystemSchema = ItemSystemSchema
-// > = ReturnType<ItemSystemModel<TActor, TItem, TSchema>['defineSchema']>;
-
 // Export
 export { ItemSystemModel };
 export type {

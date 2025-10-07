@@ -1,18 +1,18 @@
 import {
   ItemSheetContextEnrichedTexts,
-  HandleBarsItemSheetMixin,
   ItemSheetDnd35eConfig,
   ItemSheetDnd35eRenderContext,
   ItemSheetPartialsList,
-  ItemDnd35e,
 } from '@items/baseItem/index.mjs';
 import { MaterialDnd35e } from '../material.mjs';
 import {
   identifiableDescriptionPartialName,
+  IdentifiableItemSheetMixin,
   identifiableNameConfigPartialName,
 } from '@items/components/IdentifiableItem/index.mjs';
-import { type DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
 import type { HandlebarsTemplatePart } from '@client/applications/api/handlebars-application.mjs';
+import { IdentifiableItemRenderContext, RequiredIdentifiableBase } from '@items/components/IdentifiableItem/sheet/IdentifiableItemSheet.mjs';
+import { DeepMerge } from '@source/types.mjs';
 
 type MaterialSheetConfig = ItemSheetDnd35eConfig<MaterialDnd35e>;
 
@@ -20,15 +20,28 @@ type MaterialSheetPartialsList = ItemSheetPartialsList;
 
 type MaterialSheetContextEnrichedTexts = ItemSheetContextEnrichedTexts & {};
 
-interface MaterialSheetRenderContext extends ItemSheetDnd35eRenderContext {
+type MaterialSheetRenderContext<TBase extends IdentifiableItemRenderContext<ItemSheetDnd35eRenderContext>>
+  = DeepMerge<{
   partials: MaterialSheetPartialsList;
   enrichedTexts: MaterialSheetContextEnrichedTexts;
-};
+}, TBase>;
+
 
 const materialDetailsPartialName = 'materialDetails';
 
-class MaterialSheet extends HandleBarsItemSheetMixin<null, ItemDnd35e<null>>() {
-  static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
+type MaterialSheetRenderContextBase = DeepMerge<
+  {
+    partials: MaterialSheetPartialsList;
+    enrichedTexts: MaterialSheetContextEnrichedTexts;
+  },
+  Awaited<ReturnType<InstanceType<ReturnType<typeof IdentifiableItemSheetMixin>>['_prepareContext']>>
+>
+
+type MaterialSheetRenderPartContext<TBase extends IdentifiableItemRenderContext<ItemSheetDnd35eRenderContext>> = MaterialSheetRenderContext<TBase> & {
+};
+
+class MaterialSheet extends IdentifiableItemSheetMixin(RequiredIdentifiableBase) {
+  static override DEFAULT_OPTIONS: DeepPartial<MaterialSheetConfig> = {
     id: 'dnd35e-material-sheet', // this probably should be unique
   }
 
@@ -56,17 +69,17 @@ class MaterialSheet extends HandleBarsItemSheetMixin<null, ItemDnd35e<null>>() {
     }
   }
 
-  protected override async _prepareContext (options: fa.api.DocumentSheetRenderOptions): Promise<MaterialSheetRenderContext> {
-    const startingContext = await super._prepareContext(options);
-    const contextExport: MaterialSheetRenderContext = {
+  protected override async _prepareContext (options: fa.api.DocumentSheetRenderOptions): Promise<MaterialSheetRenderContext<IdentifiableItemRenderContext<ItemSheetDnd35eRenderContext>>> {
+    const startingContext = await super._prepareContext(options) as IdentifiableItemRenderContext<ItemSheetDnd35eRenderContext>;
+    const contextExport = {
       ...startingContext,
       itemType: 'TYPES.Item.material',
-    };
+    } satisfies MaterialSheetRenderContext<IdentifiableItemRenderContext<ItemSheetDnd35eRenderContext>>;
     
     return contextExport;
   }
 
-  protected override async _preparePartContext(partId: string, context: MaterialSheetRenderContext) {
+  protected override async _preparePartContext(partId: string, context: MaterialSheetRenderContext<IdentifiableItemRenderContext<ItemSheetDnd35eRenderContext>>): Promise<MaterialSheetRenderPartContext<IdentifiableItemRenderContext<ItemSheetDnd35eRenderContext>>> {
     switch (partId) {
       case 'namesetup':
       case 'description':
@@ -76,7 +89,7 @@ class MaterialSheet extends HandleBarsItemSheetMixin<null, ItemDnd35e<null>>() {
         break;
       default:
     }
-    return context;
+    return context satisfies MaterialSheetRenderPartContext<IdentifiableItemRenderContext<ItemSheetDnd35eRenderContext>>;
   }
 }
 
