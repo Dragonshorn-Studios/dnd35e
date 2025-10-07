@@ -69,4 +69,6 @@ export type {
   ItemGrantSource,
   ItemSystemData,
   ItemSystemSource,
+  ItemDescription,
+  ItemOrigin,
 };

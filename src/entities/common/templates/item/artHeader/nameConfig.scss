@@ -20,6 +20,10 @@
             margin: 1rem 0 0.25rem;
             text-decoration: underline;
         }
+
+        hr {
+            grid-column: span 2;
+        }
     }
 
     .form-group {

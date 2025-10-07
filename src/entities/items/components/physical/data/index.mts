@@ -1,8 +1,8 @@
 import { BaseItemSourceDnd35e } from '@items/baseItem/index.mjs';
 import type { PhysicalSystemData, PhysicalSystemSource } from './system.mjs';
-import { PhysicalItemSystemModel, type PhysicalItemSystemSchema } from './model.mjs';
 import { WeaponSource } from '@items/weapon/index.mjs';
 import { PHYSICAL_ITEM_TYPES, type PhysicalItemType } from './constants.mjs';
+import { type PhysicalItemSystemSchema, PhysicalItemSystemModelMixin } from './model.mjs';
 
 type BasePhysicalItemSource<
     TType extends PhysicalItemType,
@@ -23,5 +23,5 @@ export type {
 
 export {
   PHYSICAL_ITEM_TYPES,
-  PhysicalItemSystemModel,
+  PhysicalItemSystemModelMixin,
 };

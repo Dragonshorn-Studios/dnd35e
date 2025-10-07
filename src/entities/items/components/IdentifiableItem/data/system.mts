@@ -10,9 +10,9 @@ type IdentifiableItemSource = {
     };
 };
 
-type IdentifiableItemSystemData = IdentifiableItemSource;
+type IdentifiableItemSystemDataCore = IdentifiableItemSource;
 
 export type {
   IdentifiableItemSource,
-  IdentifiableItemSystemData,
+  IdentifiableItemSystemDataCore,
 };

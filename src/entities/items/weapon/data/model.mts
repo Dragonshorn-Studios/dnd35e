@@ -16,8 +16,8 @@ type WeaponDamageSchema = {
   attackFormula: fieldsType.StringField<string, string, true, false, true>;
   damageFormula: fieldsType.StringField<string, string, true, false, true>;
 };
-
-type WeaponSystemSchema = PhysicalItemSystemSchema & EquippableItemSchema & {
+// EquippableItemSchema
+type WeaponSystemSchema = PhysicalItemSystemSchema & {
   isMasterwork: fieldsType.BooleanField<boolean, boolean, true, false, true>;
   weaponType: fieldsType.StringField<WeaponType, WeaponType, true, false, true>;
   weaponSubtype: fieldsType.StringField<WeaponSubtype, WeaponSubtype, true, false, true>;
@@ -30,11 +30,11 @@ type WeaponSystemSchema = PhysicalItemSystemSchema & EquippableItemSchema & {
 class WeaponSystemModel<
   TParent extends WeaponDnd35e = WeaponDnd35e,
   TSchema extends WeaponSystemSchema = WeaponSystemSchema
-> extends PhysicalItemSystemModel<TParent, TSchema> {
+> extends <TParent, TSchema> {
   static override defineSchema (): WeaponSystemSchema {
     return {
       ...super.defineSchema(),
-      ...defineEquippableItemSchema(),
+      // ...defineEquippableItemSchema(),
       // Weapon specific fields go here
       isMasterwork: requiredBooleanField(false),
       weaponType: new fields.StringField<WeaponType, WeaponType, true, false, true>({ choices: WEAPON_TYPES, initial: 'D35E.WeaponTypeSimple', required: true }),

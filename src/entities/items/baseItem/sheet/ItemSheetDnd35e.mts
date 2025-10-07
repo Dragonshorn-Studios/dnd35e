@@ -4,6 +4,7 @@ import { defaultNameHeaderPartial, artHeaderPart } from '@entities/common/templa
 import { type HandlebarsTemplatePart } from '@client/applications/api/handlebars-application.mjs';
 import { ItemTypeLocalizationValues } from '@items/constants.mjs';
 import { createUniqueId } from '@items/components/uniqueId/index.mjs';
+import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
 
 //   getData(options) {
 //     const data = super.getData(options);
@@ -33,7 +34,8 @@ type ItemSheetContextEnrichedTexts = {
 
 type BaseRenderContextItemType = 'D35E.Item' | ItemTypeLocalizationValues;
 
-interface ItemSheetDnd35eRenderContext<TDocument extends ItemDnd35e = ItemDnd35e> extends fa.api.DocumentSheetRenderContext<TDocument> {
+interface ItemSheetDnd35eRenderContext<TDocument extends ItemDnd35e = ItemDnd35e>
+  extends fa.api.DocumentSheetRenderContext<TDocument> {
   itemType: BaseRenderContextItemType;
   partials: ItemSheetPartialsList;
   // openTab: string;
@@ -47,93 +49,123 @@ interface ItemSheetDnd35eRenderContext<TDocument extends ItemDnd35e = ItemDnd35e
 export const itemHeaderPartialName = 'itemHeader';
 export const defaultHeaderStatusPartialName = 'defaultHeaderStatus';
 
-abstract class ItemSheetDnd35e<
-  TDocument extends ItemDnd35e = ItemDnd35e,
+function HandleBarsItemSheetMixin<
+  TActor extends ActorDnd35e | null = ActorDnd35e | null,
+  TDocument extends ItemDnd35e<TActor> = ItemDnd35e<TActor>,
   TConfig extends ItemSheetDnd35eConfig<TDocument> = ItemSheetDnd35eConfig<TDocument>
-> extends foundry.applications.sheets.ItemSheetV2<TDocument, TConfig> {
-
-  static async createUniqueId(this: ItemSheetDnd35e): Promise<void> {
-    const uid = createUniqueId();
-    await this.document .update({ "system.uniqueId": uid });
-    this.render(true);
-  }
-
-  static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
-    actions: {
-      createUniqueId: ItemSheetDnd35e.createUniqueId,
-    },
-    window: {
-      controls: [
-        {
-          label: 'Test',
-          icon: 'fas fa-times',
-          action: 'testAction',
-        },
-      ],
-    },
-    classes: ['dnd35e', 'item-sheet'],
-    id: 'dnd35e-item-sheet', // this probably should be unique
-    position: {
-      width: 560,
-      height: 650,
-    },
-  };
-
-  static override TABS: Record<string, fa.ApplicationTabsConfiguration> = {
-    primary: {
-      tabs: [
-        {
-          id: 'description',
-          label: 'D35E.Description',
-        },
-        {
-          id: 'namesetup',
-          label: 'D35E.Name',
-        }
-      ],
-      initial: 'description',
-    },
-  }
-
-  static PARTS: Record<string, HandlebarsTemplatePart> = {
-    top: artHeaderPart,
-    tabs: {
-        // Foundry-provided generic template
-        template: 'templates/generic/tab-navigation.hbs',
-    },
-  };
-
-  protected async _prepareContext (options: fa.api.DocumentSheetRenderOptions): Promise<ItemSheetDnd35eRenderContext> {
-    const context = await super._prepareContext(options) as ItemSheetDnd35eRenderContext;
-    context.itemType = 'D35E.Item';
-    context.isNameTabOpen = this.tabGroups['primary'] === 'namesetup';
-    context.partials = {
-      header: itemHeaderPartialName,
-      headerMain: defaultNameHeaderPartial,
-      headerSummary: "emptyDiv",
-      headerStatus: "emptyDiv",
-    };
-    context.tabs = this._prepareTabs("primary");
-    context.enrichedTexts = {
-      identifiedDescription: context.document.system.description.value || game.i18n.localize('D35E.DescriptionPlaceholder'),
+>() {
+  abstract class ItemSheetDnd35e extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2<TDocument, TConfig>) {
+    constructor(...args: any[]) {
+      super(...args as any);
     }
-    // context.isNameTabOpen = this.tabGroups activeTab === 'nameSetup';
-    // context.labels = {};
+    
+    static async createUniqueId(this: ItemSheetDnd35e): Promise<void> {
+      const uid = createUniqueId();
+      await this.document .update({ "system.uniqueId": uid });
+      this.render(true);
+    }
 
-    return context;
-  }
+    static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
+      tag: 'form',
+      form: {
+        submitOnChange: true,
+      },
+      actions: {
+        createUniqueId: ItemSheetDnd35e.createUniqueId,
+      },
+      window: {
+        resizable: true,
+        controls: [
+          // {
+          //   label: 'Test',
+          //   icon: 'fas fa-times',
+          //   action: 'testAction',
+          // },
+        ],
+      },
+      classes: ['dnd35e', 'item-sheet'],
+      id: 'dnd35e-item-sheet', // this probably should be unique
+      position: {
+        width: 560,
+        height: 650,
+      },
+    };
 
-  override changeTab(tab:string, group:string, options?: { event?: Event; navElement?: HTMLElement; force?: boolean; updatePosition?: boolean }) {
-    super.changeTab(tab, group, options);
-  }
+    static override TABS: Record<string, fa.ApplicationTabsConfiguration> = {
+      primary: {
+        tabs: [
+          {
+            id: 'description',
+            label: 'D35E.Description',
+          },
+          {
+            id: 'namesetup',
+            label: 'D35E.Name',
+          }
+        ],
+        initial: 'description',
+      },
+    }
 
-  get title() {
-    return this.document.displayName;
-  }
-}
+    static override PARTS: Record<string, HandlebarsTemplatePart> = {
+      top: artHeaderPart,
+      tabs: {
+          // Foundry-provided generic template
+          template: 'templates/generic/tab-navigation.hbs',
+      },
+    };
+
+    protected async _prepareContext (options: fa.api.DocumentSheetRenderOptions): Promise<ItemSheetDnd35eRenderContext> {
+      const context = await super._prepareContext(options) as ItemSheetDnd35eRenderContext;
+      context.itemType = 'D35E.Item';
+      context.isNameTabOpen = this.tabGroups['primary'] === 'namesetup';
+      context.partials = {
+        header: itemHeaderPartialName,
+        headerMain: defaultNameHeaderPartial,
+        headerSummary: "emptyDiv",
+        headerStatus: "emptyDiv",
+      };
+      context.tabs = this._prepareTabs("primary");
+      context.enrichedTexts = {
+        identifiedDescription: context.document.system.description.value || game.i18n.localize('D35E.DescriptionPlaceholder'),
+      }
+      // context.isNameTabOpen = this.tabGroups activeTab === 'nameSetup';
+      // context.labels = {};
+
+      return context;
+    }
+    
+    protected async _preparePartContext(partId: string, context: ItemSheetDnd35eRenderContext) {
+      if (Object.keys(context.tabs ?? {}).includes(partId)) {
+        context.tab = context.tabs?.[partId];
+      }
+      
+      return context;
+    }
+
+    override changeTab(tab:string, group:string, options?: { event?: Event; navElement?: HTMLElement; force?: boolean; updatePosition?: boolean }) {
+      super.changeTab(tab, group, options);
+    }
+
+    get title() {
+      return this.document.displayName;
+    }
+  };
+
+  return ItemSheetDnd35e;
+};
+
+type HandleBarsItemSheetBase<
+  TActor extends ActorDnd35e | null = ActorDnd35e | null,
+  TDoc extends ItemDnd35e<TActor> = ItemDnd35e<TActor>,
+  TConfig extends ItemSheetDnd35eConfig<TDoc> = ItemSheetDnd35eConfig<TDoc>
+> = 
+ReturnType<typeof HandleBarsItemSheetMixin<TActor, TDoc, TConfig>>;
+// abstract new (...args: any[]) => ReturnType<typeof HandleBarsItemSheetMixin<TActor, TDoc, TConfig>>;
 
 export {
-  ItemSheetDnd35e,
+  // ItemSheetDnd35e,
+  HandleBarsItemSheetMixin,
 };
 
 export type {
@@ -142,4 +174,5 @@ export type {
   ItemSheetDnd35eRenderContext,
   ItemSheetPartialsList,
   ItemSheetContextEnrichedTexts,
+  HandleBarsItemSheetBase,
 };

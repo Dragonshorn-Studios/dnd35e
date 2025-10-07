@@ -31,6 +31,11 @@ declare global {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     type ConstructorOf<T> = new (...args: any[]) => T;
 
+    // Given a base class B, this is "any subclass constructor of B"
+    type SubclassOf<Ctor extends abstract new (...args: any[]) => any> =
+      abstract new (...args: ConstructorParameters<Ctor>) => InstanceType<Ctor> & Ctor;
+
+
     type DocumentConstructorOf<T extends foundry.abstract.Document> = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         new (...args: any[]): T;

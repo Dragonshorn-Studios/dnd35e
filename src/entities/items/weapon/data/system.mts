@@ -21,7 +21,7 @@ interface WeaponSystemSource extends PhysicalSystemSource {
   damageNotes: string;
 };
 
-type WeaponSystemData = WeaponSystemSource & PhysicalSystemData & EquippableItem;
+type WeaponSystemData = WeaponSystemSource & PhysicalSystemData //& EquippableItem;
 
 export type {
   WeaponDamage,

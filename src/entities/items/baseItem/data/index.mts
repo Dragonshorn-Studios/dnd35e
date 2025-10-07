@@ -1,5 +1,9 @@
-import type { PhysicalItemSource, PhysicalItemType } from '@items/physical/index.mjs';
-import { ItemSystemModel, type ItemSystemSchema } from './model.mjs';
+import { PhysicalItemSource, PhysicalItemType } from '@items/components/physical/index.mjs';
+import { ItemSystemModel } from './model.mjs';
+import type {
+  ItemSystemModelConstructor,
+  ItemSystemSchema,
+} from './model.mjs';
 import type {
   ItemFlagsDnd35e,
   ItemGrantData,
@@ -42,5 +46,6 @@ export type {
   // ItemGrantSource,
   ItemSystemData,
   ItemSystemSource,
+  ItemSystemModelConstructor,
 };
 export { ItemSystemModel };

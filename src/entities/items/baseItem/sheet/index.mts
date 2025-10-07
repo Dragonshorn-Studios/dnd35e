@@ -13,7 +13,7 @@ const partials = [
 
 partials.forEach(partialName => registerPartial(hbsPath(`${partialName}.hbs`), partialName));
 
-export { ItemSheetDnd35e } from './ItemSheetDnd35e.mjs';
+export { HandleBarsItemSheetMixin } from './ItemSheetDnd35e.mjs';
 
 export type {
   ItemSheetPartialsList,
@@ -21,4 +21,5 @@ export type {
   ItemSheetDnd35eRenderContext,
   BaseRenderContextItemType,
   ItemSheetContextEnrichedTexts,
+  HandleBarsItemSheetBase,
 } from './ItemSheetDnd35e.mjs';

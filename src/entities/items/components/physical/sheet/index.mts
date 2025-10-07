@@ -1,6 +1,6 @@
-export { PhysicalItemSheet } from './PhysicalItemSheet.mjs';
+export { PhysicalItemSheetMixin } from './PhysicalItemSheet.mjs';
 export type {
-  PhysicalItemSheetConfig,
   PhysicalItemSheetRenderContext,
   PhysicalItemSheetPartialsList,
+  PhysicalItemSheetContextEnrichedTexts,
 } from './PhysicalItemSheet.mjs';

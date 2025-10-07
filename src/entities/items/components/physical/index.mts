@@ -1,24 +1,24 @@
-import { PhysicalItemDnd35e } from './PhysicalItemDnd35e.mjs';
-import { PhysicalItemSheet } from './sheet/index.mjs';
+import { PhysicalItemSheetMixin } from './sheet/index.mjs';
 import type {
-  PhysicalItemSheetConfig,
   PhysicalItemSheetRenderContext,
   PhysicalItemSheetPartialsList,
+  PhysicalItemSheetContextEnrichedTexts,
 } from './sheet/index.mjs';
 import { defineEquippableItemSchema, type EquippableItem, type EquippableItemSchema } from './components/EquippableItem.mjs';
+import { PhysicalItemMixin } from './PhysicalItemDnd35e.mjs';
 
 export * from './data/index.mjs';
 
 export type {
-  PhysicalItemSheetConfig,
   PhysicalItemSheetRenderContext,
   PhysicalItemSheetPartialsList,
+  PhysicalItemSheetContextEnrichedTexts,
   EquippableItem,
   EquippableItemSchema,
 };
 
 export {
-  PhysicalItemDnd35e,
-  PhysicalItemSheet,
+  PhysicalItemMixin,
+  PhysicalItemSheetMixin,
   defineEquippableItemSchema,
 };

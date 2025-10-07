@@ -1,27 +1,10 @@
-import { type ActorDnd35e } from "@actors/baseActor/ActorDnd35e.mjs";
 import { ItemDnd35e } from "@items/baseItem/index.mjs";
-import { type MaterialSystemData } from "./data/system.mjs";
-import { createIdentifiableSystemData, getIdentifiableDisplayName, getUnidentifiedDisplayName } from "@items/components/IdentifiableItem/item.mjs";
+import { IdentifiableItemMixin } from "@items/components/IdentifiableItem/IdentifiableItem.mjs";
 
-class MaterialDnd35e<TActor extends ActorDnd35e | null = ActorDnd35e | null> extends ItemDnd35e<TActor> {
-  declare system: MaterialSystemData;
-
-  override get displayName (): string {
-    return getIdentifiableDisplayName(this);
-  }
-
-  get identifiedName (): string {
-    return super.displayName;
-  }
-
-  get unidentifiedDisplayName (): string {
-    return getUnidentifiedDisplayName(this);
-  }
-
-  override _createFreshSystemData (): MaterialSystemData {
+class MaterialDnd35e extends IdentifiableItemMixin(ItemDnd35e) {
+  override _createFreshSystemData () {
     return {
       ...super._createFreshSystemData(),
-      ...createIdentifiableSystemData(),
       bonusHardness: 0,
       bonusHpPerInch: 0,
       isAdamantineEquivalent: false,
@@ -31,8 +14,6 @@ class MaterialDnd35e<TActor extends ActorDnd35e | null = ActorDnd35e | null> ext
       magicEquivalent: 0,
     };
   }
-
-
 }
 
 export {

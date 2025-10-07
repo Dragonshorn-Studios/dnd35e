@@ -2,7 +2,6 @@
 import { ItemDnd35e } from '../ItemDnd35e.mjs';
 import type { ModelPropsFromSchema, SourceFromSchema } from '@common/data/fields.mjs';
 import { nullableOptionalStringField, optionalStringField, requiredBooleanField, requiredStringField } from '@helpers/fieldBuilders.mjs';
-import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
 import type { fields as fieldsType } from '@common/data/_module.mjs';
 const { fields } = foundry.data;
 // Schema
@@ -44,10 +43,14 @@ type ItemSystemSchema = {
 
 // Model
 abstract class ItemSystemModel<
-  TParent extends ItemDnd35e = ItemDnd35e,
+  TItem extends ItemDnd35e = ItemDnd35e,
   TSchema extends ItemSystemSchema = ItemSystemSchema,
-> extends foundry.abstract.TypeDataModel<TParent, TSchema> {
-  static override defineSchema (): ItemSystemSchema {
+> extends foundry.abstract.TypeDataModel<TItem, TSchema> {
+  constructor(...args: any[]) {
+    super(...args);
+  }
+
+  static override defineSchema(): ItemSystemSchema {
     return {
       // components
 
@@ -72,13 +75,30 @@ abstract class ItemSystemModel<
     };
   }
 
-  get actor (): ActorDnd35e | null {
-    return this.parent?.actor ?? null;
-  }
+  // get actor (): TActor {
+  //   return this.parent?.actor;
+  // }
 }
+
+// type ItemSystemModelConstructor<
+//   TActor extends ActorDnd35e | null = ActorDnd35e | null,
+//   TItem extends ItemDnd35e<TActor> = ItemDnd35e<TActor>,
+//   TSchema extends ItemSystemSchema = ItemSystemSchema,
+//   TModel extends ItemSystemModel<TActor, TItem, TSchema>
+//     = ItemSystemModel<TActor, TItem, TSchema>
+// > = (abstract new (...args: any[]) => TModel)
+//   & StaticSide<TModel>;
+
+// type BaseDefineSchemaType<
+//   TActor extends ActorDnd35e | null = ActorDnd35e | null,
+//   TItem extends ItemDnd35e<TActor> = ItemDnd35e<TActor>,
+//   TSchema extends ItemSystemSchema = ItemSystemSchema
+// > = ReturnType<ItemSystemModel<TActor, TItem, TSchema>['defineSchema']>;
 
 // Export
 export { ItemSystemModel };
 export type {
   ItemSystemSchema,
+  // ItemSystemModelConstructor,
+  // BaseDefineSchemaType,
 };

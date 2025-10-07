@@ -1,7 +1,4 @@
-import { ItemSystemData, ItemSystemSource } from '@items/baseItem/index.mjs';
-import { IdentifiableItemSource, IdentifiableItemSystemData } from '@items/components/IdentifiableItem/index.mjs';
-
-interface MaterialSystemSource extends ItemSystemSource, IdentifiableItemSource {
+type MaterialSystemSource = {
   priceDifference: number;
   magicEquivalent: number;
   bonusHardness: number;
@@ -11,7 +8,7 @@ interface MaterialSystemSource extends ItemSystemSource, IdentifiableItemSource 
   isColdIronEquivalent: boolean,
 };
 
-type MaterialSystemData = MaterialSystemSource & ItemSystemData & IdentifiableItemSystemData;
+type MaterialSystemData = MaterialSystemSource;
 
 export type {
   MaterialSystemData,
