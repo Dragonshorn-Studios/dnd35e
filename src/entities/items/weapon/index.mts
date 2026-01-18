@@ -1,14 +1,13 @@
-import { WeaponSheet } from './sheet/index.mjs';
+// import { WeaponSheet } from './sheet/index.mjs';
 import { WeaponDnd35e } from './WeaponDnd35e.mjs';
 
 export * from './data/index.mjs';
 
 export {
   WeaponDnd35e,
-  WeaponSheet,
+  // WeaponSheet,
 };
 export type {
-  WeaponSheetConfig,
+  // WeaponSheetConfig,
   WeaponSheetRenderContext,
-  WeaponSheetPartialsList,
 } from './sheet/index.mjs';

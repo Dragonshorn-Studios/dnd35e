@@ -11,11 +11,17 @@ import { ClientDocument, ClientDocumentStatic } from "./abstract/client-document
 
 interface ClientBaseItemStatic extends Omit<typeof BaseItem, "new">, ClientDocumentStatic {}
 
-declare const ClientBaseItem: {
-    new <TParent extends Actor | null>(...args: any): BaseItem<TParent> & ClientDocument<TParent>;
-} & ClientBaseItemStatic;
+interface ClientBaseItemConstructor extends ClientBaseItemStatic {
+  new <TParent extends Actor | null>(...args: any): ClientBaseItemInstance<TParent>;
+}
 
-declare interface ClientBaseItem<TParent extends Actor | null> extends InstanceType<typeof ClientBaseItem<TParent>> {}
+declare const ClientBaseItem: ClientBaseItemConstructor;
+
+type ClientBaseItemInstance<TParent extends Actor | null> =
+  BaseItem<TParent> & ClientDocument<TParent>;
+
+declare interface ClientBaseItem<TParent extends Actor | null>
+  extends ClientBaseItemInstance<TParent> {}
 
 /**
  * The client-side Item document which extends the common BaseItem model.

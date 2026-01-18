@@ -1,8 +1,8 @@
 import { PhysicalItemDnd35e } from '../PhysicalItemDnd35e.mjs';
 import { ItemSystemModel, ItemSystemSchema } from '@items/baseItem/index.mjs';
-import { defineIdentifiableSchema, IdentifiableItemSchema } from '@items/components/IdentifiableItem/index.mjs';
+import { IdentifiableItemSchema } from '@items/components/IdentifiableItem/index.mjs';
 import { CursableItemSchema, defineCursableSchema } from '@items/components/CursableItem.mjs';
-import { DamagableItemSchema, defineDamagableItemSchema } from '../components/DamagableItem.mjs';
+import { DamagableItemSchema, defineDamagableItemSchema } from '../../components/DamagableItem.mjs';
 import { ChangesPropertySetSchema, defineChangesSchema } from '@items/components/Changes.mjs';
 import { AlignmentSchema, defineAlignmentSchema } from '@items/components/Alignment.mjs';
 import { optionalNumberField, optionalStringField, requiredBooleanField, requiredNumberField } from '@helpers/fieldBuilders.mjs';
@@ -40,36 +40,36 @@ abstract class PhysicalItemSystemModel<
     TParent extends PhysicalItemDnd35e = PhysicalItemDnd35e,
     TSchema extends PhysicalItemSystemSchema = PhysicalItemSystemSchema
 > extends ItemSystemModel<TParent, TSchema> {
-  static override defineSchema (): PhysicalItemSystemSchema {
-    return {
-      ...super.defineSchema(),
+  // static override defineSchema (): PhysicalItemSystemSchema {
+  //   return {
+  //     ...super.defineSchema(),
 
-      // components
-      ...defineIdentifiableSchema(),
+  //     // components
+  //     ...defineIdentifiableSchema(),
 
-      ...defineCursableSchema(),
-      ...defineDamagableItemSchema(),
-      ...defineChangesSchema(),
-      ...defineAlignmentSchema(),
+  //     ...defineCursableSchema(),
+  //     ...defineDamagableItemSchema(),
+  //     ...defineChangesSchema(),
+  //     ...defineAlignmentSchema(),
 
-      // Physical
-      quantity: requiredNumberField(0),
-      weight: optionalNumberField(),
-      isWeightlessInContainer: requiredBooleanField(false),
-      isWeightlessWhenCarried: requiredBooleanField(false),
-      isCarried: requiredBooleanField(true),
-      size: new fields.StringField<Size, Size, true, false, true>({ choices: SIZES, initial: 'tiny', required: true }),
+  //     // Physical
+  //     quantity: requiredNumberField(0),
+  //     weight: optionalNumberField(),
+  //     isWeightlessInContainer: requiredBooleanField(false),
+  //     isWeightlessWhenCarried: requiredBooleanField(false),
+  //     isCarried: requiredBooleanField(true),
+  //     size: new fields.StringField<Size, Size, true, false, true>({ choices: SIZES, initial: 'tiny', required: true }),
 
-      // Price
-      price: requiredNumberField(0),
-      resalePrice: optionalNumberField(),
-      brokenResalePrice: optionalNumberField(),
-      isFullResalePrice: requiredBooleanField(true),
+  //     // Price
+  //     price: requiredNumberField(0),
+  //     resalePrice: optionalNumberField(),
+  //     brokenResalePrice: optionalNumberField(),
+  //     isFullResalePrice: requiredBooleanField(true),
 
-      // Container
-      containerId: optionalStringField(),
-    };
-  }
+  //     // Container
+  //     containerId: optionalStringField(),
+  //   };
+  // }
 }
 
 export { PhysicalItemSystemModel, type PhysicalItemSystemSchema };

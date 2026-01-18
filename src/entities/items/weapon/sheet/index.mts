@@ -11,9 +11,8 @@ const partials = [
 
 partials.forEach(partialName => registerPartial(hbsPath(`${partialName}.hbs`), partialName));
 
-export { WeaponSheet } from './weaponSheet.mjs';
+// export { WeaponSheet } from './weaponSheet.mjs';
 export type {
-  WeaponSheetConfig,
+  // WeaponSheetConfig,
   WeaponSheetRenderContext,
-  WeaponSheetPartialsList,
 } from './weaponSheet.mjs';

@@ -87,6 +87,21 @@ interface DocumentHTMLEmbedConfig {
 
 type TextContentReplacer = (match: RegExpMatchArray) => Promise<HTMLElement>;
 
+type TextEditorOptions = ProseMirrorOptions & {
+    engine?: "prosemirror" | "tinymice"
+    target?: HTMLElement;
+};
+
+type ProseMirrorOptions = {
+    uuid?: string;
+    document?: ClientDocument;
+    fieldName?: string;
+    plugins?: Record<string, any>;
+    collaborate?: boolean;
+    relativeLinks?: boolean;
+    props?: object; // See https://prosemirror.net/docs/ref/#view.EditorProps
+};
+
 /**
  * A collection of helper functions and utility methods related to the rich text editor.
  */
@@ -100,7 +115,7 @@ export default class TextEditor {
      * @returns The editor instance.
      */
     static create(
-        options?: { engine?: "prosemirror" | "tinymice" },
+        options?: TextEditorOptions,
         content?: string,
     ): Promise<TinyMCE.Editor | ProseMirrorEditor>;
 

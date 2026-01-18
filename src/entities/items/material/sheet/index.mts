@@ -1,19 +1,25 @@
-import { hbsTemplatePath } from '@constants/paths.mjs';
-import { registerPartial } from '@helpers/display.mjs';
-import { materialDetailsPartialName } from './MaterialSheet.mjs';
-
-const materialHbsPath = (file: string) => `${hbsTemplatePath}/entities/items/material/sheet/${file}`;
-const partials = [
-  materialDetailsPartialName,
-];
-
-partials.forEach(partialName => registerPartial(materialHbsPath(`${partialName}.hbs`), partialName));
-
-export {
+import { useMaterialStore } from './MaterialStore.mjs';
+import {
   MaterialSheet,
 } from './MaterialSheet.mjs';
-export type {
+import MaterialDetails from './MaterialDetails.vue';
+import MaterialSheetVue from './MaterialSheet.vue';
+
+import type { MaterialStore } from './MaterialStore.mjs';
+import type {
   MaterialSheetConfig,
-  MaterialSheetPartialsList,
   MaterialSheetRenderContext,
 } from './MaterialSheet.mjs';
+
+export {
+  useMaterialStore,
+  MaterialSheet,
+  MaterialDetails,
+  MaterialSheetVue,
+};
+
+export type {
+  MaterialStore,
+  MaterialSheetConfig,
+  MaterialSheetRenderContext,
+};

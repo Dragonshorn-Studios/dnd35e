@@ -1,0 +1,48 @@
+<template>
+  <div class="name-and-art">
+    <ImageField field="img" :title="displayName" />
+    <div class="item-name-container">
+      <slot>
+        <!-- Name field goes here -->
+      </slot>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+  import ImageField from '@vc/Fields/ImageField.vue';
+  import { inject } from 'vue';
+  import type { ItemSheetStore } from '../itemSheetStore.mts';
+
+  const {
+    document,
+    documentGetters: {
+      displayName,
+    },
+  } = inject<ItemSheetStore>('itemSheetStore');
+</script>
+
+<style scoped lang="scss">
+  .name-and-art {
+    display: flex;
+  }
+
+  .item-art-container {
+    flex: 0 128px;
+    width: 128px;
+    position: relative;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+
+    img.item-art {
+      object-fit: contain;
+      border: 2px solid #000;
+    }
+  }
+
+  .item-name-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+</style>

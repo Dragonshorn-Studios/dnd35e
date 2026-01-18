@@ -3,6 +3,7 @@ import tsconfigPaths, { PluginOptions } from 'vite-tsconfig-paths';
 import path from 'path';
 import fg from 'fast-glob';
 import fs from 'fs-extra';
+import vue from "@vitejs/plugin-vue";
 
 // Copy Foundry system + static files
 function copyStaticFiles(opts?: PluginOptions | undefined): Plugin {
@@ -94,11 +95,25 @@ function bundleLangFiles() {
 }
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@vc": path.resolve(__dirname, "src/vue"),
+      "@canvas": path.resolve(__dirname, "src/canvas"),
+      "@constants": path.resolve(__dirname, "src/constants"),
+      "@helpers": path.resolve(__dirname, "src/helpers"),
+      "@items": path.resolve(__dirname, "src/entities/items"),
+      "@actors": path.resolve(__dirname, "src/entities/actors"),
+      "@entities": path.resolve(__dirname, "src/entities"),
+      "@scene": path.resolve(__dirname, "src/scene"),
+      "@source": path.resolve(__dirname, "src"),
+    },
+  },
   plugins: [
     tsconfigPaths(),
     copyStaticFiles(),
     copyHbsFiles(),
     bundleLangFiles(),
+    vue(),
     logBuildTimestamp(),
   ],
   build: {
@@ -107,7 +122,7 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'src/main.mts')
+        main: path.resolve(__dirname, 'src/main.mts'),
       },
       output: {
         entryFileNames: (chunkInfo) => {
@@ -118,7 +133,7 @@ export default defineConfig({
           return chunkInfo.name.replace(/^src[\\/]/, '') + '.mjs';
         },
         assetFileNames: (assetInfo) => {
-          const normalized = assetInfo.name?.replace(/\\/g, '/');
+          const normalized = assetInfo.names[0]?.replace(/\\/g, '/');
           if (!normalized) return '[name][extname]';
 
           // // CSS bundle

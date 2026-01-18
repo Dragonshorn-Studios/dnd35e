@@ -1,9 +1,6 @@
 import { type HandlebarsTemplatePart } from "@client/applications/api/handlebars-application.mjs";
 import { hbsTemplatePath } from "@constants/paths.mjs";
 import { registerPartial } from "@helpers/display.mjs";
-import './artHeader/artHeader.scss';
-import './artHeader/nameConfig.scss';
-import './description/description.scss';
 
 const hbsPath = (path: string, file: string) => `${hbsTemplatePath}/entities/common/templates/item/${path}/${file}`;
 

@@ -1,11 +1,8 @@
-import { BaseItemSourceDnd35e } from '@items/baseItem/index.mjs';
-import { MaterialSystemModel, type MaterialSystemSchema } from './model.mjs';
-import type {
-  MaterialSystemData,
-  MaterialSystemSource,
-} from './system.mjs';
-
-type MaterialSource = BaseItemSourceDnd35e<'material', MaterialSystemSource>;
+import { MaterialSystemModel } from './MaterialSystemModel.mjs';
+import type { MaterialSystemData } from './MaterialSystemData.mjs';
+import type { MaterialSystemSource } from './MaterialSystemSource.mjs';
+import type { MaterialSystemSchema } from './MaterialSystemSchema.mjs';
+import type { MaterialSource } from './MaterialSource.mjs';
 
 export {
   MaterialSystemModel,

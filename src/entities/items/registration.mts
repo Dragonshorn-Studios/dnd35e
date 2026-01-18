@@ -1,15 +1,14 @@
 import { registerCommon } from '@entities/common/index.mjs';
 import { ItemProxyDnd35e } from './baseItem/index.mjs';
 import { MaterialSystemModel, MaterialSheet } from './material/index.mjs';
-import { WeaponSystemModel, WeaponSheet } from './weapon/index.mjs';
+import { WeaponSystemModel,  } from './weapon/index.mjs';
 import ItemConfig from '@constants/config/item.mjs';
-import { runPartialRegistration } from '@helpers/display.mjs';
 
 const registerSheets = () => {
   foundry.documents.collections.Items.unregisterSheet('core', foundry.appv1.sheets.ItemSheet);
   const itemSheets = [
     ['material', MaterialSheet],
-    ['weapon', WeaponSheet],
+    // ['weapon', WeaponSheet],
   ] as const;
 
   for (const [type, Sheet] of itemSheets) {
@@ -37,7 +36,6 @@ export const registerItems = () => {
 
   foundry.helpers.Hooks.once('setup', () => {
     registerCommon();
-    runPartialRegistration();
     registerSheets();
   });
 };

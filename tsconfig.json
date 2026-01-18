@@ -11,7 +11,7 @@
     // "disableReferencedProjectLoad": true,             /* Reduce the number of projects loaded automatically by TypeScript. */
 
     /* Language and Environment */
-    "target": "es2017",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "es2020",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     // "jsx": "preserve",                                /* Specify what JSX code is generated. */
     // "libReplacement": true,                           /* Enable lib replacement. */
@@ -38,6 +38,7 @@
       "@actors/*": ["./src/entities/actors/*"],
       "@entities/*": ["./src/entities/*"],
       "@scene/*": ["./src/scene/*"],
+      "@vc/*": ["./src/vue/*"],
       "@source/*": ["./src/*"],
       "@common/*": ["./types/foundry/common/*"],
       "@client/*": ["./types/foundry/client/*"],
@@ -127,6 +128,9 @@
   "include": [
     "src/**/*",
     "./types/foundry/global-external.d.mts",
+    "./types/foundry/client/global-external.d.mts",
+    "./types/foundry/common/global-external.d.mts",
+    "./types/shims-vue.d.mts",
   ],
   "exclude": ["node_modules"]
 }

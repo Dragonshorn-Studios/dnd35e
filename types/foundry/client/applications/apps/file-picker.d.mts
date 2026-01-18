@@ -21,7 +21,7 @@ export interface FilePickerConfiguration extends ApplicationConfiguration {
     /** A current file source in "data", "public", or "s3". */
     activeSource: FilePickerSource;
     /** A callback function to trigger once a file has been selected */
-    callback: Function;
+    callback: (path: string) => void;
     /** */
     current: string;
     /** A flag which permits explicitly disallowing upload, `true` by default */
@@ -128,7 +128,7 @@ export default class FilePicker extends HandlebarsApplicationMixin(ApplicationV2
     /**
      *  @param [options={}] Options that configure the behavior of the FilePicker
      */
-    constructor(options: ApplicationConfiguration & FilePickerConfiguration);
+    constructor(options: DeepPartial<ApplicationConfiguration & FilePickerConfiguration>);
 
     /** The full requested path given by the user */
     request: string;
