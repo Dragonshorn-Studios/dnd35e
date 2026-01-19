@@ -8,10 +8,11 @@ const {
 
 // Strings
 export const requiredStringField = (initialValue?: string) => {
-  if (initialValue === undefined) {
-    initialValue = '';
-  }
-  return new StringField({ required: true, nullable: false, initial: initialValue });
+  // save logic for nullable
+  // if (initialValue === undefined) {
+  //   initialValue = '';
+  // }
+  return new StringField({ required: true, nullable: false, initial: initialValue ?? '' });
 };
 
 type NullableOptionalStringField = fieldsType.StringField<string, string, false, true, true>;

@@ -2,7 +2,7 @@ import { PhysicalItemDnd35e } from '../PhysicalItemDnd35e.mjs';
 import { ItemSystemModel, ItemSystemSchema } from '@items/baseItem/index.mjs';
 import { IdentifiableItemSchema } from '@items/components/IdentifiableItem/index.mjs';
 import { CursableItemSchema, defineCursableSchema } from '@items/components/CursableItem.mjs';
-import { DamagableItemSchema, defineDamagableItemSchema } from '../../components/DamagableItem.mjs';
+// import { DamagableItemSchema, defineDamagableItemSchema } from '../../components/DamagableItem.mjs';
 import { ChangesPropertySetSchema, defineChangesSchema } from '@items/components/Changes.mjs';
 import { AlignmentSchema, defineAlignmentSchema } from '@items/components/Alignment.mjs';
 import { optionalNumberField, optionalStringField, requiredBooleanField, requiredNumberField } from '@helpers/fieldBuilders.mjs';
@@ -15,7 +15,7 @@ const { fields } = foundry.data;
 type PhysicalItemSystemSchema = ItemSystemSchema
     & IdentifiableItemSchema
     & CursableItemSchema
-    & DamagableItemSchema
+    // & DamagableItemSchema
     & ChangesPropertySetSchema
     & AlignmentSchema
 & {

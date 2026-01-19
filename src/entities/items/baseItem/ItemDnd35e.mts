@@ -1,28 +1,34 @@
-import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
-import type { DocumentConstructionContext } from '@common/_types.mjs';
 import { replaceDataAttribute } from '@helpers/formulae/index.mjs';
 import { LogHelper } from '@helpers/logHelper.mjs';
-import { ITEM_TYPES, ItemType } from '@items/itemTypes.mjs';
-import { ItemFlagsDnd35e, ItemSourceDnd35e, ItemSystemData } from './index.mjs';
+import { ITEM_TYPES } from '@items/itemTypes.mjs';
+import type { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
+import type { DocumentConstructionContext } from '@common/_types.mjs';
+import type { ItemType } from '@items/itemTypes.mjs';
+import type { ItemFlagsDnd35e, ItemSourceDnd35e, ItemSystemData } from './index.mjs';
 
-class ItemDnd35e<
-  TItemType extends ItemType = ItemType,
-  TParent extends ActorDnd35e | null = ActorDnd35e | null,
-> extends foundry.documents.Item<TParent> {
-  override prepareBaseData (): void {
+class ItemDnd35e<TItemType extends ItemType> extends foundry.documents.Item {
+  declare type: TItemType;
+  declare flags: ItemFlagsDnd35e;
+  declare system: ItemSystemData;
+  declare _source: ItemSourceDnd35e<TItemType>;
+
+  override prepareBaseData(): void {
     super.prepareBaseData();
-
-    this.system = this.system || this._createFreshSystemData();
+    // I don't actually think this is needed
+    //this.system ??= this._createFreshSystemData();
   }
-
-  _createFreshSystemData (): ItemSystemData {
-    return {
-      description: { value: '' },
-      version: CONFIG.Dnd35e.VERSION,
-      isNameFromFormula: false,
-      isPsionic: false,
-      isEpic: false,
-    };
+  // _createFreshSystemData (): ItemSystemData {
+  //   return {
+  //     description: { value: '' },
+  //     version: CONFIG.Dnd35e.VERSION,
+  //     isNameFromFormula: false,
+  //     isPsionic: false,
+  //     isEpic: false,
+  //   };
+  // }
+  get localizedType (): string {
+    return ITEM_TYPES[this.type]
+      ?? 'D35E.Item';
   }
 
   get displayName (): string {
@@ -30,15 +36,6 @@ class ItemDnd35e<
       ? replaceDataAttribute(this.system.nameFormula, this)
       : this.name;
   }
-
-  get localizedType (): string {
-    return ITEM_TYPES[this.type as ItemType]
-      ?? 'D35E.Item';
-  }
-
-  declare flags: ItemFlagsDnd35e;
-  declare system: ItemSystemData;
-  declare _source: ItemSourceDnd35e<TItemType>;
 }
 
 const ItemProxyDnd35e = new Proxy(ItemDnd35e, {
@@ -57,7 +54,7 @@ const ItemProxyDnd35e = new Proxy(ItemDnd35e, {
   },
 });
 
-type ItemDnd35eInstance = InstanceType<typeof ItemDnd35e>;
-type AnyItemDnD35e = ItemDnd35e<ItemType, ActorDnd35e | null>;
+// type ItemDnd35eInstance = InstanceType<typeof ItemDnd35e>;
+// type AnyItemDnD35e = ItemDnd35e<ItemType, ActorDnd35e | null>;
 
-export { ItemDnd35e, ItemProxyDnd35e, ItemDnd35eInstance, AnyItemDnD35e };
+export { ItemDnd35e, ItemProxyDnd35e };

@@ -1,6 +1,6 @@
 import { ItemSystemSource } from "@items/baseItem/index.mjs";
 
-interface IdentifiableItemSystemSource extends ItemSystemSource {
+interface IdentifiableItemSystemSource {
     isIdentifiable: boolean;
     unidentifiedInfo?: {
         unidentifiedName: string;

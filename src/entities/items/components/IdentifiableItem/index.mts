@@ -5,8 +5,12 @@ import {
   useIdentifiableStore,
   IdentifiableItemSheet,
 } from './sheet/index.mjs';
-import { IdentifiableItemSystemModel } from './data/index.mjs';
-import { IdentifiableItemMixin, DefaultIdentifiableItem } from './IdentifiableItem.mjs';
+import {
+  applyIdentifiableSchema,
+  applyIdentifiableRuntime,
+  identifiableOverrides,
+} from './data/index.mjs';
+// import { IdentifiableItemMixin, DefaultIdentifiableItem } from './IdentifiableItem.mjs';
 
 import type {
   IdentifiableItemSystemSource,
@@ -14,7 +18,7 @@ import type {
   IdentifiableItemSource,
   IdentifiableItemSystemData
 } from './data/index.mjs';
-import type { IdentifiableItemInstance } from './IdentifiableItem.mjs'
+import type { IdentifiableItem } from './IdentifiableItem.mjs'
 import type {
   IdentifiableItemStore,
   IdentifiableItemSheetRenderContext,
@@ -25,17 +29,20 @@ export type {
   IdentifiableItemSource,
   IdentifiableItemSystemData,
   IdentifiableItemSchema,
-  IdentifiableItemInstance,
+  // IdentifiableItemInstance,
   IdentifiableItemStore,
   IdentifiableItemSheetRenderContext,
 };
 export {
+  applyIdentifiableSchema,
+  applyIdentifiableRuntime,
+  identifiableOverrides,
   useIdentifiableStore,
   IdentifiableDescription,
   IdentifiableHeader,
   IdentifiableNameConfig,
-  IdentifiableItemMixin,
-  IdentifiableItemSystemModel,
+  // IdentifiableItemMixin,
+  // IdentifiableItemSystemModel,
   IdentifiableItemSheet,
-  DefaultIdentifiableItem,
+  // DefaultIdentifiableItem,
 };

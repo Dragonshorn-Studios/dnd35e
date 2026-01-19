@@ -1,8 +1,6 @@
 import { Size } from '@constants/sizes.mjs';
-import { ItemSystemData, ItemSystemSource } from '@items/baseItem/index.mjs';
-import { IdentifiableItemSource, IdentifiableItemSystemData } from '@items/components/IdentifiableItem/index.mjs';
 
-interface PhysicalSystemSource extends ItemSystemSource, IdentifiableItemSource {
+interface PhysicalSystemSource {
   quantity: number;
   weight: number | null;
   isWeightlessInContainer: boolean;
@@ -18,7 +16,6 @@ interface PhysicalSystemSource extends ItemSystemSource, IdentifiableItemSource 
   containerId: string | null;
 };
 
-type PhysicalSystemData = PhysicalSystemSource & ItemSystemData & IdentifiableItemSystemData;
 
 // type PhysicalItemLabelTypes = 'carried' | 'identified';
 
@@ -28,6 +25,5 @@ type PhysicalSystemData = PhysicalSystemSource & ItemSystemData & IdentifiableIt
 
 export type {
   PhysicalSystemSource,
-  PhysicalSystemData,
   // PhysicalItemLabels,
 };

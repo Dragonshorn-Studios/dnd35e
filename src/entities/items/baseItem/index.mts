@@ -12,10 +12,8 @@ export {
 export {
   ItemDnd35e,
   ItemProxyDnd35e,
-  ItemDnd35eInstance,
-  AnyItemDnD35e,
 } from './ItemDnd35e.mjs';
-export { ItemSystemModel } from './data/index.mjs';
+export { ItemSystemModelBase } from './data/index.mjs';
 
 export type {
   ItemSystemSchema,

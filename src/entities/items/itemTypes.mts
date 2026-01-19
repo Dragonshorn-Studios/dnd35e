@@ -1,4 +1,4 @@
-import { PhysicalItemType } from './physical/index.mjs';
+import type { PhysicalItemType } from './components/Physical/index.mjs';
 
 type ItemType = PhysicalItemType | 'material';
 

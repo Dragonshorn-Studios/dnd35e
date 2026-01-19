@@ -1,21 +1,22 @@
-import { IdentifiableItemSystemModel } from "@items/components/IdentifiableItem/index.mjs";
-import { MaterialDnd35e } from "../material.mjs";
-import { MaterialSystemSchema } from "./MaterialSystemSchema.mjs";
 import { requiredBooleanField, requiredNumberField } from "@helpers/fieldBuilders.mjs";
+import { ItemSystemModelBase } from "@items/baseItem/data/ItemSystemModelBase.mjs";
+import { applyIdentifiableSchema } from "@items/components/IdentifiableItem/data/applyIdentifiableSchema.mjs";
 
-class MaterialSystemModel extends IdentifiableItemSystemModel<MaterialDnd35e, MaterialSystemSchema> {
+class MaterialSystemModel extends ItemSystemModelBase {
   static override defineSchema () {
-    return {
-      ...super.defineSchema(),
-
-      priceDifference: requiredNumberField(0),
-      magicEquivalent: requiredNumberField(0),
-      bonusHardness: requiredNumberField(0),
-      bonusHpPerInch: requiredNumberField(0),
-      isAlchemicalSilverEquivalent: requiredBooleanField(false),
-      isAdamantineEquivalent: requiredBooleanField(false),
-      isColdIronEquivalent: requiredBooleanField(false),
-    };
+    const schema = super.defineSchema();
+    
+    applyIdentifiableSchema(schema);
+    
+    schema.priceDifference = requiredNumberField(0);
+    schema.magicEquivalent = requiredNumberField(0);
+    schema.bonusHardness = requiredNumberField(0);
+    schema.bonusHpPerInch = requiredNumberField(0);
+    schema.isAlchemicalSilverEquivalent = requiredBooleanField(false);
+    schema.isAdamantineEquivalent = requiredBooleanField(false);
+    schema.isColdIronEquivalent = requiredBooleanField(false);
+    
+    return schema;
   }
 }
 

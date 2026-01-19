@@ -1,4 +1,3 @@
-import { EquippableItem, PhysicalSystemData, PhysicalSystemSource } from '@items/physical/index.mjs';
 import { WeaponBaseType, WeaponSubtype } from './constants.mjs';
 
 type WeaponDamage = {
@@ -11,7 +10,7 @@ type WeaponDamage = {
   damageFormula: string;
 };
 
-interface WeaponSystemSource extends PhysicalSystemSource {
+interface WeaponSystemSource {
   isMasterwork: boolean;
   weaponType: string;
   weaponSubtype: WeaponSubtype;
@@ -21,10 +20,7 @@ interface WeaponSystemSource extends PhysicalSystemSource {
   damageNotes: string;
 };
 
-type WeaponSystemData = WeaponSystemSource & PhysicalSystemData & EquippableItem;
-
 export type {
   WeaponDamage,
   WeaponSystemSource,
-  WeaponSystemData,
 };
