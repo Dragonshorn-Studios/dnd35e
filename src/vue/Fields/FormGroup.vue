@@ -23,26 +23,26 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
-  label: string;              // localization key
-  value: any;                 // current value
-  type?: "text" | "checkbox"; // default: text
-  disabled?: boolean;
-  editable?: boolean;         // from context.isEditable
-  onUpdate: (value: any) => void;
-}>();
+  const props = defineProps<{
+    label: string;              // localization key
+    value: any;                 // current value
+    type?: "text" | "checkbox"; // default: text
+    disabled?: boolean;
+    editable?: boolean;         // from context.isEditable
+    onUpdate: (value: any) => void;
+  }>();
 
-function t(key: string) {
-  return game.i18n.localize(key);
-}
+  function t(key: string) {
+    return game.i18n.localize(key);
+  }
 
-function onChange(val: any) {
-  props.onUpdate(val);
-}
+  function onChange(val: any) {
+    props.onUpdate(val);
+  }
 </script>
 
 <style scoped>
-.form-group {
-  display: contents;
-}
+  .form-group {
+    display: contents;
+  }
 </style>

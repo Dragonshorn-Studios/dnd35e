@@ -1,5 +1,5 @@
 <template>
-  <div class="rich-text-editor flexcol">
+  <div class="prosemirror editor-content editor flexcol">
     <label>{{ label }}</label>
     <div ref="editorRoot"></div>
   </div>
@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
   import { ItemSheetStore } from "@items/baseItem/index.mjs";
-  import { onMounted, onBeforeUnmount, ref, inject } from "vue";
+  import { onMounted, onBeforeUnmount, ref, inject, nextTick, getCurrentInstance, Ref } from "vue";
 
   const { field, label } = defineProps<{
     field: string;       // e.g. "system.description"
@@ -23,6 +23,7 @@
       getFieldUpdater,
     },
     isEditable,
+    isFirstRender,
   } = inject('itemSheetStore') as ItemSheetStore;
   const updateField = getFieldUpdater(field);
 
@@ -31,33 +32,86 @@
   const editorRoot = ref<HTMLElement | null>(null);
   let editor: any = null;
 
+  function untilInDOM(elRef: Ref<HTMLElement | null>): Promise<void> {
+    return new Promise(resolve => {
+      const check = () => {
+        if (elRef.value && document.body.contains(elRef.value)) resolve();
+        else requestAnimationFrame(check);
+      };
+      check();
+    });
+  }
+
   async function createEditor() {
     if (!editorRoot.value) return;
+    if (isFirstRender) {
+      await untilInDOM(editorRoot);
+    }
+    const { TextEditor } = foundry.applications.ux;
 
-    const initial = raw ?? "";
-
-    editor = await foundry.applications.ux.TextEditor.create(
+    editor = await TextEditor.implementation.create(
       {
         engine: "prosemirror",
         target: editorRoot.value,
+        // drop: true,
+        // toolbar: true,
         props: {
           editable: () => isEditable.value,
         },
       },
-      initial,
-    );
+      raw
+    )
+    // .then((ed) => {
+    //   editor = ed;
+    //   editorRoot.value?.replaceChildren(editor.element);
+    //   // hookAutosave(editor);
+    //   editor.element.addEventListener("focusout", async () => {
+    //     const html = editor.save();
+    //     await updateField(html);
+    //   });
+    // });
+    // editorRoot.value.replaceChildren(editor.element);
 
-    editorRoot.value.replaceWith(editor.element);
-    editorRoot.value = editor.element;
+
+
+    // const initial = raw ?? "";
+    // debugger;
+
+    // editor = await foundry.applications.ux.ProseMirrorEditor.create(
+    //   editorRoot.value,
+    //   initial,
+    //   {
+    //     props: {
+    //       editable: () => isEditable.value,
+    //     },
+    //   },
+    // );
+
+    // editor = await foundry.applications.ux.TextEditor.implementation.create(
+    //   {
+    //     engine: "prosemirror",
+    //     target: editorRoot.value,
+    //     props: {
+    //       editable: () => isEditable.value,
+    //     },
+    //   },
+    //   initial,
+    // );
+
+    // editorRoot.value.replaceWith(editor.element);
+    // editorRoot.value = editor.element;
 
     // Listen for changes
-    editor.element.addEventListener("focusout", async () => {
-      const html = editor.save();
-      await updateField(html);
-    });
+    // editor.element.addEventListener("focusout", async () => {
+    //   const html = editor.save();
+    //   await updateField(html);
+    // });
   }
 
-  onMounted(createEditor);
+  onMounted(() => {
+    // Wait for the sheet to actually be in the DOM
+      createEditor();
+  });
 
   onBeforeUnmount(() => {
     editor?.destroy();

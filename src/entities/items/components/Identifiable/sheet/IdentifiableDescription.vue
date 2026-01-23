@@ -1,6 +1,6 @@
 <template>
   <section
-    class="tab flexcol description"
+    class="flexcol description"
     data-group="primary"
     data-tab="description"
     v-show="isActiveTab"

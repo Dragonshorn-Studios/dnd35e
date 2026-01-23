@@ -1,12 +1,14 @@
 import type { DocumentSheetRenderContext, DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
 import type { ItemDnd35e } from '../ItemDnd35e.mjs';
+import type { ItemType } from '@items/itemTypes.mjs';
 
 export interface BaseItemSheetRenderContext extends DocumentSheetRenderContext {
-  document: ItemDnd35e;
+  document: ItemDnd35e<ItemType>;
+  renderOptions: fa.ApplicationRenderOptions;
 };
 
 abstract class ItemSheetDnd35e<
-  TDocument extends ItemDnd35e = ItemDnd35e
+  TDocument extends ItemDnd35e<ItemType> = ItemDnd35e<ItemType>
 > extends foundry.applications.sheets.ItemSheetV2<TDocument, DocumentSheetConfiguration<TDocument>> {
   static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
     window: {

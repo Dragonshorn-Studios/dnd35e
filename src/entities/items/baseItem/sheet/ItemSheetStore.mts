@@ -1,45 +1,77 @@
-import { computed, reactive } from "vue"
-import type { ItemDnd35e, ItemSystemData } from "../index.mjs";
-import type { DocumentSheetRenderContext } from "@client/applications/api/document-sheet.mjs";
+import { Component, computed, reactive } from "vue"
+import type { BaseItemSheetRenderContext, ItemDnd35e, ItemSystemData } from "../index.mjs";
+import { Description } from "./index.mjs";
+import NameConfig from "./tabs/NameConfig.vue";
 
-const defaultState = {
+interface ItemSheetTab {
+  id: string;
+  label: string;
+  component: Component;
+  order: number;
+  icon?: string;
+  tooltip?: string
+};
+
+const createDefaultState = (): {
+  itemType: string;
+  tabs: ItemSheetTab[];
+  activeTab: string;
+} => ({
   itemType: 'D35E.Item',
-  // identifiedDescription: context.document.system.description.value || game.i18n.localize('D35E.DescriptionPlaceholder'),
   tabs: [
     {
       id: 'description',
       label: 'D35E.Description',
+      component: Description,
+      order: 10,
     },
     {
-      id: 'namesetup',
+      id: 'name-config',
       label: 'D35E.Name',
-    }
-  ],
+      component: NameConfig,
+      order: 10,
+    },
+  ] satisfies ItemSheetTab[],
   activeTab: 'description',
-}
+});
 
-const useItemSheetStore = (context: DocumentSheetRenderContext) => {
+const useItemSheetStore = (context: BaseItemSheetRenderContext) => {
   // Core state
   const state = reactive({
-    ...defaultState,
-    document: context.document as ItemDnd35e,
+    ...createDefaultState(),
+    document: context.document as ItemDnd35e<typeof context.document.type>,
     isEditable: context.editable,
+    renderOptions: context.renderOptions,
   });
   const setItemType = (itemType: string) => {
     state.itemType = itemType;
   };
   const getItemTypeDisplay = (fallback: string = 'D35E.Item') =>
     computed(() => game.i18n.localize(state.itemType || fallback));
+  const isFirstRender = computed(() => state.renderOptions.isFirstRender);
 
   // Tabs
   const tabGetters = {
     activeTabId: computed(() => state.activeTab),
-    tabs: computed(() => state.tabs),
+    tabs: computed(() => (state.tabs?? []).sort(
+      (a,b) => (a.order ?? 0) - (b.order ?? 0)
+    )),
     getIsTabOpen: (tabId: string) => computed(() => state.activeTab === tabId),
   };
   const tabActions = {
     activateTab: (tabId: string) => {
       state.activeTab = tabId;
+    },
+    replaceTabs: (newTabs: ItemSheetTab[]) => {
+      state.tabs = [
+        ...newTabs
+      ];
+    },
+    appendTabs: (newTabs: ItemSheetTab[]) => {
+      state.tabs = [
+        ...state.tabs,
+        ...newTabs
+      ];
     },
   };
 
@@ -76,6 +108,7 @@ const useItemSheetStore = (context: DocumentSheetRenderContext) => {
     setItemType,
     getItemTypeDisplay,
     isEditable: computed(() => state.isEditable),
+    isFirstRender,
     tabs: {
       tabGetters,
       tabActions,
@@ -87,5 +120,11 @@ const useItemSheetStore = (context: DocumentSheetRenderContext) => {
   };
 };
 
+interface ItemSheetStore extends ReturnType<typeof useItemSheetStore> {};
+
 export { useItemSheetStore };
-export interface ItemSheetStore extends ReturnType<typeof useItemSheetStore> {};
+
+export type {
+  ItemSheetTab,
+  ItemSheetStore,
+}

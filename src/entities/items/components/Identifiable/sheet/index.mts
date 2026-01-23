@@ -1,6 +1,7 @@
 import IdentifiableDescription from "./IdentifiableDescription.vue";
-import IdentifiableHeader from "./IdentifiableHeader.vue";
 import IdentifiableNameConfig from "./IdentifiableNameConfig.vue";
+import IdentifiableItemName from "./IdentifiableItemName.vue";
+import IdentifiableItemSheetVue from "./IdentifiableItemSheet.vue";
 
 import { IdentifiableItemSheet } from "./IdentifiableItemSheet.mjs";
 import { useIdentifiableStore } from "./IdentifiableItemStore.mjs";
@@ -11,9 +12,11 @@ import type { IdentifiableItemStore } from "./IdentifiableItemStore.mjs";
 export {
   useIdentifiableStore,
   IdentifiableDescription,
-  IdentifiableHeader,
+  IdentifiableItemName as IdentifiableHeader,
   IdentifiableNameConfig,
   IdentifiableItemSheet,
+  IdentifiableItemName,
+  IdentifiableItemSheetVue,
 };
 export type {
   IdentifiableItemSheetRenderContext,

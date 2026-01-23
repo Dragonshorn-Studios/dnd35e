@@ -1,11 +1,11 @@
-import ArtHeader from "./ArtHeader.vue";
-import DefaultNameHeader from "./DefaultNameHeader.vue";
+import NameArtWrapper from "./NameArtWrapper.vue";
+import DefaultHeaderName from "./DefaultHeaderName.vue";
 import ItemHeader from "./ItemHeader.vue";
 import ItemName from "./ItemName.vue";
 
 export {
-  ArtHeader,
-  DefaultNameHeader,
+  NameArtWrapper,
+  DefaultHeaderName,
   ItemHeader,
   ItemName,
 };

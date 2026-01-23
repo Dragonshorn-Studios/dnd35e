@@ -1,11 +1,13 @@
-// import { DefaultIdentifiableItem } from "@items/components/IdentifiableItem/index.mjs";
-import { applyIdentifiableRuntime, identifiableOverrides } from "@items/components/IdentifiableItem/index.mjs";
-import { MaterialSystemData } from "./index.mjs";
-import { ItemDnd35e } from "@items/baseItem/index.mjs";
-import { IdentifiableItem } from "@items/components/IdentifiableItem/IdentifiableItem.mjs";
+import { MaterialSystemData, MaterialSystemSource } from "./index.mjs";
+import { ItemDnd35e, ItemSourceDnd35e } from "@items/baseItem/index.mjs";
+import { applyIdentifiableRuntime, IdentifiableItem, IdentifiableItemLike, IdentifiableItemSourceProps, identifiableOverrides } from "@items/components/Identifiable/index.mjs";
 
 const materialItemType = 'material'; 
 type MaterialItemType = typeof materialItemType;
+
+type MaterialSource = Omit<ItemSourceDnd35e, "system">
+  & Omit<IdentifiableItemSourceProps, "system">
+  & { system: MaterialSystemSource; };
 
 class Material extends ItemDnd35e<MaterialItemType> {
   declare type: MaterialItemType;
@@ -14,11 +16,12 @@ class Material extends ItemDnd35e<MaterialItemType> {
 
   override prepareBaseData(): void {
     super.prepareBaseData();
-    applyIdentifiableRuntime(this);
+    applyIdentifiableRuntime<typeof this>(this);
   }
 
   override get displayName(): string {
-    return identifiableOverrides.displayName(this as MaterialType);
+    // Identifiable runtime getters are applied in prepareBaseData
+    return identifiableOverrides.displayName(this as unknown as IdentifiableItemLike);
   }
 
   // override _createFreshSystemData() {
@@ -35,28 +38,15 @@ class Material extends ItemDnd35e<MaterialItemType> {
   // }
 }
 
-interface MaterialType extends Material, Omit<
-  IdentifiableItem,
-  '_source'
-    | 'clone'
-    | 'collection'
-    | 'collections'
-    | 'createEmbeddedDocuments'
-    | 'delete'
-    | 'deleteDialog'
-    | 'deleteEmbeddedDocuments'
-    | 'effects'
-    | 'importFromJSON'
-    | 'setFlag'
-    | 'sheet'
-    
-> {};
+type MaterialType = Material & IdentifiableItem;
 
 export {
   Material,
   materialItemType,
 };
 
-export type { MaterialItemType,
-  MaterialType
+export type {
+  MaterialItemType,
+  MaterialType,
+  MaterialSource,
  };

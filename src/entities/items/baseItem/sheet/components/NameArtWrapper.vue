@@ -12,14 +12,13 @@
 <script lang="ts" setup>
   import ImageField from '@vc/Fields/ImageField.vue';
   import { inject } from 'vue';
-  import type { ItemSheetStore } from '../itemSheetStore.mts';
+  import type { ItemSheetStore } from '@items/baseItem/index.mjs';
 
   const {
-    document,
     documentGetters: {
       displayName,
     },
-  } = inject<ItemSheetStore>('itemSheetStore');
+  } = inject('itemSheetStore') as ItemSheetStore;
 </script>
 
 <style scoped lang="scss">

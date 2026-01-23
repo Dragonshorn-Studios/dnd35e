@@ -1,18 +1,21 @@
-import { hbsTemplatePath } from '@constants/paths.mjs';
-import { registerPartial } from '@helpers/display.mjs';
-import { weaponSummaryPartialName } from './weaponSheet.mjs';
-import './weaponSheet.scss';
+import WeaponSheetVue from './WeaponSheet.vue';
 
-const hbsPath = (file: string) => `${hbsTemplatePath}/entities/items/weapon/sheet/${file}`;
-
-const partials = [
-  weaponSummaryPartialName,
-];
-
-partials.forEach(partialName => registerPartial(hbsPath(`${partialName}.hbs`), partialName));
-
-// export { WeaponSheet } from './weaponSheet.mjs';
-export type {
-  // WeaponSheetConfig,
+import { useWeaponStore } from './WeaponStore.mjs';
+import { WeaponSheet } from './WeaponSheet.mjs';
+import type {
+  WeaponSheetConfig,
   WeaponSheetRenderContext,
-} from './weaponSheet.mjs';
+} from './WeaponSheet.mjs';
+import type { WeaponStore } from './WeaponStore.mjs';
+
+export {
+  WeaponSheet,
+  WeaponSheetVue,
+  useWeaponStore
+};
+
+export type {
+  WeaponSheetConfig,
+  WeaponSheetRenderContext,
+  WeaponStore,
+}

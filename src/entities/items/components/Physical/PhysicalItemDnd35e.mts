@@ -1,53 +1,66 @@
-import { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
-import { ItemDnd35e } from '@items/baseItem/index.mjs';
-// import { PhysicalSystemData } from './index.mjs';
-import { IdentifiableItem } from '../IdentifiableItem/IdentifiableItem.mjs';
-import { DamagableItem } from '../Damagable/DamagableItem.mjs';
+import { ItemDnd35e, ItemSourceDnd35e } from '@items/baseItem/index.mjs';
+import { applyDamagableRuntime, DamagableItemSourceProps } from '../Damagable/DamagableItem.mjs';
+import { applyIdentifiableRuntime, IdentifiableItemSourceProps, identifiableOverrides } from '../Identifiable/IdentifiableItem.mjs';
+import { PhysicalItemSystemData, PhysicalItemSystemSource } from './index.mjs';
+import { ItemType } from '@items/itemTypes.mjs';
 
-type PhysicalItem = IdentifiableItem & DamagableItem;
+type PhysicalItemSourceProps = {
+  system: PhysicalItemSystemSource;
+}
 
-// abstract class PhysicalItemDnd35e<TParent extends ActorDnd35e | null = ActorDnd35e | null> extends ItemDnd35e<TParent> {
-//   declare system: PhysicalSystemData;
+type PhysicalItemSource<TItemType extends ItemType = ItemType> = 
+  Omit<ItemSourceDnd35e<TItemType>, "system">
+    & IdentifiableItemSourceProps
+    & DamagableItemSourceProps
+    & PhysicalItemSourceProps;
 
-//   // when and where are we calling this?
-//   override prepareBaseData (): void {
-//     super.prepareBaseData();
+interface PhysicalItem {
+  system: PhysicalItemSystemData;
 
-//     // Ensure the system data is initialized
-//     //this.system = this.system || this._createFreshSystemData();
-//   }
+  get unidentifiedDisplayName(): string;
+  get identifiedDisplayName(): string;
+};
 
-  // override _createFreshSystemData (): PhysicalSystemData {
-  //   return {
-  //     ...super._createFreshSystemData(),
-  //     ...createIdentifiableSystemData(),
-  //     quantity: 1,
-  //     weight: 0,
-  //     isWeightlessInContainer: false,
-  //     isWeightlessWhenCarried: false,
-  //     isCarried: false,
-  //     size: 'tiny',
-  //     price: 0,
-  //     resalePrice: null,
-  //     brokenResalePrice: null,
-  //     isFullResalePrice: false,
-  //     containerId: null,
-  //   };
-  // }
+type PhysicalItemLike =
+  ItemDnd35e<ItemType> &
+  PhysicalItem;
 
-  // override get displayName (): string {
-  //   return getIdentifiableDisplayName(this);
-  // }
+const applyPhysicalRuntime = <T extends ItemDnd35e<ItemType>> (item: T) => {
+  applyIdentifiableRuntime(item);
+  applyDamagableRuntime(item);
 
-  // get identifiedDisplayName (): string {
-  //   return super.displayName;
-  // }
+};
 
-  // get unidentifiedDisplayName (): string {
-  //   return getUnidentifiedDisplayName(this);
-  // }
+const physicalOverrides = {
+  displayName: identifiableOverrides.displayName,
+};
+
+// override _createFreshSystemData (): PhysicalSystemData {
+//   return {
+//     ...super._createFreshSystemData(),
+//     ...createIdentifiableSystemData(),
+//     quantity: 1,
+//     weight: 0,
+//     isWeightlessInContainer: false,
+//     isWeightlessWhenCarried: false,
+//     isCarried: false,
+//     size: 'tiny',
+//     price: 0,
+//     resalePrice: null,
+//     brokenResalePrice: null,
+//     isFullResalePrice: false,
+//     containerId: null,
+//   };
 // }
 
-// export { PhysicalItemDnd35e };
+export {
+  applyPhysicalRuntime,
+  physicalOverrides,
+};
 
-export type { PhysicalItem };
+export type {
+  PhysicalItemSourceProps,
+  PhysicalItemSource,
+  PhysicalItem,
+  PhysicalItemLike,
+};

@@ -1,6 +1,6 @@
 import { requiredBooleanField, requiredNumberField } from "@helpers/fieldBuilders.mjs";
-import { ItemSystemModelBase } from "@items/baseItem/data/ItemSystemModelBase.mjs";
-import { applyIdentifiableSchema } from "@items/components/IdentifiableItem/data/applyIdentifiableSchema.mjs";
+import { ItemSystemModelBase } from "@items/baseItem/index.mjs";
+import { applyIdentifiableSchema } from "@items/components/Identifiable/index.mjs";
 
 class MaterialSystemModel extends ItemSystemModelBase {
   static override defineSchema () {

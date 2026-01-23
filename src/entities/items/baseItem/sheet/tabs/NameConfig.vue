@@ -1,6 +1,6 @@
 <template>
   <section
-    class="tab name-config"
+    class="name-config"
     v-show="isActive"
     data-group="primary"
     data-tab="name-config"

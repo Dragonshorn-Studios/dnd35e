@@ -1,29 +1,20 @@
-import { BasePhysicalItemSource } from '@items/physical/index.mjs';
-import type {
-  WeaponType,
-  WeaponSubtype,
-  WeaponBaseType,
-} from './constants.mjs';
 import {
   WEAPON_TYPES,
   WEAPON_SUBTYPES,
   WEAPOON_BASE_TYPES,
 } from './constants.mjs';
-import { WeaponSystemModel, type WeaponSystemSchema } from './WeaponSystemModel.mjs';
+import { WeaponSystemModel } from './WeaponSystemModel.mjs';
 
+import type {
+  WeaponType,
+  WeaponSubtype,
+  WeaponBaseType,
+} from './constants.mjs';
 import type {
   WeaponDamage,
   WeaponSystemSource,
-} from './WeaponSystemSource.mjs';
-import type {
   WeaponSystemData,
 } from './WeaponSystemData.mjs';
-
-type WeaponSource = BasePhysicalItemSource<'weapon', WeaponSystemSource>;
-
-export type {
-  WeaponSource,
-};
 
 export type {
   WeaponType,
@@ -32,7 +23,6 @@ export type {
   WeaponDamage,
   WeaponSystemSource,
   WeaponSystemData,
-  WeaponSystemSchema,
 };
 
 export {

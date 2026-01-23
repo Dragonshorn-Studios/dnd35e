@@ -1,16 +1,18 @@
-import { type DocumentSheetConfiguration, type DocumentSheetRenderOptions } from '@client/applications/api/document-sheet.mjs';
-import { WeaponDnd35e } from '../index.mjs';
-import { PhysicalItemSheet, PhysicalItemSheetRenderContext } from '@items/physical/index.mjs';
+import { Weapon, WeaponSheetVue } from '@items/weapon/index.mjs';
+import { VueSheetV2Mixin } from '@vc/VueSheetV2Mixin.mjs';
+import { ItemSheetDnd35e } from '@items/baseItem/index.mjs';
+import { PhysicalItemSheetRenderContext } from '@items/components/Physical/index.mjs';
+import { DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
 
-// type WeaponSheetConfig<TItem extends WeaponDnd35e = WeaponDnd35e> = PhysicalItemSheetConfig<TItem> & {
-//   // Add any additional properties needed for the physical item sheet context here
-// };
-
-interface WeaponSheetRenderContext extends PhysicalItemSheetRenderContext {
-  // partials: WeaponSheetPartialsList;
+type WeaponSheetConfig = DocumentSheetConfiguration<Weapon>;
+type WeaponSheetRenderContext = PhysicalItemSheetRenderContext & {
+  document: Weapon;
 };
 
-export const weaponSummaryPartialName = 'weaponSummary';
+class WeaponSheet extends VueSheetV2Mixin(ItemSheetDnd35e<Weapon>) {
+  static get vueComponent() {
+    return () => WeaponSheetVue;
+  }
 
 // class WeaponSheet extends foundry.applications.api.HandlebarsApplicationMixin(PhysicalItemSheet<WeaponDnd35e, WeaponSheetConfig>) {
 //   static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
@@ -35,10 +37,10 @@ export const weaponSummaryPartialName = 'weaponSummary';
 
 //     return baseContext;
 //   }
-// }
+}
 
-// export { WeaponSheet };
+export { WeaponSheet };
 export type {
-  // WeaponSheetConfig,
+  WeaponSheetConfig,
   WeaponSheetRenderContext,
 };

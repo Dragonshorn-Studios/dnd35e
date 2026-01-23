@@ -1,11 +1,10 @@
-import { useItemSheetStore } from "@items/baseItem/index.mjs";
+import { ItemSheetStore } from "@items/baseItem/index.mjs";
 import type { PhysicalItemSheetRenderContext } from "./index.mjs";
-import { useIdentifiableStore } from "@items/components/IdentifiableItem/index.mjs";
+import { useIdentifiableStore } from "@items/components/Identifiable/index.mjs";
 
-const usePhysicalItemStore = (context: PhysicalItemSheetRenderContext) => {
-  const baseStore = useItemSheetStore(context);
+const usePhysicalItemStore = (context: PhysicalItemSheetRenderContext, baseStore: ItemSheetStore) => {
   baseStore.setItemType('D35E.PhysicalItem');
-  const identifiableStore = useIdentifiableStore(context);
+  const identifiableStore = useIdentifiableStore(context, baseStore);
 
   // const state = reactive({
   //   document: context.document as PhysicalItemDnd35e,
@@ -13,7 +12,6 @@ const usePhysicalItemStore = (context: PhysicalItemSheetRenderContext) => {
   // const document = computed(() => state.document);
 
   return  {
-    ...baseStore,
     ...identifiableStore,
     //document,
   };

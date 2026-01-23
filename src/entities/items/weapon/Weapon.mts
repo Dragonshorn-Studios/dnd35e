@@ -2,12 +2,12 @@ import { ItemDnd35e } from '@items/baseItem/index.mjs';
 import { WeaponSystemData } from './index.mjs';
 import { applyPhysicalRuntime } from '@items/components/Physical/index.mjs';
 
-const weaponType = 'weapon'; 
-type WeaponType = typeof weaponType;
+const weaponItemType = 'weapon'; 
+type WeaponItemType = typeof weaponItemType;
 
-export class WeaponDnd35e extends ItemDnd35e<WeaponType> {
+class Weapon extends ItemDnd35e<WeaponItemType> {
   declare system: WeaponSystemData;
-  declare type: WeaponType;
+  declare type: WeaponItemType;
 
   override prepareBaseData(): void {
     super.prepareBaseData();
@@ -24,3 +24,10 @@ export class WeaponDnd35e extends ItemDnd35e<WeaponType> {
   //     : 'D35E.NotEquipped';
   // }
 }
+
+export {
+  Weapon,
+  weaponItemType,
+};
+
+export type { WeaponItemType };

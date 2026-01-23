@@ -1,6 +1,6 @@
 <template>
   <section
-    class="tab description"
+    class="description"
     v-show="isActiveTab"
     data-group="primary"
     data-tab="description"

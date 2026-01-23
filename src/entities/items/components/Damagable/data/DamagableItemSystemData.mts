@@ -1,5 +1,11 @@
-import { DamagableItemSystemSource } from "./index.mjs";
+interface DamagableItemSystemSource {
+    hp: {
+        value: number;
+        max: number;
+    };
+    hardness: number;
+};
 
 interface DamagableItemSystemData extends DamagableItemSystemSource {};
 
-export type { DamagableItemSystemData };
+export type { DamagableItemSystemData, DamagableItemSystemSource };

@@ -1,33 +1,57 @@
 <template>
-  <ArtHeader>
-    <slot name="header">
-      <ItemHeader />
-    </slot>
-  </ArtHeader>
+  <ItemHeader>
+    <NameArtWrapper>
+      <slot name="header-name">
+        <ItemName label-key="D35E.ItemName" :value="displayName" />
+      </slot>
+    </NameArtWrapper>
+    
+    <template name="header-status">
+      <slot name="status"></slot>
+    </template>
+    <template name="summary">
+      <slot name="header-summary"></slot>
+    </template>
+  </ItemHeader>
   <TabDivider />
-    <slot>
-      <Description />
-      <NameConfig />
-      <!-- Tabs go here -->
-    </slot>
+  <div
+    v-for="tab in tabs"
+    :key="tab.id"
+  >
+    <component :is="tab.component" />
+  </div>
+  <slot name="footer"></slot>
 </template>
 
 <script lang="ts" setup>
-  import { ArtHeader, ItemHeader } from './components/index.mjs';
-  import { Description, NameConfig } from './tabs/index.mjs';
+  import { NameArtWrapper, ItemHeader } from './components/index.mjs';
   import TabDivider from '@vc/TabDivider/TabDivider.vue';
-  import { provide } from 'vue';
-  import { useItemSheetStore } from './index.mjs';
-  import type { DocumentSheetRenderContext } from '@client/applications/api/document-sheet.mjs';
+  import { inject, provide } from 'vue';
+  import { BaseItemSheetRenderContext, ItemSheetStore, useItemSheetStore } from './index.mjs';
+  import ItemName from './components/ItemName.vue';
 
   const props = defineProps<{
-    context?: DocumentSheetRenderContext
+    context?: BaseItemSheetRenderContext
   }>();
 
-  if (!!props.context) {
-    const store = useItemSheetStore(props.context);
+  const store = (!!props.context
+    ? useItemSheetStore(props.context)
+    : inject('itemSheetStore')) as ItemSheetStore;
+
+  if (!!props.context) {    
     provide('itemSheetStore', store);
   }
+
+  const {
+    documentGetters: {
+      displayName,
+    },
+    tabs: {
+      tabGetters: {
+        tabs,
+      },
+    },
+  } = store;
 </script>
 
 <style lang="scss">

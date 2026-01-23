@@ -1,16 +1,23 @@
+import { ItemSourceDnd35e } from '@items/baseItem/index.mjs';
 import { DamagableItemSystemData } from './data/index.mjs';
+import { ItemType } from '@items/index.mjs';
 
-interface DamagableItem {
+interface DamagableItemSourceProps {
   system: DamagableItemSystemData;
-  // isBroken(): boolean;
+};
+
+type DamagableItemSource<TItemType extends ItemType = ItemType> = 
+  Omit<ItemSourceDnd35e<TItemType>, "system">
+    & DamagableItemSourceProps;
+
+const applyDamagableRuntime = (item: { system: any }) => {
 }
 
-// type DamagableItemSchema = {
-//     hp: fieldsType.SchemaField<{
-//         value: fieldsType.NumberField<number, number, true, false, true>;
-//         max: fieldsType.NumberField<number, number, true, false, true>;
-//     }>,
-//     hardness: fieldsType.NumberField<number, number, true, false, true>;
-// };
+export {
+  applyDamagableRuntime,
+};
 
-export type { DamagableItem };
+export type {
+  DamagableItemSourceProps,
+  DamagableItemSource,
+};

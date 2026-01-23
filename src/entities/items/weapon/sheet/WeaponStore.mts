@@ -1,18 +1,20 @@
-import { usePhysicalItemStore } from "@items/physical/sheet/PhysicalItemStore.mjs";
-import { WeaponDnd35e } from "../index.mjs";
+import { usePhysicalItemStore } from "@items/components/Physical/index.mjs";
+import { WeaponSheetRenderContext } from "../index.mjs";
 import { reactive } from "vue";
+import { useItemSheetStore } from "@items/baseItem/index.mjs";
 
-const useWeaponStore = (context: any) => {
-  const baseStore = usePhysicalItemStore(context);
+const useWeaponStore = (context: WeaponSheetRenderContext) => {
+  const baseStore = useItemSheetStore(context)
+  const physicalStore = usePhysicalItemStore(context, baseStore);
   baseStore.setItemType('TYPES.Item.weapon');
 
   const state = reactive({
-    document: context.document as WeaponDnd35e,
+    document: context.document,
   });
 
   return {
     ...baseStore,
-    ...state,
+    ...physicalStore,
   };
 };
 

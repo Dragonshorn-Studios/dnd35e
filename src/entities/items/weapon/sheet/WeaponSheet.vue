@@ -1,29 +1,18 @@
 <template>
-  <PhysicalItemSheet :context="context">
-    <template #header>
-    </template>
-    <slot>
-      <!-- Tabs go here -->
-      <IdentifiableDescription />
-      <IdentifiableNameConfig />
-      <MaterialDetails />
-    </slot>
+  <PhysicalItemSheet>
   </PhysicalItemSheet>
 </template>
 
 <script lang="ts" setup>
-  import PhysicalItemSheet from '../../physical/sheet/PhysicalItemSheet.vue';
-  import IdentifiableDescription from '../../components/IdentifiableItem/IdentifiableDescription.vue';
-  import IdentifiableNameConfig from '../../components/IdentifiableItem/IdentifiableNameConfig.vue';
-  import MaterialDetails from './MaterialDetails.vue';
+  import { PhysicalItemSheet } from '@items/components/Physical/index.mjs';
   import { provide } from 'vue';
-  import { useMaterialStore } from './materialStore.mjs';
+  import { useWeaponStore } from './index.mjs';
 
   const props = defineProps<{
     context: any;
   }>();
 
-  const store = useMaterialStore(props.context);
+  const store = useWeaponStore(props.context);
   provide('itemSheetStore', store);
 </script>
 

@@ -1,13 +1,14 @@
 <template>
-<div>
-  <!-- TODO: is this class needed?-->
-  <span class="item-status">{{equippedStatusLabel}}</span>
-</div>
+  <div>
+    <!-- TODO: is this class needed?-->
+    <span class="item-status">{{equippedStatusLabel}}</span>
+  </div>
 </template>
 
 <script lang="ts" setup>
 
-// where is this being used??
+// this belongs in equippable
+
 
 
 const props = defineProps<{

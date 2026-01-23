@@ -1,6 +1,6 @@
-import { IdentifiableItemSheetRenderContext } from "@items/IdentifiableItem/index.mjs";
-import { PhysicalItemDnd35e } from "../PhysicalItemDnd35e.mjs";
+import { IdentifiableItemSheetRenderContext } from "@items/components/Identifiable/index.mjs";
 import PhysicalItemSheet from "./PhysicalItemSheet.vue";
+import { PhysicalItem } from "../PhysicalItemDnd35e.mjs";
 
 export { usePhysicalItemStore } from "./PhysicalItemStore.mjs";
 export {
@@ -9,5 +9,5 @@ export {
 
 export type { PhysicalItemSheetStore } from "./PhysicalItemStore.mjs";
 export type PhysicalItemSheetRenderContext = IdentifiableItemSheetRenderContext & {
-  document: PhysicalItemDnd35e;
+  document: PhysicalItem;
 }

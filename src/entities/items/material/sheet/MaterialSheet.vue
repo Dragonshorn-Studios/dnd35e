@@ -1,21 +1,10 @@
 <template>
-  <BaseItemSheetVue>
-    <template #header>
-    </template>
-    <slot>
-      <!-- Tabs go here -->
-      <IdentifiableDescription />
-      <IdentifiableNameConfig />
-      <MaterialDetails />
-    </slot>
-  </BaseItemSheetVue>
+  <IdentifiableItemSheetVue />
 </template>
 <script lang="ts" setup>
-  import { IdentifiableDescription, IdentifiableNameConfig } from '@items/components/IdentifiableItem/index.mjs';
-  import MaterialDetails from './MaterialDetails.vue';
+  import { IdentifiableItemSheetVue } from '@items/components/Identifiable/index.mjs';
   import { provide } from 'vue';
-  import { useMaterialStore } from './materialStore.mts';
-import { BaseItemSheetVue } from '@items/baseItem/index.mjs';
+  import { useMaterialStore } from './index.mjs';
 
   const props = defineProps<{
     context: any;

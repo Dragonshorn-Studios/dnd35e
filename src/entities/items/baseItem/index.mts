@@ -1,29 +1,52 @@
-export {
+import {
   useItemSheetStore,
   ItemSheetDnd35e,
   BaseItemSheetVue,
-  ArtHeader,
-  DefaultNameHeader,
+  DefaultHeaderName,
   ItemHeader,
   ItemName,
   Description,
   NameConfig,
 } from './sheet/index.mjs';
-export {
+import {
   ItemDnd35e,
   ItemProxyDnd35e,
 } from './ItemDnd35e.mjs';
-export { ItemSystemModelBase } from './data/index.mjs';
+import { ItemSystemModelBase } from './data/index.mjs';
 
-export type {
-  ItemSystemSchema,
-  ItemFlagsDnd35e,
-  ItemFlagsSourceDnd35e,
-  ItemSystemData,
-  ItemSystemSource,
+import type {
   ItemSourceDnd35e,
+} from './ItemDnd35e.mjs';
+import type {
+  ItemSystemSource,
+  ItemSystemData,
 } from './data/index.mjs';
-export type {
+import type {
   ItemSheetStore,
   BaseItemSheetRenderContext,
+  ItemSheetTab,
 } from './sheet/index.mjs';
+
+
+export {
+  useItemSheetStore,
+  ItemSheetDnd35e,
+  BaseItemSheetVue,
+  DefaultHeaderName as DefaultNameHeader,
+  ItemHeader,
+  ItemName,
+  Description,
+  NameConfig,
+  ItemDnd35e,
+  ItemProxyDnd35e,
+  ItemSystemModelBase,
+};
+
+export type {
+  ItemSystemSource,
+  ItemSystemData,
+  ItemSheetStore,
+  BaseItemSheetRenderContext,
+  ItemSourceDnd35e,
+  ItemSheetTab,
+}

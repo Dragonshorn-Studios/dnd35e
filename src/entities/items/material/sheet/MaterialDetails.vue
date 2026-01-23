@@ -1,6 +1,6 @@
 <template>
   <section
-    class="tab flexcol material-details"
+    class="flexcol material-details"
     v-show="isActiveTab"
     data-group="primary"
     data-tab="material-details"
@@ -11,18 +11,18 @@
       <FormGroup
         label="D35E.Hardness"
         type="text"
-        :value="system.bonusHardness"
-        :editable="context.isEditable"
-        :onUpdate="v => update('system.bonusHardness', v)"
+        :value="bonusHardness"
+        :editable="isEditable"
+        :onUpdate="getFieldUpdater('system.bonusHardness')"
       />
 
       <!-- HP per Inch -->
       <FormGroup
         label="D35E.HpPerInch"
         type="text"
-        :value="system.bonusHpPerInch"
-        :editable="context.isEditable"
-        :onUpdate="v => update('system.bonusHpPerInch', v)"
+        :value="bonusHpPerInch"
+        :editable="isEditable"
+        :onUpdate="getFieldUpdater('system.bonusHpPerInch')"
       />
 
       <!-- Magic Equivalent -->
@@ -31,9 +31,9 @@
       <FormGroup
         label="D35E.MagicEquivalent"
         type="text"
-        :value="system.magicEquivalent"
-        :editable="context.isEditable"
-        :onUpdate="v => update('system.magicEquivalent', v)"
+        :value="magicEquivalent"
+        :editable="isEditable"
+        :onUpdate="getFieldUpdater('system.magicEquivalent')"
       />
 
       <span class="notes">
@@ -44,25 +44,25 @@
       <FormGroup
         label="D35E.MaterialAlchemicalSilverEquivalent"
         type="checkbox"
-        :value="system.isAlchemicalSilverEquivalent"
-        :editable="context.isEditable"
-        :onUpdate="v => update('system.isAlchemicalSilverEquivalent', v)"
+        :value="isAlchemicalSilverEquivalent"
+        :editable="isEditable"
+        :onUpdate="getFieldUpdater('system.isAlchemicalSilverEquivalent')"
       />
 
       <FormGroup
         label="D35E.MaterialAdamantineEquivalent"
         type="checkbox"
-        :value="system.isAdamantineEquivalent"
-        :editable="context.isEditable"
-        :onUpdate="v => update('system.isAdamantineEquivalent', v)"
+        :value="isAdamantineEquivalent"
+        :editable="isEditable"
+        :onUpdate="getFieldUpdater('system.isAdamantineEquivalent')"
       />
 
       <FormGroup
         label="D35E.MaterialColdIronEquivalent"
         type="checkbox"
-        :value="system.isColdIronEquivalent"
-        :editable="context.isEditable"
-        :onUpdate="v => update('system.isColdIronEquivalent', v)"
+        :value="isColdIronEquivalent"
+        :editable="isEditable"
+        :onUpdate="getFieldUpdater('system.isColdIronEquivalent')"
       />
 
       <!-- GM‑Only Section -->
@@ -74,9 +74,9 @@
           label="D35E.IsIdentifiable"
           true-label="D35E.Yes"
           false-label="D35E.No"
-          :checked="system.isIdentifiable"
-          :editable="context.isEditable"
-          @update="v => update('system.isIdentifiable', v)"
+          :checked="isIdentifiable"
+          :editable="isEditable"
+          @update="getFieldUpdater('system.isIdentifiable')"
         />
 
         <UniqueId />
@@ -88,26 +88,35 @@
 
 <script setup lang="ts">
   import { FormGroup, ToggleSwitch, UniqueId } from "@vc/Fields/index.mjs";
-  import { MaterialStore } from "./materialStore.mjs";
+  import type { MaterialStore } from "./index.mjs";
   import { inject } from "vue";
 
   const {
     tabs: {
       tabGetters: { getIsTabOpen },
     },
-    documentGetters
+    identifableGetters: {
+      isIdentifiable,
+    },
+    materialGetters: {
+      bonusHardness,
+      bonusHpPerInch,
+      magicEquivalent,
+      isAlchemicalSilverEquivalent,
+      isAdamantineEquivalent,
+      isColdIronEquivalent,
+    },
+    documentActions: {
+      getFieldUpdater,
+    },
+    isEditable,
   } = inject('itemSheetStore') as MaterialStore;
 
   const isActiveTab = getIsTabOpen('description');
-  const system = props.document.system;
   const userIsGM = game.user.isGM;
 
   function t(key: string) {
     return game.i18n.localize(key);
-  }
-
-  async function update(path: string, value: any) {
-    await props.document.update({ [path]: value });
   }
 </script>
 

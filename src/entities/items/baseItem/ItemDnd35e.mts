@@ -1,14 +1,15 @@
 import { replaceDataAttribute } from '@helpers/formulae/index.mjs';
 import { LogHelper } from '@helpers/logHelper.mjs';
-import { ITEM_TYPES } from '@items/itemTypes.mjs';
+import { ITEM_TYPES } from '@items/index.mjs';
 import type { ActorDnd35e } from '@actors/baseActor/ActorDnd35e.mjs';
 import type { DocumentConstructionContext } from '@common/_types.mjs';
-import type { ItemType } from '@items/itemTypes.mjs';
-import type { ItemFlagsDnd35e, ItemSourceDnd35e, ItemSystemData } from './index.mjs';
+import type { ItemType } from '@items/index.mjs';
+import type { ItemSystemData, ItemSystemSource } from './index.mjs';
+
+type ItemSourceDnd35e<TItemType extends ItemType = ItemType> = foundry.documents.ItemSource<TItemType, ItemSystemSource>;
 
 class ItemDnd35e<TItemType extends ItemType> extends foundry.documents.Item {
   declare type: TItemType;
-  declare flags: ItemFlagsDnd35e;
   declare system: ItemSystemData;
   declare _source: ItemSourceDnd35e<TItemType>;
 
@@ -31,10 +32,14 @@ class ItemDnd35e<TItemType extends ItemType> extends foundry.documents.Item {
       ?? 'D35E.Item';
   }
 
-  get displayName (): string {
+  get _displayName (): string {
     return this.system.isNameFromFormula
       ? replaceDataAttribute(this.system.nameFormula, this)
       : this.name;
+  }
+
+  get displayName (): string {
+    return this._displayName;
   }
 }
 
@@ -54,7 +59,6 @@ const ItemProxyDnd35e = new Proxy(ItemDnd35e, {
   },
 });
 
-// type ItemDnd35eInstance = InstanceType<typeof ItemDnd35e>;
-// type AnyItemDnD35e = ItemDnd35e<ItemType, ActorDnd35e | null>;
-
 export { ItemDnd35e, ItemProxyDnd35e };
+
+export type { ItemSourceDnd35e };

@@ -1,8 +1,6 @@
 
-import type { DamagableItemSystemSource } from './DamagableItemSystemSource.mjs';
-import type { DamagableItemSystemData } from './DamagableItemSystemData.mjs';
+import type { DamagableItemSystemSource, DamagableItemSystemData } from './DamagableItemSystemData.mjs';
 
-import { applyDamagableRuntime } from './applyDamagableRuntime.mjs';
 import { applyDamagableSchema } from './applyDamagableSchema.mjs';
 
 
@@ -12,6 +10,5 @@ export type {
 };
 
 export {
-  applyDamagableRuntime,
   applyDamagableSchema,
 };

@@ -1,19 +1,20 @@
 import { ItemSheetDnd35e} from '@items/baseItem/index.mjs';
-import { MaterialDnd35e } from '../material.mjs';
 import { VueSheetV2Mixin } from '@vc/VueSheetV2Mixin.mjs';
-import MaterialSheetVue from './MaterialSheet.vue';
-import { IdentifiableItemSheetRenderContext } from '@items/components/IdentifiableItem/index.mjs';
-import { DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
+import { MaterialSheetVue } from './index.mjs';
+import type { DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
+import type { Material } from '@items/material/index.mjs';
+import type { IdentifiableItemSheetRenderContext } from '@items/components/Identifiable/index.mjs';
 
-type MaterialSheetConfig = DocumentSheetConfiguration<MaterialDnd35e>;
+type MaterialSheetConfig = DocumentSheetConfiguration<Material>;
 type MaterialSheetRenderContext = IdentifiableItemSheetRenderContext & {
-  
+  document: Material;
 };
 
-const materialDetailsPartialName = 'materialDetails';
 
-class MaterialSheet extends VueSheetV2Mixin(ItemSheetDnd35e<MaterialDnd35e>) {
-  static vueComponent = MaterialSheetVue;
+class MaterialSheet extends VueSheetV2Mixin(ItemSheetDnd35e<Material>) {
+  static get vueComponent() {
+    return MaterialSheetVue;
+  }
   
   // static override DEFAULT_OPTIONS: DeepPartial<MaterialSheetConfig> = {
   //   id: 'dnd35e-material-sheet', // this probably should be unique
@@ -31,7 +32,6 @@ class MaterialSheet extends VueSheetV2Mixin(ItemSheetDnd35e<MaterialDnd35e>) {
 
 export {
   MaterialSheet,
-  materialDetailsPartialName,
 };
 
 export type {

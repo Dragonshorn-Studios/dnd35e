@@ -1,5 +1,3 @@
-import { ItemSystemSource } from "@items/baseItem/index.mjs";
-
 interface IdentifiableItemSystemSource {
     isIdentifiable: boolean;
     unidentifiedInfo?: {
@@ -12,4 +10,6 @@ interface IdentifiableItemSystemSource {
     };
 };
 
-export { IdentifiableItemSystemSource };
+interface IdentifiableItemSystemData extends IdentifiableItemSystemSource {};
+
+export type { IdentifiableItemSystemSource, IdentifiableItemSystemData };

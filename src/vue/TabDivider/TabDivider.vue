@@ -6,26 +6,27 @@
     <a v-for="tab in tabs"
       :key="tab.id"
       :data-tab="tab.id"
-      :class="tab.cssClass"
       :data-tooltip="tab.tooltip"
       :aria-selected="tab.id === activeTabId ? 'true' : 'false'"
+      class="tab"
       @click.prevent="onTabClick"
     >
       <i v-if="tab.icon" :class="tab.icon" inert></i>
-      <span v-if="tab.label">{{ $t(tab.label) }}</span>
+      <span v-if="tab.label">{{ t(tab.label) }}</span>
     </a>
   </nav>
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps} from 'vue';
+import { ItemSheetStore } from '@items/baseItem/index.mjs';
+import { computed, inject } from 'vue';
 
 const {
   tabs: {
     tabGetters: { tabs, activeTabId },
     tabActions: { activateTab },
   },
-} = inject<ItemSheetStore>('itemSheetStore');
+} = inject('itemSheetStore') as ItemSheetStore;
 
 const { verticalTabs } = defineProps<{
   verticalTabs?: boolean;
@@ -47,4 +48,11 @@ function onTabClick(event: MouseEvent) {
     activateTab(tabId);
   }
 }
+
+function t(key: string) {
+  return game.i18n.localize(key);
+}
 </script>
+
+<style lang="scss" scoped>
+</style>

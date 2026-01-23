@@ -1,11 +1,28 @@
-import type { ItemSheetStore } from "@items/baseItem/index.mjs";
+import type { ItemSheetStore, ItemSheetTab } from "@items/baseItem/index.mjs";
 import { computed, reactive } from "vue";
-import type { IdentifiableItemSheetRenderContext } from "./index.mjs";
+import { IdentifiableNameConfig, type IdentifiableItemSheetRenderContext } from "./index.mjs";
+import IdentifiableDescription from "./IdentifiableDescription.vue";
 
-const useIdentifiableStore = (context: IdentifiableItemSheetRenderContext) => {
+const createIdentifiableTabs = (): ItemSheetTab[] => [
+    {
+      id: 'description',
+      label: 'D35E.Description',
+      component: IdentifiableDescription,
+      order: 10,
+    },
+    {
+      id: 'name-config',
+      label: 'D35E.Name',
+      component: IdentifiableNameConfig,
+      order: 10,
+    },
+];
+
+const useIdentifiableStore = (context: IdentifiableItemSheetRenderContext, baseStore: ItemSheetStore) => {
   const state = reactive({
     document: context.document,
   });
+  baseStore.tabs.tabActions.replaceTabs(createIdentifiableTabs());
 
   // UnidentifiedInfoMode
   const showBoth = computed(() => (game.user.isGM || context.editable) && state.document.system.isIdentifiable);
