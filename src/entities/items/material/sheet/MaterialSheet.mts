@@ -16,16 +16,16 @@ class MaterialSheet extends VueSheetV2Mixin(ItemSheetDnd35e<Material>) {
     return MaterialSheetVue;
   }
   
-  // static override DEFAULT_OPTIONS: DeepPartial<MaterialSheetConfig> = {
-  //   id: 'dnd35e-material-sheet', // this probably should be unique
-  //   tag: 'form',
-  //   form: {
-  //     submitOnChange: true,
-  //   },
-  //   window: {
-  //     resizable: true,
-  //   },
-  // }
+  static override DEFAULT_OPTIONS = {
+    id: 'dnd35e-material-sheet', // this probably should be unique
+    tag: 'form',
+    form: {
+      submitOnChange: true,
+    },
+    window: {
+      resizable: true,
+    },
+  }
 
   //declare showUnIdentifiedDescriptionEditor: boolean;
 }
