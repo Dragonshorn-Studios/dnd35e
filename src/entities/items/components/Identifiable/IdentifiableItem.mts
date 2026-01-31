@@ -22,8 +22,10 @@ type IdentifiableItemLike =
   ItemDnd35e<ItemType> &
   IdentifiableItem;
 
-const applyIdentifiableRuntime = <T extends ItemDnd35e<ItemType>> (item: T) => {
-  Object.defineProperties(item, {
+const applyIdentifiablePrototype = <T extends typeof ItemDnd35e<ItemType>> (item: T) => {
+  if ((item as any).__isIdentifiedApplied) return;
+
+  Object.defineProperties(item.prototype, {
     unidentifiedDisplayName: {
       get() {
         const {
@@ -41,10 +43,12 @@ const applyIdentifiableRuntime = <T extends ItemDnd35e<ItemType>> (item: T) => {
     },
     identifiedDisplayName: {
       get() {
-        return item.displayName;
+        return this._displayName;
       }
-    }
+    },
   });
+
+  (item as any).__isIdentifiedApplied = true;
 };
 
 const identifiableOverrides = {
@@ -64,7 +68,7 @@ const identifiableOverrides = {
 };
 
 export {
-  applyIdentifiableRuntime,
+  applyIdentifiablePrototype,
   identifiableOverrides,
 };
 

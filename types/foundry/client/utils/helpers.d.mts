@@ -132,3 +132,5 @@ export function timeSince(timeStamp: Date | string): string;
  * An HTMLCollection is returned if the provided string contains multiple top-level elements.
  */
 export function parseHTML<THTML extends HTMLCollection | HTMLElement>(htmlString: string): THTML;
+
+export function isSubclass(cls: Function, parent: Function): boolean;

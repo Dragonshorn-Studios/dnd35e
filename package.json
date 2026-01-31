@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "vite build",
-    "dev": "vite"
+    "build": "vite build --mode production",
+    "watch": "vite build --watch --mode development"
   },
   "keywords": [],
   "author": "",

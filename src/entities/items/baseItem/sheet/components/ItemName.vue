@@ -2,7 +2,7 @@
     <h4>
         {{labelKey}}:<br />
     </h4>
-    <h3 class="charname">
+    <h3 class="item-name">
         {{value}}
     </h3>
 </template>

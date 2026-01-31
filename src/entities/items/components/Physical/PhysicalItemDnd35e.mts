@@ -1,6 +1,6 @@
 import { ItemDnd35e, ItemSourceDnd35e } from '@items/baseItem/index.mjs';
 import { applyDamagableRuntime, DamagableItemSourceProps } from '../Damagable/DamagableItem.mjs';
-import { applyIdentifiableRuntime, IdentifiableItemSourceProps, identifiableOverrides } from '../Identifiable/IdentifiableItem.mjs';
+import { applyIdentifiablePrototype, IdentifiableItemSourceProps, identifiableOverrides } from '../Identifiable/IdentifiableItem.mjs';
 import { PhysicalItemSystemData, PhysicalItemSystemSource } from './index.mjs';
 import { ItemType } from '@items/itemTypes.mjs';
 
@@ -25,9 +25,9 @@ type PhysicalItemLike =
   ItemDnd35e<ItemType> &
   PhysicalItem;
 
-const applyPhysicalRuntime = <T extends ItemDnd35e<ItemType>> (item: T) => {
-  applyIdentifiableRuntime(item);
-  applyDamagableRuntime(item);
+const applyPhysicalPrototype = <T extends typeof ItemDnd35e<ItemType>> (item: T) => {
+  applyIdentifiablePrototype(item);
+  // applyDamagableRuntime(item);
 
 };
 
@@ -54,7 +54,7 @@ const physicalOverrides = {
 // }
 
 export {
-  applyPhysicalRuntime,
+  applyPhysicalPrototype,
   physicalOverrides,
 };
 

@@ -4,6 +4,7 @@ import { MaterialSheetVue } from './index.mjs';
 import type { DocumentSheetConfiguration } from '@client/applications/api/document-sheet.mjs';
 import type { Material } from '@items/material/index.mjs';
 import type { IdentifiableItemSheetRenderContext } from '@items/components/Identifiable/index.mjs';
+import { VueApplicationConfiguration } from '@vc/VueApplication.mjs';
 
 type MaterialSheetConfig = DocumentSheetConfiguration<Material>;
 type MaterialSheetRenderContext = IdentifiableItemSheetRenderContext & {
@@ -11,20 +12,22 @@ type MaterialSheetRenderContext = IdentifiableItemSheetRenderContext & {
 };
 
 
-class MaterialSheet extends VueSheetV2Mixin(ItemSheetDnd35e<Material>) {
-  static get vueComponent() {
+class MaterialSheet extends ItemSheetDnd35e<Material> {
+  get vueComponent() {
     return MaterialSheetVue;
   }
   
-  static override DEFAULT_OPTIONS = {
-    id: 'dnd35e-material-sheet', // this probably should be unique
-    tag: 'form',
-    form: {
-      submitOnChange: true,
-    },
-    window: {
-      resizable: true,
-    },
+  static override get DEFAULT_OPTIONS(): DeepPartial<VueApplicationConfiguration> {
+    return {
+      id: 'dnd35e-material-sheet', // this probably should be unique
+      tag: 'form',
+      form: {
+        submitOnChange: true,
+      },
+      window: {
+        resizable: true,
+      },
+    };
   }
 
   //declare showUnIdentifiedDescriptionEditor: boolean;

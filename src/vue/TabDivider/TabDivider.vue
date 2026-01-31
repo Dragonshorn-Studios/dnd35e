@@ -8,7 +8,6 @@
       :data-tab="tab.id"
       :data-tooltip="tab.tooltip"
       :aria-selected="tab.id === activeTabId ? 'true' : 'false'"
-      class="tab"
       @click.prevent="onTabClick"
     >
       <i v-if="tab.icon" :class="tab.icon" inert></i>

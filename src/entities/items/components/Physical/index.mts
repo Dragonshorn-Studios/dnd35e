@@ -1,5 +1,5 @@
 import {
-  applyPhysicalRuntime,
+  applyPhysicalPrototype,
   physicalOverrides,
 } from './PhysicalItemDnd35e.mjs';
 import {
@@ -28,7 +28,7 @@ import type {
 } from './sheet/index.mjs';
 
 export {
-  applyPhysicalRuntime,
+  applyPhysicalPrototype,
   physicalOverrides,
   PhysicalItemSheet,
   applyPhysicalSchema,

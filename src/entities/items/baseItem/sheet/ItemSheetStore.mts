@@ -1,7 +1,8 @@
-import { Component, computed, reactive } from "vue"
-import type { BaseItemSheetRenderContext, ItemDnd35e, ItemSystemData } from "../index.mjs";
+import { Component, computed, markRaw, reactive, ref, shallowRef, toRaw, toRef, triggerRef, unref } from "vue"
+import type { BaseItemSheetRenderContext, ItemDnd35e } from "../index.mjs";
 import { Description } from "./index.mjs";
 import NameConfig from "./tabs/NameConfig.vue";
+import { ItemType } from "@items/itemTypes.mjs";
 
 interface ItemSheetTab {
   id: string;
@@ -12,11 +13,15 @@ interface ItemSheetTab {
   tooltip?: string
 };
 
-const createDefaultState = (): {
+interface baseItemSheetState {
   itemType: string;
   tabs: ItemSheetTab[];
   activeTab: string;
-} => ({
+};
+
+interface ItemSheetState extends baseItemSheetState {};
+
+const createDefaultState = (): baseItemSheetState => ({
   itemType: 'D35E.Item',
   tabs: [
     {
@@ -35,20 +40,20 @@ const createDefaultState = (): {
   activeTab: 'description',
 });
 
-const useItemSheetStore = (context: BaseItemSheetRenderContext) => {
+const useItemSheetStore = <TDocument extends ItemDnd35e> (context: BaseItemSheetRenderContext) => {
   // Core state
+  const document = ref(context.document);
   const state = reactive({
     ...createDefaultState(),
-    document: context.document as ItemDnd35e<typeof context.document.type>,
+    // document: 
     isEditable: context.editable,
-    renderOptions: context.renderOptions,
+    renderOptions: unref(context.renderOptions),
   });
   const setItemType = (itemType: string) => {
     state.itemType = itemType;
   };
   const getItemTypeDisplay = (fallback: string = 'D35E.Item') =>
     computed(() => game.i18n.localize(state.itemType || fallback));
-  const isFirstRender = computed(() => state.renderOptions.isFirstRender);
 
   // Tabs
   const tabGetters = {
@@ -76,29 +81,36 @@ const useItemSheetStore = (context: BaseItemSheetRenderContext) => {
   };
 
   // Document
-  const document = computed(() => state.document);
   const documentGetters = {
-    getProperty: <T,>(path: string) => computed(() => foundry.utils.getProperty(state.document, path) as T),
+    getProperty: <T,>(path: string) => computed(() => foundry.utils.getProperty(document.value, path) as T),
 
-    name: computed(() => state.document.name || ""),
-    displayName: computed(() => state.document.displayName || ""),
-    isNameFromFormula: computed(() => state.document.system.isNameFromFormula || false),
-    nameFormula: computed(() => state.document.system.nameFormula || ""),
+    name: computed(() => document.value.name || ""),
+    displayName: computed(() => document.value.displayName || ""),
+    isNameFromFormula: computed(() => document.value.system.isNameFromFormula || false),
+    nameFormula: computed(() => document.value.system.nameFormula || ""),
     
-    img: computed(() => state.document.img || ""),
+    img: computed(() => document.value.img || ""),
 
-    uniqueId: computed(() => state.document.system.uniqueId || ""),
+    uniqueId: computed(() => document.value.system.uniqueId || ""),
 
-    description: computed(() => state.document.system.description.value || ""),
+    description: computed(() => document.value.system.description.value || ""),
   };
-  const updateDocument = async (data: Partial<ItemSystemData>) => {
-    return await state.document.update(data);
+  const updateDocument = async (data: Partial<TDocument>) => {
+    const updatedDoc = await document.value.update(data) as TDocument;
+    if (updatedDoc) {
+      document.value = updatedDoc;
+      // Since the object was mutated Vue refuses to see any changes;
+      // TODO: write something smarter so we only have to refresh the parts of store that changed
+      triggerRef(document);
+      return true;
+    }
+    return false;
   };
   const documentActions = {
     updateDocument,
     getFieldUpdater: (path: string) => {
       return async (value: any) => {
-        return await updateDocument({ [path]: value } as Partial<ItemSystemData>);
+        return await updateDocument({ [path]: value } as Partial<TDocument>);
       };
     },
   };
@@ -108,19 +120,18 @@ const useItemSheetStore = (context: BaseItemSheetRenderContext) => {
     setItemType,
     getItemTypeDisplay,
     isEditable: computed(() => state.isEditable),
-    isFirstRender,
+    isFirstRender: computed(() => state.renderOptions.isFirstRender),
     tabs: {
       tabGetters,
       tabActions,
     },
-    // TODO: Fix: Rich Text Editor requires direct access to the document
-    _document: document.value,
+    _document: document,
     documentGetters,
     documentActions,
   };
 };
 
-interface ItemSheetStore extends ReturnType<typeof useItemSheetStore> {};
+interface ItemSheetStore<TDocument extends ItemDnd35e<ItemType> = ItemDnd35e<ItemType>> extends ReturnType<typeof useItemSheetStore<TDocument>> {};
 
 export { useItemSheetStore };
 

@@ -22,7 +22,7 @@
 <script setup lang="ts">
   import { computed, inject } from "vue";
   import { ItemName } from "@items/baseItem/index.mjs";
-  import type { IdentifiableItemStore } from "./index.mjs";
+  import type { IdentifiableItemStore, IdentifiableItemLike } from "@items/components/Identifiable/index.mjs";
 
   const {
     unidentifiedInfoMode: {
@@ -38,13 +38,13 @@
       identifiedDisplayName,
       unidentifiedDisplayName,
     },
-  } = inject('itemSheetStore') as IdentifiableItemStore;
+  } = inject('itemSheetStore') as IdentifiableItemStore<IdentifiableItemLike>;
 
   const identifiedValue = computed(() => showBoth
     ? identifiedDisplayName
     : displayName
   );
-  const identifiedLabelKey = computed(() => showBoth
+  const identifiedLabelKey = computed(() => isIdentifiable && showBoth
     ? "D35E.IdentifiedName"
     : "D35E.ItemName"
   );

@@ -3,7 +3,7 @@
     class="flexcol material-details"
     v-show="isActiveTab"
     data-group="primary"
-    data-tab="material-details"
+    :data-tab="tabName"
   >
     <div class="form-container">
 
@@ -68,17 +68,7 @@
       <!-- GM‑Only Section -->
       <template v-if="userIsGM">
         <h3 class="form-header">{{ t("D35E.SystemProperties") }}</h3>
-
-        <ToggleSwitch
-          name="system.isIdentifiable"
-          label="D35E.IsIdentifiable"
-          true-label="D35E.Yes"
-          false-label="D35E.No"
-          :checked="isIdentifiable"
-          :editable="isEditable"
-          @update="getFieldUpdater('system.isIdentifiable')"
-        />
-
+        <IdentifiableConfig />
         <UniqueId />
       </template>
 
@@ -87,7 +77,8 @@
 </template>
 
 <script setup lang="ts">
-  import { FormGroup, ToggleSwitch, UniqueId } from "@vc/Fields/index.mjs";
+  import { FormGroup, UniqueId } from "@vc/Fields/index.mjs";
+  import { IdentifiableConfig } from '@items/components/Identifiable/index.mjs';
   import type { MaterialStore } from "./index.mjs";
   import { inject } from "vue";
 
@@ -112,12 +103,17 @@
     isEditable,
   } = inject('itemSheetStore') as MaterialStore;
 
-  const isActiveTab = getIsTabOpen('description');
+  const tabName = 'material-details';
+  const isActiveTab = getIsTabOpen(tabName);
   const userIsGM = game.user.isGM;
 
   function t(key: string) {
     return game.i18n.localize(key);
   }
+
+  const test = (value:boolean) => {
+    getFieldUpdater('system.isIdentifiable')(value);
+  };
 </script>
 
 <style scoped>

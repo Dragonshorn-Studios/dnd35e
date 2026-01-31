@@ -3,15 +3,15 @@ import {
   IdentifiableHeader,
   IdentifiableNameConfig,
   useIdentifiableStore,
-  IdentifiableItemSheet,
   IdentifiableItemName,
   IdentifiableItemSheetVue,
+  IdentifiableConfig,
 } from './sheet/index.mjs';
 import {
   applyIdentifiableSchema,
 } from './data/index.mjs';
 import {
-  applyIdentifiableRuntime,
+  applyIdentifiablePrototype,
   identifiableOverrides,
 } from './IdentifiableItem.mjs';
 
@@ -43,7 +43,7 @@ export type {
 };
 export {
   applyIdentifiableSchema,
-  applyIdentifiableRuntime,
+  applyIdentifiablePrototype,
   identifiableOverrides,
   useIdentifiableStore,
   IdentifiableDescription,
@@ -51,8 +51,8 @@ export {
   IdentifiableNameConfig,
   // IdentifiableItemMixin,
   // IdentifiableItemSystemModel,
-  IdentifiableItemSheet,
   // DefaultIdentifiableItem,
   IdentifiableItemName,
   IdentifiableItemSheetVue,
+  IdentifiableConfig,
 };

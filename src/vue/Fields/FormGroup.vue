@@ -12,13 +12,14 @@
     />
 
     <!-- Checkbox -->
-    <input
-      v-else-if="type === 'checkbox'"
-      type="checkbox"
-      :checked="value"
-      :disabled="disabled || !editable"
-      @change="onChange(($event.target as HTMLInputElement).checked)"
-    />
+    <div v-else-if="type === 'checkbox'">
+      <input
+        type="checkbox"
+        :checked="value"
+        :disabled="disabled || !editable"
+        @change="onChange(($event.target as HTMLInputElement).checked)"
+      />
+    </div>
   </div>
 </template>
 

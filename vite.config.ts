@@ -94,7 +94,7 @@ function bundleLangFiles() {
   };
 }
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@vc": path.resolve(__dirname, "src/vue"),
@@ -120,6 +120,7 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     sourcemap: true,
+    minify: mode === 'production',
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'src/main.mts'),
@@ -149,7 +150,10 @@ export default defineConfig({
           return '[name][extname]';
         }
       }
-    }
+    },
+    watch: {
+      clearScreen: false,
+    },
   },
   css: {
     devSourcemap: true,
@@ -163,4 +167,4 @@ export default defineConfig({
       }
     }
   }
-});
+}));

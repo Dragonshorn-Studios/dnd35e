@@ -1,6 +1,8 @@
 <template>
   <div class="name-and-art">
-    <ImageField field="img" :title="displayName" />
+    <div class="item-art-container">
+      <ImageField field="img" :title="displayName" class="item-art" />
+    </div>
     <div class="item-name-container">
       <slot>
         <!-- Name field goes here -->

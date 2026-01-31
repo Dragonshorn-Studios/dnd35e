@@ -17,6 +17,7 @@
   import { computed, inject } from "vue";
   import { RichTextEditor } from "@vc/Fields/index.mjs";
   import type { IdentifiableItemStore } from "./index.mjs";
+import { IdentifiableItemLike } from "../index.mjs";
 
   const {
     tabs: {
@@ -27,7 +28,7 @@
       showIdentified,
       showUnidentified,
     },
-  } = inject('itemSheetStore') as IdentifiableItemStore;
+  } = inject('itemSheetStore') as IdentifiableItemStore<IdentifiableItemLike>;
   const isActiveTab = getIsTabOpen('description');
 
   const identifiedLabel = computed(() => showBoth

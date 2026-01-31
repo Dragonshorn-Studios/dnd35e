@@ -1,6 +1,7 @@
 <template>
   <img 
     class="item-art"
+    :class="props.class"
     :src="currentImg"
     :title="props.title"
     @click="editImage"
@@ -14,6 +15,7 @@
   const props = defineProps<{
     field: string;       // e.g. "system.description"
     title?: string;
+    class?: string;
   }>();
 
   const {
@@ -43,3 +45,6 @@
     fp.render();
   }
 </script>
+
+<style lang="scss" scoped>
+</style>

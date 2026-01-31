@@ -1,6 +1,6 @@
 import { ItemDnd35e } from '@items/baseItem/index.mjs';
 import { WeaponSystemData } from './index.mjs';
-import { applyPhysicalRuntime } from '@items/components/Physical/index.mjs';
+import { applyPhysicalPrototype } from '@items/components/Physical/index.mjs';
 
 const weaponItemType = 'weapon'; 
 type WeaponItemType = typeof weaponItemType;
@@ -11,7 +11,6 @@ class Weapon extends ItemDnd35e<WeaponItemType> {
 
   override prepareBaseData(): void {
     super.prepareBaseData();
-    applyPhysicalRuntime(this);
   }
   // This needs to go to equippable
   // get equippedStatusLabel() {
@@ -24,6 +23,8 @@ class Weapon extends ItemDnd35e<WeaponItemType> {
   //     : 'D35E.NotEquipped';
   // }
 }
+
+applyPhysicalPrototype(Weapon);
 
 export {
   Weapon,

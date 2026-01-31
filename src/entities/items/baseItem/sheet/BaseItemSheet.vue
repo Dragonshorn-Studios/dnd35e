@@ -17,6 +17,7 @@
   <div
     v-for="tab in tabs"
     :key="tab.id"
+    class="sheet-tab"
   >
     <component :is="tab.component" />
   </div>
@@ -34,9 +35,9 @@
     context?: BaseItemSheetRenderContext
   }>();
 
-  const store = (!!props.context
+  const store = !!props.context
     ? useItemSheetStore(props.context)
-    : inject('itemSheetStore')) as ItemSheetStore;
+    : inject('itemSheetStore');
 
   if (!!props.context) {    
     provide('itemSheetStore', store);
@@ -51,11 +52,11 @@
         tabs,
       },
     },
-  } = store;
+  } = store as ItemSheetStore;
 </script>
 
 <style lang="scss">
-  .tab {
+  .sheet-tab {
     padding: 0.5rem 0.5rem 0 0;
     overflow: auto;
   }

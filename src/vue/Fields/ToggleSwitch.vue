@@ -13,7 +13,7 @@
           :name="name"
           :checked="checked"
           :disabled="disabled || !editable"
-          @change="onToggle($event.target.checked)"
+          @change="onToggle"
         />
         <span class="slider"></span>
       </div>
@@ -43,8 +43,9 @@ function t(key: string) {
   return game.i18n.localize(key);
 }
 
-function onToggle(value: boolean) {
-  emit("update", value);
+function onToggle(event: Event) {
+  const target = event.target as HTMLInputElement
+  emit("update", target.checked);
 }
 </script>
 

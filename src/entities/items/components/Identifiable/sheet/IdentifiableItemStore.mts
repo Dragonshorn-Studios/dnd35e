@@ -1,7 +1,7 @@
 import type { ItemSheetStore, ItemSheetTab } from "@items/baseItem/index.mjs";
-import { computed, reactive } from "vue";
-import { IdentifiableNameConfig, type IdentifiableItemSheetRenderContext } from "./index.mjs";
-import IdentifiableDescription from "./IdentifiableDescription.vue";
+import { computed, Ref } from "vue";
+import { IdentifiableNameConfig, IdentifiableDescription } from "@items/components/Identifiable/index.mjs";
+import type { IdentifiableItemSheetRenderContext, IdentifiableItemLike } from "@items/components/Identifiable/index.mjs";
 
 const createIdentifiableTabs = (): ItemSheetTab[] => [
     {
@@ -18,31 +18,30 @@ const createIdentifiableTabs = (): ItemSheetTab[] => [
     },
 ];
 
-const useIdentifiableStore = (context: IdentifiableItemSheetRenderContext, baseStore: ItemSheetStore) => {
-  const state = reactive({
-    document: context.document,
-  });
+const useIdentifiableStore = <TDocument extends IdentifiableItemLike> (context: IdentifiableItemSheetRenderContext, baseStore: ItemSheetStore<TDocument>) => {
   baseStore.tabs.tabActions.replaceTabs(createIdentifiableTabs());
 
+  const document = baseStore._document as unknown as Ref<IdentifiableItemLike>;
+
   // UnidentifiedInfoMode
-  const showBoth = computed(() => (game.user.isGM || context.editable) && state.document.system.isIdentifiable);
+  const showBoth = computed(() => (game.user.isGM || baseStore.isEditable) && document.value.system.isIdentifiable);
   const showOnlyIdentified = computed(() =>
-    !state.document.system.isIdentifiable 
-      || (state.document.system.unidentifiedInfo?.isIdentified || false)
+    !document.value.system.isIdentifiable
+    || (document.value.system.unidentifiedInfo?.isIdentified || false)
   );
-  const showOnlyUnidentified = computed(() => state.document.system.isIdentifiable && !state.document.system.unidentifiedInfo?.isIdentified);
-  const showIdentified = computed(() => showBoth || showOnlyIdentified);
-  const showUnidentified = computed(() => showBoth || showOnlyUnidentified);
+  const showOnlyUnidentified = computed(() => document.value.system.isIdentifiable && !document.value.system.unidentifiedInfo?.isIdentified);
+  const showIdentified = computed(() => showBoth.value || showOnlyIdentified.value);
+  const showUnidentified = computed(() => showBoth.value || showOnlyUnidentified.value);
 
   // Getters
   const identifableGetters = {
-    unidentifiedDescription: computed(() => state.document.system.unidentifiedInfo?.unidentifiedDescription || ""),
-    isIdentifiable: computed(() => state.document.system.isIdentifiable),
-    identifiedDisplayName: computed(() => state.document.identifiedDisplayName),
-    unidentifiedDisplayName: computed(() => state.document.unidentifiedDisplayName),
-    unidentifiedName: computed(() => state.document.system.unidentifiedInfo?.unidentifiedName || ""),
-    isUnidentifiedNameFromFormula: computed(() => state.document.system.unidentifiedInfo?.isUnidentifiedNameFromFormula || false),
-    unidentifiedNameFormula: computed(() => state.document.system.unidentifiedInfo?.unidentifiedNameFormula || ""),
+    unidentifiedDescription: computed(() => document.value.system.unidentifiedInfo?.unidentifiedDescription || ""),
+    isIdentifiable: computed(() => document.value.system.isIdentifiable),
+    identifiedDisplayName: computed(() => document.value.identifiedDisplayName),
+    unidentifiedDisplayName: computed(() => document.value.unidentifiedDisplayName),
+    unidentifiedName: computed(() => document.value.system.unidentifiedInfo?.unidentifiedName || ""),
+    isUnidentifiedNameFromFormula: computed(() => document.value.system.unidentifiedInfo?.isUnidentifiedNameFromFormula || false),
+    unidentifiedNameFormula: computed(() => document.value.system.unidentifiedInfo?.unidentifiedNameFormula || ""),
   };
 
   return {
@@ -57,7 +56,7 @@ const useIdentifiableStore = (context: IdentifiableItemSheetRenderContext, baseS
   };
 };
 
-interface IdentifiableItemStore extends ReturnType<typeof useIdentifiableStore>, ItemSheetStore {};
+interface IdentifiableItemStore<TDocument extends IdentifiableItemLike = IdentifiableItemLike> extends ReturnType<typeof useIdentifiableStore>, ItemSheetStore<TDocument> {};
 
 export { useIdentifiableStore };
 export type {
